@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GüvencePlus Hizmetleri A.Ş. | G08</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3a8a', // Dark blue
+                        secondary: '#3b82f6', // Light blue
+                        accent: '#f59e0b', // Amber
+                        dark: '#1f2937'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        html { scroll-behavior: smooth; }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-effect border-b border-gray-200 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center gap-3">
+                        <i class="fas fa-shield-alt text-3xl text-primary"></i>
+                        <span class="font-bold text-2xl text-primary tracking-tight">GüvencePlus <span class="text-secondary text-sm ml-1 bg-blue-100 px-2 py-1 rounded-md">G08</span></span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-600 hover:text-primary font-medium transition-colors">Ana Sayfa</a>
+                    <a href="#about" class="text-gray-600 hover:text-primary font-medium transition-colors">Hakkımızda</a>
+                    <a href="#products" class="text-gray-600 hover:text-primary font-medium transition-colors">Ürün & Hizmetler</a>
+                    <a href="#b2b" class="text-gray-600 hover:text-primary font-medium transition-colors">Tedarik Ağı</a>
+                    <a href="#financials" class="text-gray-600 hover:text-primary font-medium transition-colors">Finansal Görünüm</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-20 lg:pt-40 lg:pb-28 bg-gradient-to-br from-primary via-blue-800 to-secondary text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==')]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">SmartBox Ekosisteminin Güvencesi</h1>
+                <p class="text-xl md:text-2xl text-blue-100 mb-10">Dijital Şirketler Ligi'nde kalitenin, güvenin ve yenilikçi B2B çözümlerinin adresi.</p>
+                <div class="flex justify-center gap-4">
+                    <a href="#products" class="bg-white text-primary px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">Hizmetlerimizi İnceleyin</a>
+                    <a href="#about" class="border-2 border-white text-white px-8 py-3 rounded-full font-bold hover:bg-white hover:text-primary transition-all">Şirketimizi Tanıyın</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hakkımızda Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Hakkımızda</h2>
+                <div class="w-24 h-1 bg-secondary mx-auto rounded"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-2xl font-semibold text-primary mb-4">GüvencePlus Hizmetleri A.Ş. (G08)</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Dijital Şirketler Ligi'nde faaliyet gösteren şirketimiz, ekosistemin temel yapı taşlarından biri olan <strong>Garanti Hizmet Paketi</strong> üretiminde uzmanlaşmıştır. SmartBox nihai ürününün üretiminde kritik bir role sahip olan bu hizmetimiz, sektördeki diğer 7 şirket tarafından tercih edilmektedir.
+                    </p>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Aynı zamanda tedarik ağımızdaki iş ortaklarımızdan sağladığımız 7 farklı bileşeni, kendi uzmanlık ürünümüzle birleştirerek yüksek kaliteli <strong>SmartBox</strong> cihazlarının montajını gerçekleştiriyor ve nihai tüketici pazarına sunuyoruz.
+                    </p>
+                    <div class="flex items-center gap-4 mt-8">
+                        <div class="bg-blue-50 p-4 rounded-lg flex-1 text-center border border-blue-100">
+                            <i class="fas fa-check-circle text-2xl text-secondary mb-2"></i>
+                            <h4 class="font-bold text-dark">Kalite Onaylı</h4>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg flex-1 text-center border border-blue-100">
+                            <i class="fas fa-handshake text-2xl text-secondary mb-2"></i>
+                            <h4 class="font-bold text-dark">Güçlü B2B Ağı</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-2xl shadow-inner border border-gray-100">
+                    <h3 class="text-xl font-bold text-dark mb-6 border-b pb-4"><i class="fas fa-sitemap mr-2 text-secondary"></i>Departmanlarımız</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3"><div class="w-2 h-2 rounded-full bg-primary"></div><span class="font-medium">Yönetim & Strateji</span></li>
+                        <li class="flex items-center gap-3"><div class="w-2 h-2 rounded-full bg-primary"></div><span class="font-medium">Finans & Muhasebe</span></li>
+                        <li class="flex items-center gap-3"><div class="w-2 h-2 rounded-full bg-primary"></div><span class="font-medium">Tedarik Zinciri</span></li>
+                        <li class="flex items-center gap-3"><div class="w-2 h-2 rounded-full bg-primary"></div><span class="font-medium">Operasyon & Montaj</span></li>
+                        <li class="flex items-center gap-3"><div class="w-2 h-2 rounded-full bg-primary"></div><span class="font-medium">Pazarlama & Satış</span></li>
+                        <li class="flex items-center gap-3"><div class="w-2 h-2 rounded-full bg-primary"></div><span class="font-medium">BT ve Veri Analitiği</span></li>
+                        <li class="flex items-center gap-3"><div class="w-2 h-2 rounded-full bg-primary"></div><span class="font-medium">İK, Risk ve Etik</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ürünler Section -->
+    <section id="products" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Ürün ve Hizmetlerimiz</h2>
+                <div class="w-24 h-1 bg-secondary mx-auto rounded"></div>
+                <p class="mt-6 text-gray-600 max-w-2xl mx-auto">Sektördeki uzmanlığımızla hem B2B pazarında hem de nihai tüketici pazarında en iyi çözümleri sunuyoruz.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Uzmanlık Ürünü -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow border-t-4 border-primary relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 text-gray-100 opacity-50"><i class="fas fa-shield-check text-9xl"></i></div>
+                    <div class="relative z-10">
+                        <span class="text-sm font-bold text-secondary uppercase tracking-wider">Uzmanlık Ürünümüz</span>
+                        <h3 class="text-2xl font-bold text-dark mt-2 mb-4">Garanti Hizmet Paketi</h3>
+                        <p class="text-gray-600 mb-6">Her bir SmartBox cihazının ayrılmaz bir parçası olan, üretim reçetesindeki temel bileşenimizdir.</p>
+                        
+                        <div class="space-y-3 mt-6 bg-gray-50 p-4 rounded-lg">
+                            <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                <span class="text-gray-500">Üretim Maliyeti</span>
+                                <span class="font-bold text-dark">50 TL / Adet</span>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                <span class="text-gray-500">Normal B2B Fiyat Aralığı</span>
+                                <span class="font-bold text-dark">50 - 75 TL</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-500">Üretim Kapasitesi (Normal)</span>
+                                <span class="font-bold text-dark">1.200 Adet / Tur</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nihai Ürün -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow border-t-4 border-accent relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 text-gray-100 opacity-50"><i class="fas fa-box-open text-9xl"></i></div>
+                    <div class="relative z-10">
+                        <span class="text-sm font-bold text-accent uppercase tracking-wider">Nihai Ürünümüz</span>
+                        <h3 class="text-2xl font-bold text-dark mt-2 mb-4">SmartBox</h3>
+                        <p class="text-gray-600 mb-6">Sekiz farklı kritik bileşenin entegrasyonu ile tarafımızca monte edilen, pazara sunduğumuz akıllı donanım ünitesi.</p>
+                        
+                        <div class="space-y-3 mt-6 bg-gray-50 p-4 rounded-lg">
+                            <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                <span class="text-gray-500">Gereken Bileşen Sayısı</span>
+                                <span class="font-bold text-dark">8 Farklı Bileşen</span>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                <span class="text-gray-500">Montaj Nakit Gereksinimi</span>
+                                <span class="font-bold text-dark">100 TL / Ürün</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-500">Montaj Kapasitesi</span>
+                                <span class="font-bold text-dark">600 Adet / Tur</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- B2B & Tedarik Ağı -->
+    <section id="b2b" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">İş Ortakları & Tedarik Ağımız</h2>
+                <div class="w-24 h-1 bg-secondary mx-auto rounded"></div>
+                <p class="mt-6 text-gray-600 max-w-2xl mx-auto">SmartBox üretimini gerçekleştirmek için ekosistemdeki diğer 7 değerli şirketle güçlü alım-satım ilişkileri kuruyoruz. Müşterilerimiz aynı zamanda tedarikçilerimizdir.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- G01 -->
+                <div class="bg-gray-50 border border-gray-200 p-6 rounded-xl text-center hover:border-secondary transition-colors group">
+                    <div class="w-16 h-16 bg-blue-100 text-secondary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                        <span class="font-bold text-xl">G01</span>
+                    </div>
+                    <h4 class="font-bold text-dark mb-1">EnerjiNova A.Ş.</h4>
+                    <p class="text-sm text-gray-500">Enerji Modülü Tedarikçisi</p>
+                </div>
+                <!-- G02 -->
+                <div class="bg-gray-50 border border-gray-200 p-6 rounded-xl text-center hover:border-secondary transition-colors group">
+                    <div class="w-16 h-16 bg-blue-100 text-secondary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                        <span class="font-bold text-xl">G02</span>
+                    </div>
+                    <h4 class="font-bold text-dark mb-1">MikroCore Teknoloji</h4>
+                    <p class="text-sm text-gray-500">İşlemci Modülü Tedarikçisi</p>
+                </div>
+                <!-- G03 -->
+                <div class="bg-gray-50 border border-gray-200 p-6 rounded-xl text-center hover:border-secondary transition-colors group">
+                    <div class="w-16 h-16 bg-blue-100 text-secondary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                        <span class="font-bold text-xl">G03</span>
+                    </div>
+                    <h4 class="font-bold text-dark mb-1">SensoTek A.Ş.</h4>
+                    <p class="text-sm text-gray-500">Sensör Kiti Tedarikçisi</p>
+                </div>
+                <!-- G04 -->
+                <div class="bg-gray-50 border border-gray-200 p-6 rounded-xl text-center hover:border-secondary transition-colors group">
+                    <div class="w-16 h-16 bg-blue-100 text-secondary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                        <span class="font-bold text-xl">G04</span>
+                    </div>
+                    <h4 class="font-bold text-dark mb-1">FormAmbalaj A.Ş.</h4>
+                    <p class="text-sm text-gray-500">Kasa ve Ambalaj Tedarikçisi</p>
+                </div>
+                <!-- G05 -->
+                <div class="bg-gray-50 border border-gray-200 p-6 rounded-xl text-center hover:border-secondary transition-colors group">
+                    <div class="w-16 h-16 bg-blue-100 text-secondary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                        <span class="font-bold text-xl">G05</span>
+                    </div>
+                    <h4 class="font-bold text-dark mb-1">BulutOS Yazılım</h4>
+                    <p class="text-sm text-gray-500">Yazılım Lisansı Tedarikçisi</p>
+                </div>
+                <!-- G06 -->
+                <div class="bg-gray-50 border border-gray-200 p-6 rounded-xl text-center hover:border-secondary transition-colors group">
+                    <div class="w-16 h-16 bg-blue-100 text-secondary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                        <span class="font-bold text-xl">G06</span>
+                    </div>
+                    <h4 class="font-bold text-dark mb-1">HızlıRota Lojistik</h4>
+                    <p class="text-sm text-gray-500">Lojistik Tokenı Tedarikçisi</p>
+                </div>
+                <!-- G07 -->
+                <div class="bg-gray-50 border border-gray-200 p-6 rounded-xl text-center hover:border-secondary transition-colors group">
+                    <div class="w-16 h-16 bg-blue-100 text-secondary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                        <span class="font-bold text-xl">G07</span>
+                    </div>
+                    <h4 class="font-bold text-dark mb-1">VeriPusula Analitik</h4>
+                    <p class="text-sm text-gray-500">Müşteri Analitiği Lisansı</p>
+                </div>
+                
+                <!-- G08 (Biz) -->
+                <div class="bg-blue-600 border border-blue-700 p-6 rounded-xl text-center text-white shadow-lg transform scale-105">
+                    <div class="w-16 h-16 bg-white text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="font-bold text-xl">G08</span>
+                    </div>
+                    <h4 class="font-bold mb-1">GüvencePlus Hizmetleri</h4>
+                    <p class="text-sm text-blue-100">Garanti Hizmet Paketi Sağlayıcısı</p>
+                </div>
+            </div>
+            
+            <div class="mt-12 bg-blue-50 border border-blue-100 rounded-xl p-6 flex flex-col md:flex-row items-center justify-between">
+                <div class="flex items-center gap-4 mb-4 md:mb-0">
+                    <i class="fas fa-info-circle text-2xl text-secondary"></i>
+                    <div>
+                        <h4 class="font-bold text-dark">Acil Tedarik Durumu</h4>
+                        <p class="text-sm text-gray-600">Onaylı B2B alım gerçekleşmezse acil tedarik maliyeti <strong class="text-red-500">90 TL/adet</strong> olarak uygulanır.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Finansal Görünüm -->
+    <section id="financials" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Açılış Finansal Tablosu</h2>
+                <div class="w-24 h-1 bg-secondary mx-auto rounded"></div>
+                <p class="mt-6 text-gray-600">Şirketimizin başlangıç dönemindeki güçlü finansal altyapısı ve varlık dağılımı.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+                <div class="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-gray-200">
+                    <!-- Varlıklar -->
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold text-dark mb-6 flex items-center"><i class="fas fa-wallet text-secondary mr-3"></i> Varlıklar (Aktif)</h3>
+                        <ul class="space-y-4">
+                            <li class="flex justify-between items-center border-b border-gray-100 pb-2">
+                                <span class="text-gray-600">Açılış Kasası</span>
+                                <span class="font-bold text-dark">450.000 TL</span>
+                            </li>
+                            <li class="flex justify-between items-center border-b border-gray-100 pb-2">
+                                <span class="text-gray-600">Ticari Alacaklar</span>
+                                <span class="font-bold text-dark">50.000 TL</span>
+                            </li>
+                            <li class="flex justify-between items-center border-b border-gray-100 pb-2">
+                                <span class="text-gray-600">Toplam Bileşen Stoku</span>
+                                <span class="font-bold text-dark">200.000 TL</span>
+                            </li>
+                            <li class="flex justify-between items-center border-b border-gray-100 pb-2">
+                                <span class="text-gray-600">Maddi Varlıklar</span>
+                                <span class="font-bold text-dark">250.000 TL</span>
+                            </li>
+                            <li class="flex justify-between items-center pb-2">
+                                <span class="text-gray-600">Yazılım Varlığı</span>
+                                <span class="font-bold text-dark">50.000 TL</span>
+                            </li>
+                        </ul>
+                        <div class="mt-6 pt-4 border-t-2 border-gray-800 flex justify-between items-center">
+                            <span class="font-bold text-lg text-dark">Toplam Varlık</span>
+                            <span class="font-bold text-xl text-primary">1.000.000 TL</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Kaynaklar -->
+                    <div class="p-8 bg-gray-50">
+                        <h3 class="text-xl font-bold text-dark mb-6 flex items-center"><i class="fas fa-chart-pie text-secondary mr-3"></i> Kaynaklar (Pasif)</h3>
+                        <ul class="space-y-4">
+                            <li class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                <span class="text-gray-600">Ticari Borçlar</span>
+                                <span class="font-bold text-dark">100.000 TL</span>
+                            </li>
+                            <li class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                <span class="text-gray-600">Banka Kredisi</span>
+                                <span class="font-bold text-dark">150.000 TL</span>
+                            </li>
+                            <li class="flex justify-between items-center pb-2">
+                                <span class="text-gray-600">Öz Sermaye</span>
+                                <span class="font-bold text-dark">750.000 TL</span>
+                            </li>
+                        </ul>
+                        <div class="mt-[112px] pt-4 border-t-2 border-gray-800 flex justify-between items-center">
+                            <span class="font-bold text-lg text-dark">Toplam Kaynak</span>
+                            <span class="font-bold text-xl text-primary">1.000.000 TL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 bg-white rounded-xl shadow p-6 border border-gray-100">
+                <h4 class="font-bold text-dark mb-4 border-b pb-2">Başlangıç Stok Durumu</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <div class="text-sm text-gray-500 mb-1">Uzmanlık Bileşeni</div>
+                        <div class="font-bold text-lg text-primary">3.300 Adet</div>
+                        <div class="text-xs text-gray-400">Garanti Hizmet Paketi</div>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <div class="text-sm text-gray-500 mb-1">Diğer Bileşenler (7 Adet)</div>
+                        <div class="font-bold text-lg text-dark">Her birinden 100 Adet</div>
+                        <div class="text-xs text-gray-400">G01'den G07'ye kadar</div>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <div class="text-sm text-gray-500 mb-1">Mamul Stoku</div>
+                        <div class="font-bold text-lg text-dark">0 Adet</div>
+                        <div class="text-xs text-gray-400">SmartBox (Başlangıç)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 border-b border-gray-700 pb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <i class="fas fa-shield-alt text-2xl text-secondary"></i>
+                        <span class="font-bold text-xl tracking-tight">GüvencePlus G08</span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Dijital Şirketler Ligi'nde Garanti Hizmet Paketi sağlayıcısı ve güvenilir SmartBox montaj markası. Müşteri memnuniyeti ve B2B güvenilirlik önceliğimizdir.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-secondary hover:text-white transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-secondary hover:text-white transition-colors"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Hızlı Bağlantılar</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">Hakkımızda</a></li>
+                        <li><a href="#products" class="text-gray-400 hover:text-white transition-colors">Ürün ve Hizmetler</a></li>
+                        <li><a href="#b2b" class="text-gray-400 hover:text-white transition-colors">Tedarik Ağımız</a></li>
+                        <li><a href="#financials" class="text-gray-400 hover:text-white transition-colors">Finansal Tablo</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6">İletişim & Sistem</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-globe text-secondary mt-1"></i>
+                            <div>
+                                <span class="block text-sm text-gray-400">Öğrenci Portalı</span>
+                                <a href="https://dijital-sirketler-ligi-serhat-ata.ataserhat54.chatgpt.site/ogrenci" target="_blank" class="text-sm hover:text-secondary transition-colors break-all">dijital-sirketler-ligi-serhat-ata...</a>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-envelope text-secondary mt-1"></i>
+                            <div>
+                                <span class="block text-sm text-gray-400">İletişim E-posta</span>
+                                <span class="text-sm">G08 ekip mail adresi eklenecektir</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center text-gray-500 text-sm flex flex-col md:flex-row justify-between items-center">
+                <p>&copy; 2024 GüvencePlus Hizmetleri A.Ş. (G08) - Tüm Hakları Saklıdır.</p>
+                <p class="mt-2 md:mt-0">Dijital Şirketler Ligi Proje Ödevi</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
+
