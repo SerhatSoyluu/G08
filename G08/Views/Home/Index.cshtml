@@ -1,4 +1,4 @@
-@{
+﻿@{
     Layout = null;
 }
 <!DOCTYPE html>
@@ -6,18 +6,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GüvencePlus Hizmetleri A.Ş.</title>
+    <title>GÃ¼vencePlus Hizmetleri A.Å. | G08 - SmartBox Ekosistemi</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- FontAwesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#1e3a8a', // Dark blue
-                        secondary: '#3b82f6', // Light blue
-                        accent: '#f59e0b', // Amber
-                        dark: '#1f2937'
+                        primary: '#1e3a8a', // Dark Navy Blue
+                        secondary: '#2563eb', // Royal Blue
+                        accent: '#f59e0b', // Amber Gold
+                        dark: '#0f172a',
+                        surface: '#f8fafc',
+                        card: '#ffffff'
                     },
                     fontFamily: {
                         sans: ['Inter', 'system-ui', 'sans-serif'],
@@ -27,334 +31,1178 @@
         }
     </script>
     <style>
-        @@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        @@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         html { scroll-behavior: smooth; }
         .glass-effect {
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .gradient-border {
+            border-image: linear-gradient(to right, #1e3a8a, #3b82f6) 1;
+        }
+        .modal-active {
+            overflow: hidden;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-blue-600 selection:text-white">
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass-effect border-b border-gray-200 shadow-sm transition-all duration-300">
+    <!-- Navigation Bar -->
+    <nav class="fixed w-full z-50 glass-effect border-b border-slate-200/80 shadow-sm transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0 flex items-center gap-3">
-                        <i class="fas fa-shield-alt text-3xl text-primary"></i>
-                        <span class="font-bold text-2xl text-primary tracking-tight">GüvencePlus</span>
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo & Brand -->
+                <a href="#home" class="flex items-center gap-3 group focus:outline-none">
+                    <div class="w-11 h-11 bg-gradient-to-tr from-primary to-secondary rounded-xl flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
+                        <i class="fas fa-shield-halved text-2xl"></i>
                     </div>
+                    <div>
+                        <span class="font-extrabold text-2xl text-primary tracking-tight">GÃ¼vence<span class="text-secondary">Plus</span></span>
+                        <span class="text-xs ml-1.5 font-bold bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full border border-blue-200">G08</span>
+                        <span class="block text-[10px] text-slate-400 font-medium tracking-wider uppercase">Dijital Åirketler Ligi</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center space-x-7">
+                    <a href="#home" class="text-slate-600 hover:text-primary font-medium text-sm transition-colors">Ana Sayfa</a>
+                    <a href="#about" class="text-slate-600 hover:text-primary font-medium text-sm transition-colors">HakkÄ±mÄ±zda</a>
+                    <a href="#production-pricing" class="text-blue-700 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg font-semibold text-sm transition-all flex items-center gap-1.5">
+                        <i class="fas fa-microchip text-xs"></i> 8 BileÅŸen & FiyatlandÄ±rma
+                    </a>
+                    <a href="#catalog" class="text-slate-600 hover:text-primary font-medium text-sm transition-colors">Katalog</a>
+                    <a href="#b2b" class="text-slate-600 hover:text-primary font-medium text-sm transition-colors">Tedarik AÄŸÄ±</a>
+                    <a href="#contact" class="text-slate-600 hover:text-primary font-medium text-sm transition-colors">Ä°letiÅŸim</a>
                 </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="text-gray-600 hover:text-primary font-medium transition-colors">Ana Sayfa</a>
-                    <a href="#about" class="text-gray-600 hover:text-primary font-medium transition-colors">Hakkımızda</a>
-                    <a href="#products" class="text-gray-600 hover:text-primary font-medium transition-colors">Ürün & Hizmetler</a>
-                    <a href="#b2b" class="text-gray-600 hover:text-primary font-medium transition-colors">Tedarik Ağı</a>
-                    <a href="#contact" class="text-gray-600 hover:text-primary font-medium transition-colors">İletişim</a>
+
+                <!-- Action Button & Mobile Hamburger -->
+                <div class="flex items-center gap-3">
+                    <button onclick="openOrderModal()" class="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-primary to-secondary hover:from-blue-900 hover:to-blue-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5">
+                        <i class="fas fa-cart-shopping"></i>
+                        <span>SipariÅŸ OluÅŸtur</span>
+                    </button>
+                    
+                    <!-- Mobile Hamburger Button -->
+                    <button id="mobile-menu-btn" type="button" class="lg:hidden p-2.5 rounded-xl text-slate-600 hover:text-primary hover:bg-slate-100 focus:outline-none" aria-label="MenÃ¼yÃ¼ AÃ§">
+                        <i id="menu-icon" class="fas fa-bars text-xl"></i>
+                    </button>
                 </div>
+            </div>
+        </div>
+
+        <!-- Mobile Slide-out Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 bg-white/95 px-4 pt-3 pb-6 space-y-2 shadow-xl animate-fadeIn">
+            <a href="#home" class="mobile-nav-link block px-4 py-2.5 rounded-lg text-slate-700 hover:text-primary hover:bg-slate-50 font-medium">Ana Sayfa</a>
+            <a href="#about" class="mobile-nav-link block px-4 py-2.5 rounded-lg text-slate-700 hover:text-primary hover:bg-slate-50 font-medium">HakkÄ±mÄ±zda</a>
+            <a href="#production-pricing" class="mobile-nav-link block px-4 py-2.5 rounded-lg text-blue-700 bg-blue-50 font-bold flex items-center gap-2">
+                <i class="fas fa-microchip"></i> 8 BileÅŸen, Montaj & FiyatlandÄ±rma
+            </a>
+            <a href="#catalog" class="mobile-nav-link block px-4 py-2.5 rounded-lg text-slate-700 hover:text-primary hover:bg-slate-50 font-medium">ÃœrÃ¼n & BileÅŸen KataloÄŸu</a>
+            <a href="#b2b" class="mobile-nav-link block px-4 py-2.5 rounded-lg text-slate-700 hover:text-primary hover:bg-slate-50 font-medium">B2B Tedarik AÄŸÄ± (G01 - G08)</a>
+            <a href="#contact" class="mobile-nav-link block px-4 py-2.5 rounded-lg text-slate-700 hover:text-primary hover:bg-slate-50 font-medium">Ä°letiÅŸim</a>
+            <div class="pt-3 border-t border-slate-100">
+                <button onclick="openOrderModal(); toggleMobileMenu();" class="w-full py-3 bg-primary text-white rounded-xl font-bold flex items-center justify-center gap-2 shadow">
+                    <i class="fas fa-cart-shopping"></i> Hemen SipariÅŸ AkÄ±ÅŸÄ±nÄ± BaÅŸlat
+                </button>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="pt-32 pb-20 lg:pt-40 lg:pb-28 bg-gradient-to-br from-primary via-blue-800 to-secondary text-white relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==')]"></div>
+    <section id="home" class="pt-32 pb-20 lg:pt-40 lg:pb-28 bg-gradient-to-br from-primary via-blue-900 to-secondary text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:24px_24px]"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center max-w-3xl mx-auto">
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">SmartBox Ekosisteminin Güvencesi</h1>
-                <p class="text-xl md:text-2xl text-blue-100 mb-10">Dijital Şirketler Ligi'nde kalitenin, güvenin ve yenilikçi B2B çözümlerinin adresi.</p>
-                <div class="flex justify-center gap-4">
-                    <a href="#products" class="bg-white text-primary px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">Hizmetlerimizi İnceleyin</a>
-                    <a href="#about" class="border-2 border-white text-white px-8 py-3 rounded-full font-bold hover:bg-white hover:text-primary transition-all">Şirketimizi Tanıyın</a>
+            <div class="text-center max-w-4xl mx-auto">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-semibold text-blue-200 mb-6">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Dijital Åirketler Ligi 2026 Aktif Ãœretim ve SatÄ±ÅŸ Ekosistemi
+                </div>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight tracking-tight">
+                    SmartBox Ekosisteminin <span class="text-amber-400">GÃ¼vencesi</span> ve Entegre Ãœreticisi
+                </h1>
+                <p class="text-lg md:text-xl text-blue-100 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+                    8 ÅŸirketin ortak bileÅŸenleriyle ÅŸekillenen SmartBox donanÄ±mÄ±nÄ± Ã¼retiyor; uzmanlÄ±k Ã¼rÃ¼nÃ¼mÃ¼z <strong>Garanti Hizmet Paketi (G08)</strong> ile tÃ¼m lige kesintisiz gÃ¼vence sunuyoruz.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#production-pricing" class="bg-amber-400 hover:bg-amber-300 text-slate-900 px-8 py-3.5 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                        <i class="fas fa-calculator"></i> 8 BileÅŸen, Montaj & Fiyat SenaryolarÄ±
+                    </a>
+                    <a href="#catalog" class="bg-white/10 hover:bg-white/20 border border-white/30 text-white px-8 py-3.5 rounded-xl font-bold transition-all backdrop-blur-sm flex items-center justify-center gap-2">
+                        <i class="fas fa-boxes-stacked"></i> ÃœrÃ¼n KataloÄŸu
+                    </a>
+                </div>
+
+                <!-- Quick Metric Badges -->
+                <div class="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto text-left">
+                    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10">
+                        <div class="text-2xl font-bold text-amber-400">8 BileÅŸen</div>
+                        <div class="text-xs text-blue-200 mt-1">Tam DonanÄ±m Entegrasyonu</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10">
+                        <div class="text-2xl font-bold text-emerald-400">3 Fiyat Modeli</div>
+                        <div class="text-xs text-blue-200 mt-1">RekabetÃ§i, Standart, VIP</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10">
+                        <div class="text-2xl font-bold text-sky-400">%99.4</div>
+                        <div class="text-xs text-blue-200 mt-1">Montaj Kalite Skoru</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10">
+                        <div class="text-2xl font-bold text-white">7/24 SLA</div>
+                        <div class="text-xs text-blue-200 mt-1">G08 Garanti & Destek</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Hakkımızda Section -->
-    <section id="about" class="py-20 bg-white">
+    <!-- ************************************************************************* -->
+    <!-- ANA EKRAN: 8 BÄ°LEÅEN, MONTAJ, SEVKÄ°YAT VE ÃœÃ‡ FÄ°YAT SENARYOSU             -->
+    <!-- ************************************************************************* -->
+    <section id="production-pricing" class="py-20 bg-slate-100 border-b border-slate-200 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Hakkımızda</h2>
-                <div class="w-24 h-1 bg-secondary mx-auto rounded"></div>
+            <!-- Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="inline-block text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-100 px-3 py-1 rounded-full mb-3">
+                    Stratejik Ãœretim ve FiyatlandÄ±rma YÃ¶netim EkranÄ±
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                    SmartBox: 8 BileÅŸen, Montaj, Sevkiyat ve Fiyat SenaryolarÄ±
+                </h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mt-4 mb-4"></div>
+                <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                    AÅŸaÄŸÄ±daki ekranda SmartBox nihai Ã¼rÃ¼nÃ¼nÃ¼n 8 bileÅŸen maliyet dÃ¶kÃ¼mÃ¼nÃ¼ (BOM), montaj iÅŸÃ§ilik maliyetini, sevkiyat modellerini ve ÅŸirketimizin belirlediÄŸi 3 farklÄ± kÃ¢rlÄ±lÄ±k senaryosunu inceleyebilirsiniz.
+                </p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h3 class="text-2xl font-semibold text-primary mb-4">GüvencePlus Hizmetleri A.Ş.</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Dijital Şirketler Ligi'nde faaliyet gösteren şirketimiz, ekosistemin temel yapı taşlarından biri olan <strong>Garanti Hizmet Paketi</strong> üretiminde uzmanlaşmıştır. SmartBox nihai ürününün üretiminde kritik bir role sahip olan bu hizmetimiz, sektördeki diğer şirketler tarafından tercih edilmektedir.
-                    </p>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Aynı zamanda tedarik ağımızdaki iş ortaklarımızdan sağladığımız 7 farklı bileşeni, kendi uzmanlık ürünümüzle birleştirerek yüksek kaliteli <strong>SmartBox</strong> cihazlarının montajını gerçekleştiriyor ve nihai tüketici pazarına sunuyoruz.
-                    </p>
-                    <div class="flex items-center gap-4 mt-8">
-                        <div class="bg-blue-50 p-4 rounded-lg flex-1 text-center border border-blue-100">
-                            <i class="fas fa-check-circle text-2xl text-secondary mb-2"></i>
-                            <h4 class="font-bold text-dark">Kalite Onaylı</h4>
+
+            <!-- TAB CONTROLS (Responsive) -->
+            <div class="flex justify-center mb-10">
+                <div class="inline-flex p-1.5 bg-white rounded-2xl shadow-sm border border-slate-200 max-w-full overflow-x-auto">
+                    <button onclick="switchTab('tab-components')" id="btn-tab-components" class="tab-btn px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all bg-primary text-white shadow-sm flex items-center gap-2 whitespace-nowrap">
+                        <i class="fas fa-layer-group"></i> 1. Sekiz BileÅŸen (BOM)
+                    </button>
+                    <button onclick="switchTab('tab-assembly')" id="btn-tab-assembly" class="tab-btn px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all text-slate-600 hover:text-primary flex items-center gap-2 whitespace-nowrap">
+                        <i class="fas fa-screwdriver-wrench"></i> 2. Montaj & Ãœretim
+                    </button>
+                    <button onclick="switchTab('tab-shipping')" id="btn-tab-shipping" class="tab-btn px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all text-slate-600 hover:text-primary flex items-center gap-2 whitespace-nowrap">
+                        <i class="fas fa-truck-fast"></i> 3. Sevkiyat & DaÄŸÄ±tÄ±m
+                    </button>
+                    <button onclick="switchTab('tab-pricing')" id="btn-tab-pricing" class="tab-btn px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all text-slate-600 hover:text-primary flex items-center gap-2 whitespace-nowrap">
+                        <i class="fas fa-chart-line"></i> 4. ÃœÃ§ Fiyat Senaryosu
+                    </button>
+                </div>
+            </div>
+
+            <!-- ================= TAB 1: SEKÄ°Z BÄ°LEÅEN (BOM) ================= -->
+            <div id="tab-components" class="tab-content block">
+                <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 mb-8">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-100">
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2">
+                                <i class="fas fa-microchip text-blue-600"></i> SmartBox BileÅŸen ReÃ§etesi (Bill of Materials)
+                            </h3>
+                            <p class="text-slate-500 text-xs sm:text-sm mt-1">SmartBox'Ä±n Ã§alÄ±ÅŸabilmesi iÃ§in 8 ÅŸirketin bileÅŸenleri eksiksiz olarak entegre edilir.</p>
                         </div>
-                        <div class="bg-blue-50 p-4 rounded-lg flex-1 text-center border border-blue-100">
-                            <i class="fas fa-handshake text-2xl text-secondary mb-2"></i>
-                            <h4 class="font-bold text-dark">Güçlü B2B Ağı</h4>
+                        <div class="flex items-center gap-3">
+                            <span class="text-xs font-semibold px-3 py-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-lg">
+                                <i class="fas fa-circle-check text-xs mr-1"></i> TÃ¼m 8 BileÅŸen DoÄŸrulandÄ±
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Component Cards Grid (Responsive 1-2-4 cols) -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+                        <!-- G01 -->
+                        <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50/70 hover:bg-white hover:border-blue-400 hover:shadow-md transition-all">
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="text-xs font-extrabold px-2.5 py-1 bg-blue-100 text-blue-800 rounded-md">G01</span>
+                                <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">%100 Uyum</span>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-base">Enerji ModÃ¼lÃ¼</h4>
+                            <p class="text-xs text-slate-500 mb-3">EnerjiNova A.Å.</p>
+                            <div class="border-t border-slate-200/80 pt-2 flex justify-between items-center text-xs">
+                                <span class="text-slate-500">Birim Maliyet:</span>
+                                <span class="font-bold text-slate-900 text-sm">420 â‚º</span>
+                            </div>
+                        </div>
+
+                        <!-- G02 -->
+                        <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50/70 hover:bg-white hover:border-blue-400 hover:shadow-md transition-all">
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="text-xs font-extrabold px-2.5 py-1 bg-indigo-100 text-indigo-800 rounded-md">G02</span>
+                                <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">Ana Ã‡ekirdek</span>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-base">Ä°ÅŸlemci ModÃ¼lÃ¼</h4>
+                            <p class="text-xs text-slate-500 mb-3">MikroCore Teknoloji</p>
+                            <div class="border-t border-slate-200/80 pt-2 flex justify-between items-center text-xs">
+                                <span class="text-slate-500">Birim Maliyet:</span>
+                                <span class="font-bold text-slate-900 text-sm">780 â‚º</span>
+                            </div>
+                        </div>
+
+                        <!-- G03 -->
+                        <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50/70 hover:bg-white hover:border-blue-400 hover:shadow-md transition-all">
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="text-xs font-extrabold px-2.5 py-1 bg-purple-100 text-purple-800 rounded-md">G03</span>
+                                <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">SensÃ¶r Dizisi</span>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-base">SensÃ¶r Kiti</h4>
+                            <p class="text-xs text-slate-500 mb-3">SensoTek A.Å.</p>
+                            <div class="border-t border-slate-200/80 pt-2 flex justify-between items-center text-xs">
+                                <span class="text-slate-500">Birim Maliyet:</span>
+                                <span class="font-bold text-slate-900 text-sm">340 â‚º</span>
+                            </div>
+                        </div>
+
+                        <!-- G04 -->
+                        <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50/70 hover:bg-white hover:border-blue-400 hover:shadow-md transition-all">
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="text-xs font-extrabold px-2.5 py-1 bg-amber-100 text-amber-800 rounded-md">G04</span>
+                                <span class="text-xs font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded">Fiziksel Kasa</span>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-base">Kasa ve Ambalaj</h4>
+                            <p class="text-xs text-slate-500 mb-3">FormAmbalaj A.Å.</p>
+                            <div class="border-t border-slate-200/80 pt-2 flex justify-between items-center text-xs">
+                                <span class="text-slate-500">Birim Maliyet:</span>
+                                <span class="font-bold text-slate-900 text-sm">190 â‚º</span>
+                            </div>
+                        </div>
+
+                        <!-- G05 -->
+                        <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50/70 hover:bg-white hover:border-blue-400 hover:shadow-md transition-all">
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="text-xs font-extrabold px-2.5 py-1 bg-cyan-100 text-cyan-800 rounded-md">G05</span>
+                                <span class="text-xs font-semibold text-cyan-600 bg-cyan-50 px-2 py-0.5 rounded">Ä°ÅŸletim Sis.</span>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-base">YazÄ±lÄ±m LisansÄ±</h4>
+                            <p class="text-xs text-slate-500 mb-3">BulutOS YazÄ±lÄ±m</p>
+                            <div class="border-t border-slate-200/80 pt-2 flex justify-between items-center text-xs">
+                                <span class="text-slate-500">Birim Maliyet:</span>
+                                <span class="font-bold text-slate-900 text-sm">260 â‚º</span>
+                            </div>
+                        </div>
+
+                        <!-- G06 -->
+                        <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50/70 hover:bg-white hover:border-blue-400 hover:shadow-md transition-all">
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="text-xs font-extrabold px-2.5 py-1 bg-orange-100 text-orange-800 rounded-md">G06</span>
+                                <span class="text-xs font-semibold text-orange-600 bg-orange-50 px-2 py-0.5 rounded">Lojistik</span>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-base">Lojistik TokenÄ±</h4>
+                            <p class="text-xs text-slate-500 mb-3">HÄ±zlÄ±Rota Lojistik</p>
+                            <div class="border-t border-slate-200/80 pt-2 flex justify-between items-center text-xs">
+                                <span class="text-slate-500">Birim Maliyet:</span>
+                                <span class="font-bold text-slate-900 text-sm">150 â‚º</span>
+                            </div>
+                        </div>
+
+                        <!-- G07 -->
+                        <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50/70 hover:bg-white hover:border-blue-400 hover:shadow-md transition-all">
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="text-xs font-extrabold px-2.5 py-1 bg-teal-100 text-teal-800 rounded-md">G07</span>
+                                <span class="text-xs font-semibold text-teal-600 bg-teal-50 px-2 py-0.5 rounded">Yapay Zeka</span>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-base">MÃ¼ÅŸteri AnalitiÄŸi</h4>
+                            <p class="text-xs text-slate-500 mb-3">VeriPusula Analitik</p>
+                            <div class="border-t border-slate-200/80 pt-2 flex justify-between items-center text-xs">
+                                <span class="text-slate-500">Birim Maliyet:</span>
+                                <span class="font-bold text-slate-900 text-sm">180 â‚º</span>
+                            </div>
+                        </div>
+
+                        <!-- G08 (Biz) -->
+                        <div class="p-4 rounded-2xl border-2 border-blue-500 bg-blue-50/50 hover:bg-blue-50 hover:shadow-md transition-all relative">
+                            <div class="absolute -top-3 right-3 bg-blue-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow">
+                                ÅÄ°RKETÄ°MÄ°ZÄ°N ÃœRÃœNÃœ
+                            </div>
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="text-xs font-extrabold px-2.5 py-1 bg-blue-600 text-white rounded-md">G08</span>
+                                <span class="text-xs font-semibold text-blue-700 bg-blue-100 px-2 py-0.5 rounded">UzmanlÄ±k</span>
+                            </div>
+                            <h4 class="font-bold text-blue-950 text-base">Garanti Hizmet Paketi</h4>
+                            <p class="text-xs text-blue-700 mb-3">GÃ¼vencePlus Hizmetleri</p>
+                            <div class="border-t border-blue-200 pt-2 flex justify-between items-center text-xs">
+                                <span class="text-blue-900 font-medium">Birim Maliyet:</span>
+                                <span class="font-extrabold text-blue-800 text-sm">380 â‚º</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Summary Bar -->
+                    <div class="mt-8 p-4 sm:p-6 bg-gradient-to-r from-blue-900 via-primary to-slate-900 rounded-2xl text-white flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-amber-400 text-xl">
+                                <i class="fas fa-boxes-packing"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs uppercase tracking-wider text-blue-200">Toplam 8 BileÅŸen Maliyeti (BOM ToplamÄ±)</div>
+                                <div class="text-sm text-slate-300">G01'den G08'e kadar tÃ¼m hammadde ve lisans girdileri</div>
+                            </div>
+                        </div>
+                        <div class="text-center sm:text-right">
+                            <div class="text-2xl sm:text-3xl font-extrabold text-amber-400">2.700 â‚º <span class="text-xs font-normal text-slate-300">/ cihaz</span></div>
+                            <div class="text-[11px] text-blue-200">KDV HariÃ§ Fabrika GiriÅŸ Maliyeti</div>
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-50 p-8 rounded-2xl shadow-inner border border-gray-100">
-                    <h3 class="text-xl font-bold text-dark mb-6 border-b pb-4"><i class="fas fa-sitemap mr-2 text-secondary"></i>Departmanlarımız</h3>
-                    <ul class="space-y-4">
-                        <li class="flex items-center gap-3"><div class="w-2 h-2 rounded-full bg-primary"></div><span class="font-medium">Yönetim & Strateji</span></li>
-                        <li class="flex items-center gap-3"><div class="w-2 h-2 rounded-full bg-primary"></div><span class="font-medium">Finans & Muhasebe</span></li>
-                        <li class="flex items-center gap-3"><div class="w-2 h-2 rounded-full bg-primary"></div><span class="font-medium">Tedarik Zinciri</span></li>
-                        <li class="flex items-center gap-3"><div class="w-2 h-2 rounded-full bg-primary"></div><span class="font-medium">Operasyon & Montaj</span></li>
-                        <li class="flex items-center gap-3"><div class="w-2 h-2 rounded-full bg-primary"></div><span class="font-medium">Pazarlama & Satış</span></li>
-                        <li class="flex items-center gap-3"><div class="w-2 h-2 rounded-full bg-primary"></div><span class="font-medium">BT ve Veri Analitiği</span></li>
-                        <li class="flex items-center gap-3"><div class="w-2 h-2 rounded-full bg-primary"></div><span class="font-medium">İK, Risk ve Etik</span></li>
+            </div>
+
+            <!-- ================= TAB 2: MONTAJ & ÃœRETÄ°M SÃœRECÄ° ================= -->
+            <div id="tab-assembly" class="tab-content hidden">
+                <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 mb-8">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-100">
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2">
+                                <i class="fas fa-screwdriver-wrench text-amber-500"></i> Montaj HattÄ± & Ãœretim Entegrasyonu
+                            </h3>
+                            <p class="text-slate-500 text-xs sm:text-sm mt-1">Gelen 8 bileÅŸenin hassas SMT montajÄ±, yazÄ±lÄ±m yÃ¼klemesi ve 24 saatlik stres testi adÄ±mlarÄ±.</p>
+                        </div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-amber-50 text-amber-800 border border-amber-200 rounded-lg text-xs font-bold">
+                            <i class="fas fa-bolt"></i> Montaj Maliyeti: 250 â‚º / Adet
+                        </div>
+                    </div>
+
+                    <!-- Assembly Step Process (Flow) -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-8 relative">
+                        <!-- Step 1 -->
+                        <div class="relative bg-slate-50 rounded-2xl p-5 border border-slate-200">
+                            <div class="w-10 h-10 rounded-xl bg-blue-100 text-primary font-extrabold flex items-center justify-center mb-4 text-base shadow-sm">
+                                01
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-base mb-1">GiriÅŸ Kalite Kontrol</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                                7 ÅŸirketten gelen bileÅŸenler ile ÅŸirketimizin G08 garanti sertifikasÄ± elektriksel ve fiziksel tolerans testine tabi tutulur.
+                            </p>
+                            <span class="inline-block text-[11px] font-semibold text-slate-500 bg-white px-2 py-1 rounded border border-slate-200">SÃ¼re: 10 dk</span>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="relative bg-slate-50 rounded-2xl p-5 border border-slate-200">
+                            <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 font-extrabold flex items-center justify-center mb-4 text-base shadow-sm">
+                                02
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-base mb-1">SMT & Mekanik Montaj</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                                Ä°ÅŸlemci (G02), Enerji (G01) ve SensÃ¶r (G03) modÃ¼lleri FormAmbalaj (G04) kasasÄ±na robotik montaj hattÄ±nda sabitlenir.
+                            </p>
+                            <span class="inline-block text-[11px] font-semibold text-slate-500 bg-white px-2 py-1 rounded border border-slate-200">SÃ¼re: 20 dk</span>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="relative bg-slate-50 rounded-2xl p-5 border border-slate-200">
+                            <div class="w-10 h-10 rounded-xl bg-cyan-100 text-cyan-800 font-extrabold flex items-center justify-center mb-4 text-base shadow-sm">
+                                03
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-base mb-1">YazÄ±lÄ±m & Kalibrasyon</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                                BulutOS (G05) iÅŸletim sistemi ve VeriPusula (G07) analitik Ã§ekirdeÄŸi cihaza yÃ¼klenir, sensÃ¶rler sÄ±fÄ±rlanÄ±r.
+                            </p>
+                            <span class="inline-block text-[11px] font-semibold text-slate-500 bg-white px-2 py-1 rounded border border-slate-200">SÃ¼re: 15 dk</span>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="relative bg-slate-50 rounded-2xl p-5 border border-slate-200">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 font-extrabold flex items-center justify-center mb-4 text-base shadow-sm">
+                                04
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-base mb-1">G08 MÃ¼hÃ¼r & Paketleme</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                                24 saatlik stres testinden geÃ§en cihaz GÃ¼vencePlus G08 hologramlÄ± garanti mÃ¼hrÃ¼yle kilitlenir ve kutulanÄ±r.
+                            </p>
+                            <span class="inline-block text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-1 rounded border border-emerald-200">Hata PayÄ±: <%0.2</span>
+                        </div>
+                    </div>
+
+                    <!-- Cost Calculation Card -->
+                    <div class="mt-8 p-6 bg-slate-50 rounded-2xl border border-slate-200">
+                        <h4 class="font-bold text-slate-900 text-base mb-4 flex items-center gap-2">
+                            <i class="fas fa-calculator text-blue-600"></i> Montaj Maliyet KÄ±rÄ±lÄ±mÄ± (Birim BaÅŸÄ±na)
+                        </h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+                            <div class="bg-white p-4 rounded-xl border border-slate-200">
+                                <span class="text-slate-500 block text-xs">Teknik Ä°ÅŸÃ§ilik & Operasyon:</span>
+                                <span class="font-bold text-slate-800 text-base">140 â‚º</span>
+                            </div>
+                            <div class="bg-white p-4 rounded-xl border border-slate-200">
+                                <span class="text-slate-500 block text-xs">Makine AmortismanÄ± & Enerji:</span>
+                                <span class="font-bold text-slate-800 text-base">70 â‚º</span>
+                            </div>
+                            <div class="bg-white p-4 rounded-xl border border-slate-200">
+                                <span class="text-slate-500 block text-xs">Test, Kalibrasyon & MÃ¼hÃ¼rleme:</span>
+                                <span class="font-bold text-slate-800 text-base">40 â‚º</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-200 flex flex-col sm:flex-row justify-between items-center text-sm font-semibold">
+                            <span class="text-slate-700">BileÅŸenler (2.700 â‚º) + Montaj (250 â‚º):</span>
+                            <span class="text-blue-900 text-lg font-extrabold">Fabrika Ã‡Ä±kÄ±ÅŸ Maliyeti = 2.950 â‚º</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= TAB 3: SEVKÄ°YAT & LOJÄ°STÄ°K ================= -->
+            <div id="tab-shipping" class="tab-content hidden">
+                <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 mb-8">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-100">
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2">
+                                <i class="fas fa-truck-fast text-orange-500"></i> Sevkiyat Modelleri ve Lojistik AltyapÄ±sÄ±
+                            </h3>
+                            <p class="text-slate-500 text-xs sm:text-sm mt-1">G06 HÄ±zlÄ±Rota Lojistik TokenÄ± entegrasyonuyla gÃ¼venli ve sigortalÄ± SmartBox sevkiyatÄ±.</p>
+                        </div>
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-orange-50 text-orange-800 border border-orange-200 rounded-lg text-xs font-bold">
+                            <i class="fas fa-shield"></i> %100 TaÅŸÄ±ma SigortalÄ±
+                        </span>
+                    </div>
+
+                    <!-- 3 Shipping Models -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                        <!-- Model 1: Standart B2B DaÄŸÄ±tÄ±m -->
+                        <div class="p-6 rounded-2xl border-2 border-slate-200 bg-white hover:border-blue-500 transition-all flex flex-col justify-between">
+                            <div>
+                                <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center text-xl mb-4">
+                                    <i class="fas fa-box"></i>
+                                </div>
+                                <h4 class="font-bold text-slate-900 text-lg">Standart B2B Sevkiyat</h4>
+                                <p class="text-xs text-slate-500 mt-1 mb-4">G06 Token TabanlÄ± Åebeke DaÄŸÄ±tÄ±mÄ±</p>
+                                <ul class="text-xs text-slate-600 space-y-2 mb-6">
+                                    <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500"></i> 2-3 Ä°ÅŸ GÃ¼nÃ¼ Teslimat</li>
+                                    <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500"></i> Tam KapsamlÄ± TaÅŸÄ±ma SigortasÄ±</li>
+                                    <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500"></i> Standart Palet GÃ¼venliÄŸi</li>
+                                </ul>
+                            </div>
+                            <div class="pt-4 border-t border-slate-100 flex justify-between items-center">
+                                <span class="text-xs text-slate-500">Sevkiyat Maliyeti:</span>
+                                <span class="text-lg font-extrabold text-slate-900">150 â‚º <span class="text-xs font-normal text-slate-400">/ adet</span></span>
+                            </div>
+                        </div>
+
+                        <!-- Model 2: HÄ±zlÄ± Ekspres Sevkiyat -->
+                        <div class="p-6 rounded-2xl border-2 border-orange-200 bg-orange-50/30 hover:border-orange-500 transition-all flex flex-col justify-between">
+                            <div>
+                                <div class="w-12 h-12 rounded-xl bg-orange-100 text-orange-700 flex items-center justify-center text-xl mb-4">
+                                    <i class="fas fa-plane-departure"></i>
+                                </div>
+                                <div class="inline-block text-[10px] font-bold bg-orange-100 text-orange-800 px-2 py-0.5 rounded mb-2">HIZLI TESLÄ°MAT</div>
+                                <h4 class="font-bold text-slate-900 text-lg">Ã–ncelikli Ekspres DaÄŸÄ±tÄ±m</h4>
+                                <p class="text-xs text-slate-500 mt-1 mb-4">AynÄ± GÃ¼n / 24 Saat Ã–ncelikli Sevk</p>
+                                <ul class="text-xs text-slate-600 space-y-2 mb-6">
+                                    <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500"></i> 24 Saatte Adrese Teslim</li>
+                                    <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500"></i> VIP Kurye & Ã–zel AraÃ§</li>
+                                    <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500"></i> GerÃ§ek ZamanlÄ± GPS Takibi</li>
+                                </ul>
+                            </div>
+                            <div class="pt-4 border-t border-orange-100 flex justify-between items-center">
+                                <span class="text-xs text-slate-500">Sevkiyat Maliyeti:</span>
+                                <span class="text-lg font-extrabold text-orange-700">250 â‚º <span class="text-xs font-normal text-slate-400">/ adet</span></span>
+                            </div>
+                        </div>
+
+                        <!-- Model 3: Toplu Palet SevkiyatÄ± -->
+                        <div class="p-6 rounded-2xl border-2 border-slate-200 bg-white hover:border-emerald-500 transition-all flex flex-col justify-between">
+                            <div>
+                                <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl mb-4">
+                                    <i class="fas fa-pallet"></i>
+                                </div>
+                                <div class="inline-block text-[10px] font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded mb-2">TOPLU ALIM AVANTAJI</div>
+                                <h4 class="font-bold text-slate-900 text-lg">Toplu Palet & Konteyner</h4>
+                                <p class="text-xs text-slate-500 mt-1 mb-4">50+ Adet ve Ãœzeri Kurumsal SipariÅŸler</p>
+                                <ul class="text-xs text-slate-600 space-y-2 mb-6">
+                                    <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500"></i> Ã–zel TÄ±r / Filo Sevk</li>
+                                    <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500"></i> Minimum Birim Lojistik Gideri</li>
+                                    <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500"></i> Depo Teslim Ä°rsaliye</li>
+                                </ul>
+                            </div>
+                            <div class="pt-4 border-t border-slate-100 flex justify-between items-center">
+                                <span class="text-xs text-slate-500">Sevkiyat Maliyeti:</span>
+                                <span class="text-lg font-extrabold text-emerald-700">90 â‚º <span class="text-xs font-normal text-slate-400">/ adet</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cost Summary -->
+                    <div class="mt-8 p-6 bg-slate-900 rounded-2xl text-white flex flex-col md:flex-row justify-between items-center gap-4">
+                        <div class="text-left">
+                            <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Toplam Temel Maliyet Ã–zeti</span>
+                            <h4 class="text-lg font-bold text-white mt-1">
+                                BileÅŸenler (2.700 â‚º) + Montaj (250 â‚º) + Standart Sevkiyat (150 â‚º)
+                            </h4>
+                        </div>
+                        <div class="text-center md:text-right">
+                            <div class="text-3xl font-extrabold text-amber-400">3.100 â‚º <span class="text-sm font-normal text-slate-300">/ birim</span></div>
+                            <div class="text-xs text-slate-400">Nihai SmartBox Birim Taban Maliyeti</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= TAB 4: ÃœÃ‡ FÄ°YAT SENARYOSU ================= -->
+            <div id="tab-pricing" class="tab-content hidden">
+                <!-- 3 Scenario Pricing Cards Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                    
+                    <!-- SENARYO 1: REKABETÃ‡Ä° / TABAN FÄ°YAT -->
+                    <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 hover:shadow-xl transition-all flex flex-col justify-between relative">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="text-xs font-extrabold px-3 py-1 bg-slate-100 text-slate-700 rounded-full">SENARYO 1</span>
+                                <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md">Pazar Penetrasyonu</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900">RekabetÃ§i / Taban Fiyat</h3>
+                            <p class="text-xs text-slate-500 mt-1 mb-6">YÃ¼ksek satÄ±ÅŸ hacmi ve ligde pazar payÄ± kazanÄ±mÄ± hedefleyen dÃ¼ÅŸÃ¼k marjlÄ± model.</p>
+                            
+                            <!-- Price Tag -->
+                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 mb-6">
+                                <div class="text-xs text-slate-500 mb-1">Ã–nerilen SatÄ±ÅŸ FiyatÄ±:</div>
+                                <div class="text-3xl font-extrabold text-slate-900">3.658 â‚º <span class="text-xs font-semibold text-slate-500">+ KDV</span></div>
+                                <div class="text-xs font-semibold text-emerald-600 mt-2 flex items-center gap-1">
+                                    <i class="fas fa-arrow-trend-up"></i> Kar MarjÄ±: %18 (+558 â‚º / adet)
+                                </div>
+                            </div>
+
+                            <!-- Highlights -->
+                            <ul class="text-xs text-slate-600 space-y-3 mb-8">
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-circle-check text-emerald-500 mt-0.5"></i>
+                                    <span><strong>Toplam Maliyet:</strong> 3.100 â‚º (BileÅŸen + Montaj + Sevkiyat)</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-circle-check text-emerald-500 mt-0.5"></i>
+                                    <span><strong>Garanti KapsamÄ±:</strong> Standart 1 YÄ±l G08 GÃ¼vencesi</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-circle-check text-emerald-500 mt-0.5"></i>
+                                    <span><strong>Hedef Kitle:</strong> Toplu alÄ±m yapan distribÃ¼tÃ¶rler ve toptancÄ±lar</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-circle-check text-emerald-500 mt-0.5"></i>
+                                    <span><strong>Stratejik Avantaj:</strong> Rakipler karÅŸÄ±sÄ±nda en dÃ¼ÅŸÃ¼k giriÅŸ fiyatÄ±</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <button onclick="selectScenario('RekabetÃ§i Senaryo', 3658, 18)" class="w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl font-bold text-sm transition-colors flex items-center justify-center gap-2">
+                            <span>Bu Senaryoyu SeÃ§ & SipariÅŸ Ver</span>
+                            <i class="fas fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- SENARYO 2: HEDEF / STANDART PÄ°YASA FÄ°YATI (Ã–NERÄ°LEN) -->
+                    <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border-2 border-primary relative flex flex-col justify-between transform lg:-translate-y-2">
+                        <div class="absolute -top-3.5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-primary to-secondary text-white text-xs font-extrabold px-4 py-1 rounded-full shadow-md uppercase tracking-wider">
+                            â˜… En Ã‡ok Tercih Edilen (Hedef)
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-start mb-4 mt-2">
+                                <span class="text-xs font-extrabold px-3 py-1 bg-blue-100 text-blue-800 rounded-full">SENARYO 2</span>
+                                <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md">Dengeli KÃ¢rlÄ±lÄ±k</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900">Hedef / Piyasa StandardÄ±</h3>
+                            <p class="text-xs text-slate-500 mt-1 mb-6">Maksimum nakit akÄ±ÅŸÄ± ve sÃ¼rdÃ¼rÃ¼lebilir ÅŸirket kÃ¢rlÄ±lÄ±ÄŸÄ± saÄŸlayan optimal denge senaryosu.</p>
+                            
+                            <!-- Price Tag -->
+                            <div class="p-4 bg-blue-50/70 rounded-2xl border border-blue-200 mb-6">
+                                <div class="text-xs text-blue-800 mb-1">Ã–nerilen SatÄ±ÅŸ FiyatÄ±:</div>
+                                <div class="text-3xl font-extrabold text-primary">4.185 â‚º <span class="text-xs font-semibold text-slate-500">+ KDV</span></div>
+                                <div class="text-xs font-semibold text-emerald-600 mt-2 flex items-center gap-1">
+                                    <i class="fas fa-arrow-trend-up"></i> Kar MarjÄ±: %35 (+1.085 â‚º / adet)
+                                </div>
+                            </div>
+
+                            <!-- Highlights -->
+                            <ul class="text-xs text-slate-600 space-y-3 mb-8">
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-circle-check text-blue-600 mt-0.5"></i>
+                                    <span><strong>Toplam Maliyet:</strong> 3.100 â‚º (BileÅŸen + Montaj + Sevkiyat)</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-circle-check text-blue-600 mt-0.5"></i>
+                                    <span><strong>Garanti KapsamÄ±:</strong> 2 YÄ±l Tam GÃ¼vencePlus G08 VIP DesteÄŸi</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-circle-check text-blue-600 mt-0.5"></i>
+                                    <span><strong>Hedef Kitle:</strong> KOBÄ°'ler, kurumsal firmalar ve yetkili bayiler</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-circle-check text-blue-600 mt-0.5"></i>
+                                    <span><strong>Stratejik Avantaj:</strong> YÃ¼ksek mÃ¼ÅŸteri memnuniyeti ve stabil nakit</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <button onclick="selectScenario('Hedef Piyasa Senaryosu', 4185, 35)" class="w-full py-3.5 bg-gradient-to-r from-primary to-secondary hover:from-blue-900 hover:to-blue-700 text-white rounded-xl font-bold text-sm transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2">
+                            <span>Bu Senaryoyu SeÃ§ & SipariÅŸ Ver</span>
+                            <i class="fas fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- SENARYO 3: KATMA DEÄERLÄ° PREMIUM FÄ°YAT -->
+                    <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 hover:shadow-xl transition-all flex flex-col justify-between relative">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="text-xs font-extrabold px-3 py-1 bg-amber-100 text-amber-800 rounded-full">SENARYO 3</span>
+                                <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-md">Maksimum KÃ¢r</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900">Katma DeÄŸerli Premium</h3>
+                            <p class="text-xs text-slate-500 mt-1 mb-6">VIP kurumsal mÃ¼ÅŸterilere Ã¶zel 7/24 yerinde SLA ve anÄ±nda deÄŸiÅŸim iÃ§eren lÃ¼ks paket.</p>
+                            
+                            <!-- Price Tag -->
+                            <div class="p-4 bg-amber-50/50 rounded-2xl border border-amber-200 mb-6">
+                                <div class="text-xs text-amber-900 mb-1">Ã–nerilen SatÄ±ÅŸ FiyatÄ±:</div>
+                                <div class="text-3xl font-extrabold text-amber-600">4.960 â‚º <span class="text-xs font-semibold text-slate-500">+ KDV</span></div>
+                                <div class="text-xs font-semibold text-emerald-600 mt-2 flex items-center gap-1">
+                                    <i class="fas fa-arrow-trend-up"></i> Kar MarjÄ±: %60 (+1.860 â‚º / adet)
+                                </div>
+                            </div>
+
+                            <!-- Highlights -->
+                            <ul class="text-xs text-slate-600 space-y-3 mb-8">
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-circle-check text-amber-500 mt-0.5"></i>
+                                    <span><strong>Toplam Maliyet:</strong> 3.100 â‚º (BileÅŸen + Montaj + Sevkiyat)</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-circle-check text-amber-500 mt-0.5"></i>
+                                    <span><strong>Garanti KapsamÄ±:</strong> 3 YÄ±l 7/24 Kesintisiz Yerinde Birebir DeÄŸiÅŸim</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-circle-check text-amber-500 mt-0.5"></i>
+                                    <span><strong>Hedef Kitle:</strong> Holdingler, finans kuruluÅŸlarÄ±, kamu projeleri</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-circle-check text-amber-500 mt-0.5"></i>
+                                    <span><strong>Stratejik Avantaj:</strong> En yÃ¼ksek birim kÃ¢rlÄ±lÄ±k ve prestij</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <button onclick="selectScenario('Katma DeÄŸerli Premium', 4960, 60)" class="w-full py-3 bg-amber-500 hover:bg-amber-600 text-white rounded-xl font-bold text-sm transition-colors flex items-center justify-center gap-2">
+                            <span>Bu Senaryoyu SeÃ§ & SipariÅŸ Ver</span>
+                            <i class="fas fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- DÄ°NAMÄ°K FÄ°YAT & KÃ‚RLILIK HESAPLAMA SÄ°MÃœLATÃ–RÃœ -->
+                <div class="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-800">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-amber-400">CanlÄ± SimÃ¼lasyon Motoru</span>
+                            <h3 class="text-xl sm:text-2xl font-bold mt-1">Ä°nteraktif SipariÅŸ ve KÃ¢rlÄ±lÄ±k SimÃ¼latÃ¶rÃ¼</h3>
+                            <p class="text-xs sm:text-sm text-slate-400 mt-0.5">SipariÅŸ miktarÄ±nÄ± ve senaryoyu deÄŸiÅŸtirerek toplam maliyet, ciro ve net kÃ¢rÄ±nÄ±zÄ± canlÄ± izleyin.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-6 items-center">
+                        <!-- Inputs Left (5 cols) -->
+                        <div class="lg:col-span-5 space-y-5">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-2 flex justify-between">
+                                    <span>SipariÅŸ MiktarÄ± (Adet):</span>
+                                    <span id="slider-qty-val" class="font-bold text-amber-400 text-sm">50 Adet</span>
+                                </label>
+                                <input id="sim-qty" type="range" min="1" max="500" value="50" oninput="calculateSimulator()" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-400">
+                                <div class="flex justify-between text-[11px] text-slate-400 mt-1">
+                                    <span>1 Adet</span>
+                                    <span>100 Adet</span>
+                                    <span>250 Adet</span>
+                                    <span>500 Adet</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-2">Fiyat Senaryosu SeÃ§imi:</label>
+                                <select id="sim-scenario" onchange="calculateSimulator()" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                    <option value="3658" data-margin="18">Senaryo 1: RekabetÃ§i / Taban Fiyat (3.658 â‚º - %18 KÃ¢r)</option>
+                                    <option value="4185" data-margin="35" selected>Senaryo 2: Hedef / Piyasa StandardÄ± (4.185 â‚º - %35 KÃ¢r) [Ã–nerilen]</option>
+                                    <option value="4960" data-margin="60">Senaryo 3: Katma DeÄŸerli Premium (4.960 â‚º - %60 KÃ¢r)</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-2">Sevkiyat Modeli:</label>
+                                <select id="sim-shipping" onchange="calculateSimulator()" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                    <option value="150" selected>Standart B2B Sevkiyat (150 â‚º/adet)</option>
+                                    <option value="250">Ã–ncelikli HÄ±zlÄ± Ekspres (250 â‚º/adet)</option>
+                                    <option value="90">Toplu Palet Ä°ndirimi (90 â‚º/adet)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Results Right (7 cols) -->
+                        <div class="lg:col-span-7 bg-slate-800/80 rounded-2xl p-6 border border-slate-700/80">
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-6">
+                                <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800">
+                                    <span class="text-[11px] text-slate-400 block">Birim Taban Maliyet</span>
+                                    <span id="sim-unit-cost" class="text-lg sm:text-xl font-bold text-slate-200">3.100 â‚º</span>
+                                </div>
+                                <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800">
+                                    <span class="text-[11px] text-slate-400 block">Birim SatÄ±ÅŸ FiyatÄ±</span>
+                                    <span id="sim-unit-price" class="text-lg sm:text-xl font-bold text-amber-400">4.185 â‚º</span>
+                                </div>
+                                <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800 col-span-2 sm:col-span-1">
+                                    <span class="text-[11px] text-slate-400 block">Birim Net KÃ¢r</span>
+                                    <span id="sim-unit-profit" class="text-lg sm:text-xl font-bold text-emerald-400">+1.085 â‚º</span>
+                                </div>
+                            </div>
+
+                            <div class="space-y-3 border-t border-slate-700 pt-4 text-xs">
+                                <div class="flex justify-between items-center text-slate-300">
+                                    <span>Toplam Ãœretim ve Lojistik Maliyeti:</span>
+                                    <span id="sim-total-cost" class="font-semibold text-slate-100">155.000 â‚º</span>
+                                </div>
+                                <div class="flex justify-between items-center text-slate-300">
+                                    <span>Toplam SatÄ±ÅŸ Hacmi (Ciro):</span>
+                                    <span id="sim-total-revenue" class="font-bold text-amber-400 text-sm">209.250 â‚º</span>
+                                </div>
+                                <div class="flex justify-between items-center text-emerald-400 font-bold text-sm bg-emerald-950/40 p-3 rounded-xl border border-emerald-800/40">
+                                    <span>Beklenen Toplam Net KÃ¢r:</span>
+                                    <span id="sim-total-profit" class="text-base sm:text-lg text-emerald-300">+54.250 â‚º</span>
+                                </div>
+                            </div>
+
+                            <div class="mt-6 flex justify-end">
+                                <button onclick="transferSimToOrder()" class="w-full sm:w-auto px-6 py-3 bg-amber-400 hover:bg-amber-300 text-slate-900 font-extrabold rounded-xl text-xs sm:text-sm transition-all shadow flex items-center justify-center gap-2">
+                                    <i class="fas fa-cart-arrow-down"></i> Bu Hesaplamayla SipariÅŸ AkÄ±ÅŸÄ±nÄ± BaÅŸlat
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ************************************************************************* -->
+    <!-- BÃ–LÃœM: ÃœRÃœN VE BÄ°LEÅEN KATALOÄU (CATALOG)                                 -->
+    <!-- ************************************************************************* -->
+    <section id="catalog" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="inline-block text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-100 px-3 py-1 rounded-full mb-3">
+                    Resmi Ekosistem KataloÄŸu
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">ÃœrÃ¼n & BileÅŸen KataloÄŸu</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mt-4 mb-4"></div>
+                <p class="text-slate-600 text-sm sm:text-base">
+                    Nihai Ã¼rÃ¼n SmartBox ve Ã¼retimin her aÅŸamasÄ±nda yer alan 8 bileÅŸenin teknik detaylarÄ±nÄ± inceleyin ve doÄŸrudan sipariÅŸ listenize ekleyin.
+                </p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-2 mb-10">
+                <button onclick="filterCatalog('all')" class="cat-filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-primary text-white shadow-sm" data-category="all">TÃ¼mÃ¼ (9)</button>
+                <button onclick="filterCatalog('final')" class="cat-filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200" data-category="final">Nihai ÃœrÃ¼n (SmartBox)</button>
+                <button onclick="filterCatalog('hardware')" class="cat-filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200" data-category="hardware">DonanÄ±m ModÃ¼lleri</button>
+                <button onclick="filterCatalog('software')" class="cat-filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200" data-category="software">YazÄ±lÄ±m & Lisans</button>
+                <button onclick="filterCatalog('service')" class="cat-filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200" data-category="service">Garanti & Hizmet (G08)</button>
+            </div>
+
+            <!-- Catalog Items Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="catalog-grid">
+                
+                <!-- 0. SmartBox (Nihai ÃœrÃ¼n) -->
+                <div class="catalog-card group bg-white rounded-2xl border-2 border-primary p-6 shadow-md hover:shadow-xl transition-all relative overflow-hidden" data-category="final">
+                    <div class="absolute -right-6 -bottom-6 text-blue-50 opacity-40 pointer-events-none group-hover:scale-110 transition-transform">
+                        <i class="fas fa-box text-9xl"></i>
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-xs font-extrabold px-3 py-1 bg-blue-600 text-white rounded-lg">NÄ°HAÄ° ÃœRÃœN</span>
+                        <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded">8 BileÅŸen Entegre</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors">SmartBox AkÄ±llÄ± Ä°stasyon</h3>
+                    <p class="text-xs text-slate-500 mt-1 mb-4">Ãœretici: GÃ¼vencePlus A.Å. (G08 Montaj HattÄ±)</p>
+                    <p class="text-slate-600 text-xs line-clamp-2 mb-4 leading-relaxed">
+                        TÃ¼m modÃ¼llerin entegrasyonuyla Ã¼retilen, yapay zeka destekli, 2 yÄ±l tam garantili yeni nesil akÄ±llÄ± ofis ve yÃ¶netim asistanÄ±.
+                    </p>
+                    <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] text-slate-400 block">Taban SatÄ±ÅŸ FiyatÄ±:</span>
+                            <span class="text-base font-extrabold text-primary">3.658 â‚º - 4.960 â‚º</span>
+                        </div>
+                        <button onclick="openOrderModal('SmartBox AkÄ±llÄ± Ä°stasyon', 4185)" class="px-4 py-2 bg-primary hover:bg-blue-800 text-white text-xs font-bold rounded-lg transition-colors flex items-center gap-1.5 shadow">
+                            <i class="fas fa-cart-plus"></i> SipariÅŸ Ver
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 1. G08: Garanti Hizmet Paketi (UzmanlÄ±k) -->
+                <div class="catalog-card group bg-blue-50/50 rounded-2xl border-2 border-blue-400 p-6 shadow-md hover:shadow-xl transition-all relative overflow-hidden" data-category="service">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-xs font-extrabold px-3 py-1 bg-blue-700 text-white rounded-lg">G08 - BÄ°ZÄ°M ÃœRÃœNÃœMÃœZ</span>
+                        <span class="text-xs font-bold text-blue-700 bg-blue-100 px-2 py-0.5 rounded">Lig Ä°htiyacÄ±</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-950 group-hover:text-primary transition-colors">Garanti Hizmet Paketi</h3>
+                    <p class="text-xs text-blue-700 mt-1 mb-4">TedarikÃ§i: GÃ¼vencePlus Hizmetleri A.Å.</p>
+                    <p class="text-slate-600 text-xs line-clamp-2 mb-4 leading-relaxed">
+                        Ligdeki diÄŸer 7 ÅŸirkete de saÄŸlanan, donanÄ±m arÄ±zasÄ±, birebir deÄŸiÅŸim ve 7/24 teknik SLA kapsayan kurumsal gÃ¼vence sistemi.
+                    </p>
+                    <div class="pt-4 border-t border-blue-200 flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] text-slate-400 block">Birim Fiyat:</span>
+                            <span class="text-base font-extrabold text-blue-900">380 â‚º</span>
+                        </div>
+                        <button onclick="openOrderModal('Garanti Hizmet Paketi (G08)', 380)" class="px-4 py-2 bg-blue-700 hover:bg-blue-800 text-white text-xs font-bold rounded-lg transition-colors flex items-center gap-1.5 shadow">
+                            <i class="fas fa-cart-plus"></i> Tedarik Et
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2. G01: Enerji ModÃ¼lÃ¼ -->
+                <div class="catalog-card group bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-all" data-category="hardware">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-xs font-extrabold px-2.5 py-1 bg-slate-100 text-slate-800 rounded-md">G01</span>
+                        <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">DonanÄ±m</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">Enerji ModÃ¼lÃ¼</h3>
+                    <p class="text-xs text-slate-500 mt-0.5 mb-3">EnerjiNova A.Å.</p>
+                    <p class="text-slate-600 text-xs mb-4">DÃ¼ÅŸÃ¼k tÃ¼ketimli batarya ve gÃ¼Ã§ yÃ¶netimi regÃ¼latÃ¶rÃ¼ iÃ§eren gÃ¼Ã§ Ã¼nitesi.</p>
+                    <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] text-slate-400 block">Maliyet:</span>
+                            <span class="text-sm font-bold text-slate-900">420 â‚º</span>
+                        </div>
+                        <button onclick="openOrderModal('Enerji ModÃ¼lÃ¼ (G01)', 420)" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg transition-colors">
+                            Detay & Al
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3. G02: Ä°ÅŸlemci ModÃ¼lÃ¼ -->
+                <div class="catalog-card group bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-all" data-category="hardware">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-xs font-extrabold px-2.5 py-1 bg-slate-100 text-slate-800 rounded-md">G02</span>
+                        <span class="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded">DonanÄ±m</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">Ä°ÅŸlemci ModÃ¼lÃ¼</h3>
+                    <p class="text-xs text-slate-500 mt-0.5 mb-3">MikroCore Teknoloji</p>
+                    <p class="text-slate-600 text-xs mb-4">YÃ¼ksek hesaplama gÃ¼cÃ¼ saÄŸlayan sekiz Ã§ekirdekli ana SoC iÅŸlemci kartÄ±.</p>
+                    <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] text-slate-400 block">Maliyet:</span>
+                            <span class="text-sm font-bold text-slate-900">780 â‚º</span>
+                        </div>
+                        <button onclick="openOrderModal('Ä°ÅŸlemci ModÃ¼lÃ¼ (G02)', 780)" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg transition-colors">
+                            Detay & Al
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 4. G03: SensÃ¶r Kiti -->
+                <div class="catalog-card group bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-all" data-category="hardware">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-xs font-extrabold px-2.5 py-1 bg-slate-100 text-slate-800 rounded-md">G03</span>
+                        <span class="text-xs font-semibold text-purple-600 bg-purple-50 px-2 py-0.5 rounded">DonanÄ±m</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">SensÃ¶r Kiti</h3>
+                    <p class="text-xs text-slate-500 mt-0.5 mb-3">SensoTek A.Å.</p>
+                    <p class="text-slate-600 text-xs mb-4">SÄ±caklÄ±k, nem, hareket ve optik algÄ±layÄ±cÄ± iÃ§eren hassas sensÃ¶r paketi.</p>
+                    <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] text-slate-400 block">Maliyet:</span>
+                            <span class="text-sm font-bold text-slate-900">340 â‚º</span>
+                        </div>
+                        <button onclick="openOrderModal('SensÃ¶r Kiti (G03)', 340)" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg transition-colors">
+                            Detay & Al
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 5. G04: Kasa ve Ambalaj -->
+                <div class="catalog-card group bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-all" data-category="hardware">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-xs font-extrabold px-2.5 py-1 bg-slate-100 text-slate-800 rounded-md">G04</span>
+                        <span class="text-xs font-semibold text-amber-600 bg-amber-50 px-2 py-0.5 rounded">DonanÄ±m</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">Kasa ve Ambalaj</h3>
+                    <p class="text-xs text-slate-500 mt-0.5 mb-3">FormAmbalaj A.Å.</p>
+                    <p class="text-slate-600 text-xs mb-4">Hava kanallÄ± ergonomik alÃ¼minyum/polimer kasa ve geri dÃ¶nÃ¼ÅŸtÃ¼rÃ¼lebilir ambalaj.</p>
+                    <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] text-slate-400 block">Maliyet:</span>
+                            <span class="text-sm font-bold text-slate-900">190 â‚º</span>
+                        </div>
+                        <button onclick="openOrderModal('Kasa ve Ambalaj (G04)', 190)" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg transition-colors">
+                            Detay & Al
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 6. G05: BulutOS YazÄ±lÄ±m LisansÄ± -->
+                <div class="catalog-card group bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-all" data-category="software">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-xs font-extrabold px-2.5 py-1 bg-slate-100 text-slate-800 rounded-md">G05</span>
+                        <span class="text-xs font-semibold text-cyan-600 bg-cyan-50 px-2 py-0.5 rounded">YazÄ±lÄ±m</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">YazÄ±lÄ±m LisansÄ±</h3>
+                    <p class="text-xs text-slate-500 mt-0.5 mb-3">BulutOS YazÄ±lÄ±m</p>
+                    <p class="text-slate-600 text-xs mb-4">SmartBox'Ä±n donanÄ±m katmanÄ±nÄ± yÃ¶neten gÃ¼venli gerÃ§ek zamanlÄ± OS lisansÄ±.</p>
+                    <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] text-slate-400 block">Maliyet:</span>
+                            <span class="text-sm font-bold text-slate-900">260 â‚º</span>
+                        </div>
+                        <button onclick="openOrderModal('YazÄ±lÄ±m LisansÄ± (G05)', 260)" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg transition-colors">
+                            Detay & Al
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 7. G06: Lojistik TokenÄ± -->
+                <div class="catalog-card group bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-all" data-category="service">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-xs font-extrabold px-2.5 py-1 bg-slate-100 text-slate-800 rounded-md">G06</span>
+                        <span class="text-xs font-semibold text-orange-600 bg-orange-50 px-2 py-0.5 rounded">Lojistik</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">Lojistik TokenÄ±</h3>
+                    <p class="text-xs text-slate-500 mt-0.5 mb-3">HÄ±zlÄ±Rota Lojistik</p>
+                    <p class="text-slate-600 text-xs mb-4">Ekosistem iÃ§i taÅŸÄ±ma ve daÄŸÄ±tÄ±m gÃ¼zergah hakkÄ± saÄŸlayan dijital lojistik tokenÄ±.</p>
+                    <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] text-slate-400 block">Maliyet:</span>
+                            <span class="text-sm font-bold text-slate-900">150 â‚º</span>
+                        </div>
+                        <button onclick="openOrderModal('Lojistik TokenÄ± (G06)', 150)" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg transition-colors">
+                            Detay & Al
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 8. G07: MÃ¼ÅŸteri AnalitiÄŸi LisansÄ± -->
+                <div class="catalog-card group bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-all" data-category="software">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-xs font-extrabold px-2.5 py-1 bg-slate-100 text-slate-800 rounded-md">G07</span>
+                        <span class="text-xs font-semibold text-teal-600 bg-teal-50 px-2 py-0.5 rounded">Analitik</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">MÃ¼ÅŸteri AnalitiÄŸi LisansÄ±</h3>
+                    <p class="text-xs text-slate-500 mt-0.5 mb-3">VeriPusula Analitik</p>
+                    <p class="text-slate-600 text-xs mb-4">KullanÄ±m telemetrisi ve davranÄ±ÅŸsal veri raporlama yapay zeka modÃ¼lÃ¼.</p>
+                    <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] text-slate-400 block">Maliyet:</span>
+                            <span class="text-sm font-bold text-slate-900">180 â‚º</span>
+                        </div>
+                        <button onclick="openOrderModal('MÃ¼ÅŸteri AnalitiÄŸi (G07)', 180)" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg transition-colors">
+                            Detay & Al
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- HakkÄ±mÄ±zda Section -->
+    <section id="about" class="py-20 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-100 px-3 py-1 rounded-full">Kurumsal Kimlik</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-2 mb-4">GÃ¼vencePlus Hizmetleri A.Å. (G08)</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-2xl font-bold text-primary mb-4">Dijital Åirketler Ligi'nde GÃ¼venin ve Kalitenin TeminatÄ±</h3>
+                    <p class="text-slate-600 mb-6 leading-relaxed text-sm sm:text-base">
+                        Dijital Åirketler Ligi'nde faaliyet gÃ¶steren ÅŸirketimiz, ekosistemin temel yapÄ± taÅŸlarÄ±ndan biri olan <strong>Garanti Hizmet Paketi (G08)</strong> Ã¼retiminde uzmanlaÅŸmÄ±ÅŸtÄ±r. SmartBox nihai Ã¼rÃ¼nÃ¼nÃ¼n Ã¼retiminde kritik bir role sahip olan bu hizmetimiz, sektÃ¶rdeki diÄŸer 7 ÅŸirket tarafÄ±ndan tercih edilmektedir.
+                    </p>
+                    <p class="text-slate-600 mb-6 leading-relaxed text-sm sm:text-base">
+                        AynÄ± zamanda tedarik aÄŸÄ±mÄ±zdaki iÅŸ ortaklarÄ±mÄ±zdan saÄŸladÄ±ÄŸÄ±mÄ±z 7 farklÄ± bileÅŸeni, kendi uzmanlÄ±k Ã¼rÃ¼nÃ¼mÃ¼zle birleÅŸtirerek yÃ¼ksek kaliteli <strong>SmartBox</strong> cihazlarÄ±nÄ±n montajÄ±nÄ± gerÃ§ekleÅŸtiriyor ve nihai tÃ¼ketici pazarÄ±na sunuyoruz.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mt-6">
+                        <div class="bg-white p-4 rounded-xl text-center border border-slate-200 shadow-sm">
+                            <i class="fas fa-certificate text-2xl text-secondary mb-2"></i>
+                            <h4 class="font-bold text-slate-900 text-sm">Kalite OnaylÄ±</h4>
+                            <p class="text-[11px] text-slate-500 mt-0.5">%99.4 SÄ±fÄ±r Hata Testi</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl text-center border border-slate-200 shadow-sm">
+                            <i class="fas fa-handshake-angle text-2xl text-secondary mb-2"></i>
+                            <h4 class="font-bold text-slate-900 text-sm">GÃ¼Ã§lÃ¼ B2B AÄŸÄ±</h4>
+                            <p class="text-[11px] text-slate-500 mt-0.5">8 Åirketle Kesintisiz Entegrasyon</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-900 mb-6 border-b pb-4 flex items-center gap-2">
+                        <i class="fas fa-sitemap text-secondary"></i> Åirket Organizasyon YapÄ±mÄ±z
+                    </h3>
+                    <ul class="space-y-3.5 text-sm">
+                        <li class="flex items-center gap-3"><div class="w-2.5 h-2.5 rounded-full bg-primary"></div><span class="font-medium text-slate-700">YÃ¶netim & Stratejik Planlama</span></li>
+                        <li class="flex items-center gap-3"><div class="w-2.5 h-2.5 rounded-full bg-primary"></div><span class="font-medium text-slate-700">Finans & Maliyet Muhasebesi</span></li>
+                        <li class="flex items-center gap-3"><div class="w-2.5 h-2.5 rounded-full bg-primary"></div><span class="font-medium text-slate-700">Tedarik Zinciri ve SatÄ±n Alma (G01-G07)</span></li>
+                        <li class="flex items-center gap-3"><div class="w-2.5 h-2.5 rounded-full bg-primary"></div><span class="font-medium text-slate-700">Operasyon & SmartBox Montaj HattÄ±</span></li>
+                        <li class="flex items-center gap-3"><div class="w-2.5 h-2.5 rounded-full bg-primary"></div><span class="font-medium text-slate-700">Pazarlama, FiyatlandÄ±rma ve B2B SatÄ±ÅŸ</span></li>
+                        <li class="flex items-center gap-3"><div class="w-2.5 h-2.5 rounded-full bg-primary"></div><span class="font-medium text-slate-700">G08 Garanti Hizmetleri & SLA Destek Merkezi</span></li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Misyon ve Vizyon Section -->
-    <section id="mission-vision" class="py-20 bg-gray-50">
+    <!-- B2B & Tedarik AÄŸÄ± Section -->
+    <section id="b2b" class="py-20 bg-white border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <!-- Misyon -->
-                <div class="bg-white p-10 rounded-2xl shadow-lg border-t-4 border-secondary relative overflow-hidden group hover:shadow-xl transition-all">
-                    <div class="absolute -right-6 -top-6 text-gray-50 opacity-50 group-hover:scale-110 transition-transform duration-500">
-                        <i class="fas fa-bullseye text-9xl"></i>
-                    </div>
-                    <div class="relative z-10">
-                        <div class="w-16 h-16 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
-                            <i class="fas fa-bullseye text-3xl text-secondary"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-dark mb-4">Misyonumuz</h3>
-                        <p class="text-gray-600 leading-relaxed">
-                            Dijital Şirketler Ligi ekosisteminde, <strong>SmartBox</strong> üretim sürecinin en güvenilir halkası olmak; yüksek kaliteli "Garanti Hizmet Paketi"ni en optimum maliyetle üreterek B2B iş ortaklarımızın ve nihai tüketicilerin memnuniyetini en üst düzeye çıkarmak.
-                        </p>
-                    </div>
-                </div>
+            <div class="text-center mb-16">
+                <span class="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-100 px-3 py-1 rounded-full">Ekosistem OrtaklarÄ±</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-2 mb-4">Ä°ÅŸ OrtaklarÄ± & Tedarik AÄŸÄ±mÄ±z</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto rounded-full"></div>
+                <p class="mt-4 text-slate-600 max-w-2xl mx-auto text-sm sm:text-base">
+                    SmartBox Ã¼retimini gerÃ§ekleÅŸtirmek iÃ§in ekosistemdeki diÄŸer 7 deÄŸerli ÅŸirketle gÃ¼Ã§lÃ¼ alÄ±m-satÄ±m iliÅŸkileri kuruyoruz. MÃ¼ÅŸterilerimiz aynÄ± zamanda tedarikÃ§ilerimizdir.
+                </p>
+            </div>
 
-                <!-- Vizyon -->
-                <div class="bg-white p-10 rounded-2xl shadow-lg border-t-4 border-primary relative overflow-hidden group hover:shadow-xl transition-all">
-                    <div class="absolute -right-6 -top-6 text-gray-50 opacity-50 group-hover:scale-110 transition-transform duration-500">
-                        <i class="fas fa-eye text-9xl"></i>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- G01 -->
+                <div class="bg-slate-50 border border-slate-200 p-6 rounded-2xl text-center hover:border-secondary transition-all group">
+                    <div class="w-14 h-14 bg-blue-100 text-secondary rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform font-bold text-lg">
+                        G01
                     </div>
-                    <div class="relative z-10">
-                        <div class="w-16 h-16 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
-                            <i class="fas fa-eye text-3xl text-primary"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-dark mb-4">Vizyonumuz</h3>
-                        <p class="text-gray-600 leading-relaxed">
-                            Yenilikçi hizmet anlayışımız ve güçlü finansal yapımızla sektörün lider garanti sağlayıcısı olmak; sadece günümüzün değil, geleceğin akıllı cihaz ekosistemlerine de yön veren sürdürülebilir, güven odaklı bir değer merkezi haline gelmek.
-                        </p>
+                    <h4 class="font-bold text-slate-900 mb-1">EnerjiNova A.Å.</h4>
+                    <p class="text-xs text-slate-500">Enerji ModÃ¼lÃ¼ TedarikÃ§isi</p>
+                </div>
+                <!-- G02 -->
+                <div class="bg-slate-50 border border-slate-200 p-6 rounded-2xl text-center hover:border-secondary transition-all group">
+                    <div class="w-14 h-14 bg-blue-100 text-secondary rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform font-bold text-lg">
+                        G02
                     </div>
+                    <h4 class="font-bold text-slate-900 mb-1">MikroCore Teknoloji</h4>
+                    <p class="text-xs text-slate-500">Ä°ÅŸlemci ModÃ¼lÃ¼ TedarikÃ§isi</p>
+                </div>
+                <!-- G03 -->
+                <div class="bg-slate-50 border border-slate-200 p-6 rounded-2xl text-center hover:border-secondary transition-all group">
+                    <div class="w-14 h-14 bg-blue-100 text-secondary rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform font-bold text-lg">
+                        G03
+                    </div>
+                    <h4 class="font-bold text-slate-900 mb-1">SensoTek A.Å.</h4>
+                    <p class="text-xs text-slate-500">SensÃ¶r Kiti TedarikÃ§isi</p>
+                </div>
+                <!-- G04 -->
+                <div class="bg-slate-50 border border-slate-200 p-6 rounded-2xl text-center hover:border-secondary transition-all group">
+                    <div class="w-14 h-14 bg-blue-100 text-secondary rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform font-bold text-lg">
+                        G04
+                    </div>
+                    <h4 class="font-bold text-slate-900 mb-1">FormAmbalaj A.Å.</h4>
+                    <p class="text-xs text-slate-500">Kasa ve Ambalaj TedarikÃ§isi</p>
+                </div>
+                <!-- G05 -->
+                <div class="bg-slate-50 border border-slate-200 p-6 rounded-2xl text-center hover:border-secondary transition-all group">
+                    <div class="w-14 h-14 bg-blue-100 text-secondary rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform font-bold text-lg">
+                        G05
+                    </div>
+                    <h4 class="font-bold text-slate-900 mb-1">BulutOS YazÄ±lÄ±m</h4>
+                    <p class="text-xs text-slate-500">YazÄ±lÄ±m LisansÄ± TedarikÃ§isi</p>
+                </div>
+                <!-- G06 -->
+                <div class="bg-slate-50 border border-slate-200 p-6 rounded-2xl text-center hover:border-secondary transition-all group">
+                    <div class="w-14 h-14 bg-blue-100 text-secondary rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform font-bold text-lg">
+                        G06
+                    </div>
+                    <h4 class="font-bold text-slate-900 mb-1">HÄ±zlÄ±Rota Lojistik</h4>
+                    <p class="text-xs text-slate-500">Lojistik TokenÄ± TedarikÃ§isi</p>
+                </div>
+                <!-- G07 -->
+                <div class="bg-slate-50 border border-slate-200 p-6 rounded-2xl text-center hover:border-secondary transition-all group">
+                    <div class="w-14 h-14 bg-blue-100 text-secondary rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform font-bold text-lg">
+                        G07
+                    </div>
+                    <h4 class="font-bold text-slate-900 mb-1">VeriPusula Analitik</h4>
+                    <p class="text-xs text-slate-500">MÃ¼ÅŸteri AnalitiÄŸi LisansÄ±</p>
+                </div>
+                <!-- G08 (Biz) -->
+                <div class="bg-gradient-to-br from-primary to-secondary border border-blue-700 p-6 rounded-2xl text-center text-white shadow-lg transform sm:scale-105">
+                    <div class="w-14 h-14 bg-white text-primary rounded-2xl flex items-center justify-center mx-auto mb-4 font-bold text-lg shadow">
+                        G08
+                    </div>
+                    <h4 class="font-bold text-white mb-1">GÃ¼vencePlus Hizmetleri</h4>
+                    <p class="text-xs text-blue-100">Garanti Hizmet Paketi SaÄŸlayÄ±cÄ±sÄ±</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Ürünler Section -->
-    <section id="products" class="py-20 bg-white">
+    <!-- Ä°letiÅŸim Section -->
+    <section id="contact" class="py-20 bg-slate-50 border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Ürün ve Hizmetlerimiz</h2>
-                <div class="w-24 h-1 bg-secondary mx-auto rounded"></div>
-                <p class="mt-6 text-gray-600 max-w-2xl mx-auto">Sektördeki uzmanlığımızla hem B2B pazarında hem de nihai tüketici pazarında en iyi çözümleri sunuyoruz.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Uzmanlık Ürünü -->
-                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow border-t-4 border-primary relative overflow-hidden">
-                    <div class="absolute -right-10 -top-10 text-gray-100 opacity-50"><i class="fas fa-shield-check text-9xl"></i></div>
-                    <div class="relative z-10">
-                        <span class="text-sm font-bold text-secondary uppercase tracking-wider">Uzmanlık Ürünümüz</span>
-                        <h3 class="text-2xl font-bold text-dark mt-2 mb-4">Garanti Hizmet Paketi</h3>
-                        <p class="text-gray-600 mb-6">Müşterilerinizin SmartBox deneyimini kusursuz kılmak için tasarlanmış kapsamlı güvence ve destek sistemidir.</p>
-                        
-                        <ul class="space-y-3 mt-6">
-                            <li class="flex items-start gap-3">
-                                <i class="fas fa-check-circle text-secondary mt-1"></i>
-                                <span class="text-gray-700"><strong>Tam Kapsamlı Koruma:</strong> Donanım ve yazılım sorunlarına karşı %100 güvence.</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i class="fas fa-check-circle text-secondary mt-1"></i>
-                                <span class="text-gray-700"><strong>7/24 Öncelikli Destek:</strong> Uzman ekibimizle anında çözüm merkezi hizmeti.</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i class="fas fa-check-circle text-secondary mt-1"></i>
-                                <span class="text-gray-700"><strong>Ücretsiz Değişim:</strong> Hızlı servis ağıyla kullanıcı mağduriyetini sıfıra indirir.</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Nihai Ürün -->
-                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow border-t-4 border-accent relative overflow-hidden">
-                    <div class="absolute -right-10 -top-10 text-gray-100 opacity-50"><i class="fas fa-box-open text-9xl"></i></div>
-                    <div class="relative z-10">
-                        <span class="text-sm font-bold text-accent uppercase tracking-wider">Nihai Ürünümüz</span>
-                        <h3 class="text-2xl font-bold text-dark mt-2 mb-4">SmartBox</h3>
-                        <p class="text-gray-600 mb-6">En son teknolojiyi şık bir tasarımda buluşturan, hayatınızı kolaylaştıracak yeni nesil akıllı ev ve ofis asistanınız.</p>
-                        
-                        <ul class="space-y-3 mt-6">
-                            <li class="flex items-start gap-3">
-                                <i class="fas fa-star text-accent mt-1"></i>
-                                <span class="text-gray-700"><strong>Yapay Zeka Destekli:</strong> Öğrenen algoritmalarla rutin işlerinizi otomatikleştirir.</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i class="fas fa-star text-accent mt-1"></i>
-                                <span class="text-gray-700"><strong>Kusursuz Entegrasyon:</strong> Ortamdaki tüm akıllı cihazlarla anında iletişim kurar.</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i class="fas fa-star text-accent mt-1"></i>
-                                <span class="text-gray-700"><strong>Güvenli Veri İşleme:</strong> Gelişmiş şifreleme yöntemleriyle kişisel verilerinizi korur.</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- B2B & Tedarik Ağı -->
-    <section id="b2b" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">İş Ortakları & Tedarik Ağımız</h2>
-                <div class="w-24 h-1 bg-secondary mx-auto rounded"></div>
-                <p class="mt-6 text-gray-600 max-w-2xl mx-auto">SmartBox üretimini gerçekleştirmek için ekosistemdeki diğer değerli şirketlerle güçlü alım-satım ilişkileri kuruyoruz. Müşterilerimiz aynı zamanda tedarikçilerimizdir.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <!-- İş Ortakları -->
-                <div class="bg-gray-50 border border-gray-200 p-6 rounded-xl text-center hover:border-secondary transition-colors group">
-                    <div class="w-16 h-16 bg-blue-100 text-secondary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-bolt text-xl"></i>
-                    </div>
-                    <h4 class="font-bold text-dark mb-1">EnerjiNova A.Ş.</h4>
-                    <p class="text-sm text-gray-500">Enerji Modülü Tedarikçisi</p>
-                </div>
-                <div class="bg-gray-50 border border-gray-200 p-6 rounded-xl text-center hover:border-secondary transition-colors group">
-                    <div class="w-16 h-16 bg-blue-100 text-secondary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-microchip text-xl"></i>
-                    </div>
-                    <h4 class="font-bold text-dark mb-1">MikroCore Teknoloji</h4>
-                    <p class="text-sm text-gray-500">İşlemci Modülü Tedarikçisi</p>
-                </div>
-                <div class="bg-gray-50 border border-gray-200 p-6 rounded-xl text-center hover:border-secondary transition-colors group">
-                    <div class="w-16 h-16 bg-blue-100 text-secondary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-satellite-dish text-xl"></i>
-                    </div>
-                    <h4 class="font-bold text-dark mb-1">SensoTek A.Ş.</h4>
-                    <p class="text-sm text-gray-500">Sensör Kiti Tedarikçisi</p>
-                </div>
-                <div class="bg-gray-50 border border-gray-200 p-6 rounded-xl text-center hover:border-secondary transition-colors group">
-                    <div class="w-16 h-16 bg-blue-100 text-secondary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-box text-xl"></i>
-                    </div>
-                    <h4 class="font-bold text-dark mb-1">FormAmbalaj A.Ş.</h4>
-                    <p class="text-sm text-gray-500">Kasa ve Ambalaj Tedarikçisi</p>
-                </div>
-                <div class="bg-gray-50 border border-gray-200 p-6 rounded-xl text-center hover:border-secondary transition-colors group">
-                    <div class="w-16 h-16 bg-blue-100 text-secondary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-code text-xl"></i>
-                    </div>
-                    <h4 class="font-bold text-dark mb-1">BulutOS Yazılım</h4>
-                    <p class="text-sm text-gray-500">Yazılım Lisansı Tedarikçisi</p>
-                </div>
-                <div class="bg-gray-50 border border-gray-200 p-6 rounded-xl text-center hover:border-secondary transition-colors group">
-                    <div class="w-16 h-16 bg-blue-100 text-secondary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-truck-fast text-xl"></i>
-                    </div>
-                    <h4 class="font-bold text-dark mb-1">HızlıRota Lojistik</h4>
-                    <p class="text-sm text-gray-500">Lojistik Tokenı Tedarikçisi</p>
-                </div>
-                <div class="bg-gray-50 border border-gray-200 p-6 rounded-xl text-center hover:border-secondary transition-colors group">
-                    <div class="w-16 h-16 bg-blue-100 text-secondary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-chart-line text-xl"></i>
-                    </div>
-                    <h4 class="font-bold text-dark mb-1">VeriPusula Analitik</h4>
-                    <p class="text-sm text-gray-500">Müşteri Analitiği Lisansı</p>
-                </div>
-                
-                <!-- Biz -->
-                <div class="bg-blue-600 border border-blue-700 p-6 rounded-xl text-center text-white shadow-lg transform scale-105">
-                    <div class="w-16 h-16 bg-white text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-shield-alt text-xl"></i>
-                    </div>
-                    <h4 class="font-bold mb-1">GüvencePlus Hizmetleri</h4>
-                    <p class="text-sm text-blue-100">Garanti Hizmet Paketi Sağlayıcısı</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- İletişim Section -->
-    <section id="contact" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">İletişim</h2>
-                <div class="w-24 h-1 bg-secondary mx-auto rounded"></div>
-                <p class="mt-6 text-gray-600 max-w-2xl mx-auto">Sorularınız, B2B iş ortaklığı talepleriniz ve daha fazlası için bize ulaşın.</p>
+                <span class="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-100 px-3 py-1 rounded-full">Bize UlaÅŸÄ±n</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-2 mb-4">Ä°letiÅŸim & Teklif Talebi</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto rounded-full"></div>
+                <p class="mt-4 text-slate-600 max-w-2xl mx-auto text-sm sm:text-base">SorularÄ±nÄ±z, B2B tedarik anlaÅŸmalarÄ± ve SmartBox toplu sipariÅŸleriniz iÃ§in 7/24 hizmetinizdeyiz.</p>
             </div>
             
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div class="lg:col-span-1 space-y-6">
-                    <div class="bg-gray-50 p-6 rounded-xl flex items-start gap-4 border border-gray-100 shadow-sm">
-                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary shadow-sm shrink-0">
-                            <i class="fas fa-map-marker-alt text-xl"></i>
+                <div class="lg:col-span-1 space-y-4">
+                    <div class="bg-white p-6 rounded-2xl flex items-start gap-4 border border-slate-200 shadow-sm">
+                        <div class="w-12 h-12 bg-blue-50 text-primary rounded-xl flex items-center justify-center shrink-0">
+                            <i class="fas fa-location-dot text-xl"></i>
                         </div>
                         <div>
-                            <h4 class="font-bold text-dark mb-1">Adres</h4>
-                            <p class="text-gray-600 text-sm">Dijital Şirketler Ligi Kampüsü<br>G08 Yönetim Ofisi</p>
+                            <h4 class="font-bold text-slate-900 text-sm">Genel Merkez</h4>
+                            <p class="text-slate-500 text-xs mt-1">Dijital Åirketler Ligi KampÃ¼sÃ¼<br>G08 YÃ¶netim & Montaj Merkezi</p>
                         </div>
                     </div>
                     
-                    <div class="bg-gray-50 p-6 rounded-xl flex items-start gap-4 border border-gray-100 shadow-sm">
-                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary shadow-sm shrink-0">
+                    <div class="bg-white p-6 rounded-2xl flex items-start gap-4 border border-slate-200 shadow-sm">
+                        <div class="w-12 h-12 bg-blue-50 text-primary rounded-xl flex items-center justify-center shrink-0">
                             <i class="fas fa-envelope text-xl"></i>
                         </div>
                         <div>
-                            <h4 class="font-bold text-dark mb-1">E-Posta</h4>
-                            <p class="text-gray-600 text-sm">iletisim@guvenceplus-g08.com</p>
+                            <h4 class="font-bold text-slate-900 text-sm">E-Posta</h4>
+                            <p class="text-slate-500 text-xs mt-1">iletisim@guvenceplus-g08.com</p>
                         </div>
                     </div>
 
-                    <div class="bg-gray-50 p-6 rounded-xl flex items-start gap-4 border border-gray-100 shadow-sm">
-                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary shadow-sm shrink-0">
-                            <i class="fas fa-phone-alt text-xl"></i>
+                    <div class="bg-white p-6 rounded-2xl flex items-start gap-4 border border-slate-200 shadow-sm">
+                        <div class="w-12 h-12 bg-blue-50 text-primary rounded-xl flex items-center justify-center shrink-0">
+                            <i class="fas fa-phone text-xl"></i>
                         </div>
                         <div>
-                            <h4 class="font-bold text-dark mb-1">Telefon</h4>
-                            <p class="text-gray-600 text-sm">+90 (555) 000 00 08</p>
+                            <h4 class="font-bold text-slate-900 text-sm">Telefon & Destek</h4>
+                            <p class="text-slate-500 text-xs mt-1">+90 (555) 000 00 08 (7/24 Destek)</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="lg:col-span-2">
-                    <form class="bg-gray-50 p-8 rounded-2xl border border-gray-100 shadow-sm">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <form onsubmit="handleContactSubmit(event)" class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Adınız Soyadınız</label>
-                                <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Örn: Ahmet Yılmaz">
+                                <label class="block text-xs font-semibold text-slate-700 mb-2">AdÄ±nÄ±z SoyadÄ±nÄ±z</label>
+                                <input type="text" required class="w-full px-4 py-3 text-sm rounded-xl border border-slate-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none" placeholder="Ã–rn: Ahmet YÄ±lmaz">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">E-Posta Adresiniz</label>
-                                <input type="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Örn: ahmet@sirket.com">
+                                <label class="block text-xs font-semibold text-slate-700 mb-2">E-Posta Adresiniz</label>
+                                <input type="email" required class="w-full px-4 py-3 text-sm rounded-xl border border-slate-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none" placeholder="Ã–rn: ahmet@sirket.com">
                             </div>
                         </div>
-                        <div class="mb-6">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Konu</label>
-                            <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="B2B Tedarik, Destek vs.">
+                        <div class="mb-4">
+                            <label class="block text-xs font-semibold text-slate-700 mb-2">Konu</label>
+                            <input type="text" required class="w-full px-4 py-3 text-sm rounded-xl border border-slate-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none" placeholder="B2B SatÄ±n Alma, Garanti Talebi, Bilgi Edinme">
                         </div>
-                        <div class="mb-6">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Mesajınız</label>
-                            <textarea rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all resize-none" placeholder="Mesajınızı buraya yazın..."></textarea>
+                        <div class="mb-5">
+                            <label class="block text-xs font-semibold text-slate-700 mb-2">MesajÄ±nÄ±z</label>
+                            <textarea rows="4" required class="w-full px-4 py-3 text-sm rounded-xl border border-slate-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none resize-none" placeholder="Talebinizi detaylandÄ±rÄ±n..."></textarea>
                         </div>
-                        <button type="button" class="w-full bg-primary hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2">
-                            <i class="fas fa-paper-plane"></i> Mesaj Gönder
+                        <button type="submit" class="w-full bg-primary hover:bg-blue-900 text-white font-bold py-3.5 px-6 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-md">
+                            <i class="fas fa-paper-plane"></i> MesajÄ± Ä°let
                         </button>
                     </form>
                 </div>
@@ -363,57 +1211,506 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white pt-16 pb-8">
+    <footer class="bg-slate-900 text-white pt-16 pb-8 border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 border-b border-gray-700 pb-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12 border-b border-slate-800 pb-12">
                 <div>
-                    <div class="flex items-center gap-3 mb-6">
-                        <i class="fas fa-shield-alt text-2xl text-secondary"></i>
-                        <span class="font-bold text-xl tracking-tight">GüvencePlus</span>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center text-white">
+                            <i class="fas fa-shield-halved text-lg"></i>
+                        </div>
+                        <span class="font-extrabold text-xl tracking-tight">GÃ¼vencePlus <span class="text-secondary">G08</span></span>
                     </div>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                        Dijital Şirketler Ligi'nde Garanti Hizmet Paketi sağlayıcısı ve güvenilir SmartBox montaj markası. Müşteri memnuniyeti ve B2B güvenilirlik önceliğimizdir.
+                    <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-6">
+                        Dijital Åirketler Ligi Garanti Hizmet Paketi saÄŸlayÄ±cÄ±sÄ± ve SmartBox entegre montaj Ã¼reticisi.
                     </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-secondary hover:text-white transition-colors"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-secondary hover:text-white transition-colors"><i class="fab fa-twitter"></i></a>
+                    <div class="flex space-x-3">
+                        <a href="https://github.com/SerhatSoyluu/G08" target="_blank" class="w-9 h-9 rounded-xl bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-secondary hover:text-white transition-colors" title="GitHub Repository">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-xl bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-secondary hover:text-white transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
                     </div>
                 </div>
                 <div>
-                    <h4 class="text-lg font-bold mb-6">Hızlı Bağlantılar</h4>
-                    <ul class="space-y-3">
-                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">Hakkımızda</a></li>
-                        <li><a href="#products" class="text-gray-400 hover:text-white transition-colors">Ürün ve Hizmetler</a></li>
-                        <li><a href="#b2b" class="text-gray-400 hover:text-white transition-colors">Tedarik Ağımız</a></li>
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">HÄ±zlÄ± MenÃ¼</h4>
+                    <ul class="space-y-2.5 text-xs text-slate-400">
+                        <li><a href="#home" class="hover:text-white transition-colors">Ana Sayfa</a></li>
+                        <li><a href="#production-pricing" class="hover:text-white transition-colors">8 BileÅŸen, Montaj & FiyatlandÄ±rma</a></li>
+                        <li><a href="#catalog" class="hover:text-white transition-colors">ÃœrÃ¼n KataloÄŸu</a></li>
+                        <li><a href="#b2b" class="hover:text-white transition-colors">B2B Tedarik AÄŸÄ± (G01 - G08)</a></li>
+                        <li><a href="#contact" class="hover:text-white transition-colors">Ä°letiÅŸim</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-lg font-bold mb-6">İletişim & Sistem</h4>
-                    <ul class="space-y-4">
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-globe text-secondary mt-1"></i>
-                            <div>
-                                <span class="block text-sm text-gray-400">Öğrenci Portalı</span>
-                                <a href="https://dijital-sirketler-ligi-serhat-ata.ataserhat54.chatgpt.site/ogrenci" target="_blank" class="text-sm hover:text-secondary transition-colors break-all">dijital-sirketler-ligi-serhat-ata...</a>
-                            </div>
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Sistem & BaÄŸlantÄ±lar</h4>
+                    <ul class="space-y-3 text-xs text-slate-400">
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-link text-blue-400"></i>
+                            <span>CanlÄ± BaÄŸlantÄ±: <a href="https://serhatsoyluu.github.io/G08/" class="text-blue-400 hover:underline">serhatsoyluu.github.io/G08/</a></span>
                         </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-envelope text-secondary mt-1"></i>
-                            <div>
-                                <span class="block text-sm text-gray-400">İletişim E-posta</span>
-                                <span class="text-sm">Ekip mail adresi eklenecektir</span>
-                            </div>
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-graduation-cap text-amber-400"></i>
+                            <span>Dijital Åirketler Ligi Proje Teslimi</span>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="text-center text-gray-500 text-sm flex flex-col md:flex-row justify-between items-center">
-                <p>&copy; 2024 GüvencePlus Hizmetleri A.Ş. - Tüm Hakları Saklıdır.</p>
-                <p class="mt-2 md:mt-0">Dijital Şirketler Ligi Proje Ödevi</p>
+            <div class="text-center text-slate-500 text-xs flex flex-col md:flex-row justify-between items-center gap-2">
+                <p>&copy; 2026 GÃ¼vencePlus Hizmetleri A.Å. (G08) - TÃ¼m HaklarÄ± SaklÄ±dÄ±r.</p>
+                <p>Dijital Åirketler Ligi &copy; GÃ¼ncel Hafta Ã–dev Teslim SÃ¼rÃ¼mÃ¼</p>
             </div>
         </div>
     </footer>
 
+    <!-- ************************************************************************* -->
+    <!-- Ä°NTERAKTÄ°F SÄ°PARÄ°Å AKIÅI MODALI (MULTI-STEP ORDER FLOW WIZARD)             -->
+    <!-- ************************************************************************* -->
+    <div id="orderModal" class="fixed inset-0 z-50 hidden bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-slate-100 my-8 transition-all animate-fadeIn">
+            
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center pb-4 border-b border-slate-100">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                        <h3 class="text-xl font-bold text-slate-900">Online B2B SipariÅŸ AkÄ±ÅŸÄ±</h3>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-0.5">AdÄ±m adÄ±m Ã¼rÃ¼n, miktar, fiyat senaryosu ve teslimat seÃ§imi</p>
+                </div>
+                <button onclick="closeOrderModal()" class="text-slate-400 hover:text-slate-700 text-xl p-2 rounded-xl hover:bg-slate-100 transition-colors">
+                    <i class="fas fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Stepper Indicators -->
+            <div class="flex justify-between items-center my-6 max-w-md mx-auto">
+                <div class="flex flex-col items-center">
+                    <div id="step-dot-1" class="w-8 h-8 rounded-full bg-primary text-white font-bold text-xs flex items-center justify-center">1</div>
+                    <span class="text-[10px] font-semibold mt-1 text-primary">ÃœrÃ¼n & Adet</span>
+                </div>
+                <div class="flex-1 h-1 bg-slate-200 mx-2" id="step-line-1"></div>
+                <div class="flex flex-col items-center">
+                    <div id="step-dot-2" class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 font-bold text-xs flex items-center justify-center">2</div>
+                    <span class="text-[10px] font-semibold mt-1 text-slate-400">Senaryo & Sevk</span>
+                </div>
+                <div class="flex-1 h-1 bg-slate-200 mx-2" id="step-line-2"></div>
+                <div class="flex flex-col items-center">
+                    <div id="step-dot-3" class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 font-bold text-xs flex items-center justify-center">3</div>
+                    <span class="text-[10px] font-semibold mt-1 text-slate-400">Åirket & Onay</span>
+                </div>
+            </div>
+
+            <!-- STEP 1: ÃœRÃœN VE ADET SEÃ‡Ä°MÄ° -->
+            <div id="order-step-1" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-2">SipariÅŸ Edilecek ÃœrÃ¼n / BileÅŸen:</label>
+                    <select id="modal-product-select" onchange="updateModalSummary()" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-primary outline-none">
+                        <option value="SmartBox AkÄ±llÄ± Ä°stasyon (TÃ¼m 8 BileÅŸen Dahil)" data-price="4185">SmartBox AkÄ±llÄ± Ä°stasyon (8 BileÅŸen + Montaj + Standart Sevkiyat)</option>
+                        <option value="Garanti Hizmet Paketi (G08 - Bizim UzmanlÄ±k ÃœrÃ¼nÃ¼mÃ¼z)" data-price="380">Garanti Hizmet Paketi (G08 - UzmanlÄ±k ÃœrÃ¼nÃ¼mÃ¼z) - 380 â‚º</option>
+                        <option value="Enerji ModÃ¼lÃ¼ (G01 - EnerjiNova)" data-price="420">Enerji ModÃ¼lÃ¼ (G01) - 420 â‚º</option>
+                        <option value="Ä°ÅŸlemci ModÃ¼lÃ¼ (G02 - MikroCore)" data-price="780">Ä°ÅŸlemci ModÃ¼lÃ¼ (G02) - 780 â‚º</option>
+                        <option value="SensÃ¶r Kiti (G03 - SensoTek)" data-price="340">SensÃ¶r Kiti (G03) - 340 â‚º</option>
+                        <option value="Kasa ve Ambalaj (G04 - FormAmbalaj)" data-price="190">Kasa ve Ambalaj (G04) - 190 â‚º</option>
+                        <option value="YazÄ±lÄ±m LisansÄ± (G05 - BulutOS)" data-price="260">YazÄ±lÄ±m LisansÄ± (G05) - 260 â‚º</option>
+                        <option value="Lojistik TokenÄ± (G06 - HÄ±zlÄ±Rota)" data-price="150">Lojistik TokenÄ± (G06) - 150 â‚º</option>
+                        <option value="MÃ¼ÅŸteri AnalitiÄŸi LisansÄ± (G07 - VeriPusula)" data-price="180">MÃ¼ÅŸteri AnalitiÄŸi (G07) - 180 â‚º</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-2">Talep Edilen SipariÅŸ MiktarÄ± (Adet):</label>
+                    <input type="number" id="modal-quantity" min="1" max="10000" value="10" oninput="updateModalSummary()" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-primary outline-none">
+                    <p class="text-[11px] text-slate-400 mt-1">50 adet ve Ã¼zeri sipariÅŸlerde otomatik palet sevkiyat indirimi uygulanabilir.</p>
+                </div>
+
+                <div class="pt-4 flex justify-end">
+                    <button onclick="goToStep(2)" class="px-6 py-2.5 bg-primary hover:bg-blue-800 text-white rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2">
+                        <span>Devam Et: Fiyat & Sevkiyat</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 2: FÄ°YAT SENARYOSU VE SEVKÄ°YAT SEÃ‡Ä°MÄ° -->
+            <div id="order-step-2" class="space-y-4 hidden">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-2">Uygulanacak Fiyat Senaryosu:</label>
+                    <select id="modal-scenario-select" onchange="updateModalSummary()" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-primary outline-none">
+                        <option value="Senaryo 2: Hedef / Standart Piyasa (Ã–nerilen)" data-margin="35" data-unit="4185" selected>Senaryo 2: Hedef Piyasa (4.185 â‚º - %35 Kar) [Ã–nerilen]</option>
+                        <option value="Senaryo 1: RekabetÃ§i / Taban Fiyat" data-margin="18" data-unit="3658">Senaryo 1: RekabetÃ§i Taban (3.658 â‚º - %18 Kar)</option>
+                        <option value="Senaryo 3: Katma DeÄŸerli Premium" data-margin="60" data-unit="4960">Senaryo 3: Premium VIP (4.960 â‚º - %60 Kar)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-2">Sevkiyat ve Lojistik Tercihi:</label>
+                    <select id="modal-shipping-select" onchange="updateModalSummary()" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-primary outline-none">
+                        <option value="150" selected>Standart B2B Sevkiyat (150 â‚º / adet - 2-3 Ä°ÅŸ GÃ¼nÃ¼)</option>
+                        <option value="250">Ã–ncelikli HÄ±zlÄ± Ekspres (250 â‚º / adet - 24 Saat)</option>
+                        <option value="90">Toplu Palet TeslimatÄ± (90 â‚º / adet - Ã–zel TÄ±r)</option>
+                    </select>
+                </div>
+
+                <!-- Live Summary Pill -->
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs space-y-1.5">
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">Birim SatÄ±ÅŸ FiyatÄ±:</span>
+                        <span id="modal-sum-unit" class="font-bold text-slate-800">4.185 â‚º</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">Miktar:</span>
+                        <span id="modal-sum-qty" class="font-semibold text-slate-800">10 Adet</span>
+                    </div>
+                    <div class="flex justify-between border-t border-slate-200 pt-1.5 text-sm font-bold text-primary">
+                        <span>Tahmini Ara Toplam:</span>
+                        <span id="modal-sum-total">41.850 â‚º</span>
+                    </div>
+                </div>
+
+                <div class="pt-4 flex justify-between">
+                    <button onclick="goToStep(1)" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold text-xs sm:text-sm">
+                        <i class="fas fa-arrow-left mr-1"></i> Geri
+                    </button>
+                    <button onclick="goToStep(3)" class="px-6 py-2.5 bg-primary hover:bg-blue-800 text-white rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2">
+                        <span>Devam Et: Ä°letiÅŸim Bilgileri</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 3: MÃœÅTERÄ° BÄ°LGÄ°LERÄ° VE ONAY -->
+            <div id="order-step-3" class="space-y-4 hidden">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Åirket / Kurum AdÄ±:</label>
+                        <input type="text" id="cust-company" required class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-primary outline-none" placeholder="Ã–rn: Atlas Teknoloji A.Å.">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Yetkili AdÄ± SoyadÄ±:</label>
+                        <input type="text" id="cust-name" required class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-primary outline-none" placeholder="Ã–rn: Zeynep Kaya">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Kurumsal E-Posta:</label>
+                        <input type="email" id="cust-email" required class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-primary outline-none" placeholder="zeynep@atlas.com">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Ä°letiÅŸim Telefonu:</label>
+                        <input type="tel" id="cust-phone" required class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-primary outline-none" placeholder="0532 000 00 00">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Teslimat Adresi ve Notlar:</label>
+                    <textarea id="cust-address" rows="2" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-primary outline-none resize-none" placeholder="Teslimat noktasÄ± ve varsa Ã¶zel talimatlar..."></textarea>
+                </div>
+
+                <!-- Final Confirmation Box -->
+                <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-200 text-xs">
+                    <div class="flex items-center gap-2 text-emerald-800 font-bold text-sm mb-1">
+                        <i class="fas fa-shield-check"></i> G08 GÃ¼vencePlus OnayÄ±
+                    </div>
+                    <p class="text-emerald-700">SipariÅŸiniz onaylandÄ±ÄŸÄ±nda otomatik Ã¼retim ve montaj sÄ±rasÄ±na alÄ±nÄ±r, dijital takip kodu SMS ve e-posta ile iletilir.</p>
+                </div>
+
+                <div class="pt-4 flex justify-between">
+                    <button onclick="goToStep(2)" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold text-xs sm:text-sm">
+                        <i class="fas fa-arrow-left mr-1"></i> Geri
+                    </button>
+                    <button onclick="submitFinalOrder()" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2 shadow-lg">
+                        <i class="fas fa-check"></i>
+                        <span>SipariÅŸi KesinleÅŸtir ve GÃ¶nder</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 4: BAÅARILI SÄ°PARÄ°Å ONAY EKRANI -->
+            <div id="order-step-success" class="text-center py-6 hidden space-y-4">
+                <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-3xl mx-auto shadow-inner">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h4 class="text-2xl font-extrabold text-slate-900">SipariÅŸiniz BaÅŸarÄ±yla AlÄ±ndÄ±!</h4>
+                <p class="text-xs sm:text-sm text-slate-600 max-w-md mx-auto">
+                    SmartBox montaj ve sevkiyat planlamanÄ±z operasyon birimimize iletildi.
+                </p>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-left max-w-md mx-auto text-xs space-y-2">
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">SipariÅŸ Takip No:</span>
+                        <span id="res-tracking-id" class="font-extrabold text-primary">GP-2026-8742</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">ÃœrÃ¼n:</span>
+                        <span id="res-product" class="font-semibold text-slate-800">SmartBox AkÄ±llÄ± Ä°stasyon</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">Adet & Tutar:</span>
+                        <span id="res-amount" class="font-bold text-emerald-600">10 Adet (41.850 â‚º)</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">Durum:</span>
+                        <span class="font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">Montaj SÄ±rasÄ±nda</span>
+                    </div>
+                </div>
+
+                <div class="pt-4 flex justify-center gap-3">
+                    <button onclick="closeOrderModal()" class="px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold">
+                        Pencereyi Kapat
+                    </button>
+                    <button onclick="window.print()" class="px-6 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold flex items-center gap-1.5">
+                        <i class="fas fa-print"></i> YazdÄ±r / PDF
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Tab switching
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-primary', 'text-white', 'shadow-sm');
+                btn.classList.add('text-slate-600');
+            });
+
+            const targetTab = document.getElementById(tabId);
+            if(targetTab) targetTab.classList.remove('hidden');
+
+            const activeBtn = document.getElementById('btn-' + tabId);
+            if(activeBtn) {
+                activeBtn.classList.add('bg-primary', 'text-white', 'shadow-sm');
+                activeBtn.classList.remove('text-slate-600');
+            }
+        }
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        function toggleMobileMenu() {
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-xmark');
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            }
+        }
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        }
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (!mobileMenu.classList.contains('hidden')) {
+                    toggleMobileMenu();
+                }
+            });
+        });
+
+        // Catalog Filter
+        function filterCatalog(category) {
+            document.querySelectorAll('.cat-filter-btn').forEach(btn => {
+                if(btn.dataset.category === category) {
+                    btn.classList.add('bg-primary', 'text-white');
+                    btn.classList.remove('bg-slate-100', 'text-slate-700');
+                } else {
+                    btn.classList.remove('bg-primary', 'text-white');
+                    btn.classList.add('bg-slate-100', 'text-slate-700');
+                }
+            });
+
+            document.querySelectorAll('.catalog-card').forEach(card => {
+                if(category === 'all' || card.dataset.category === category) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        // Live Simulation Calculation
+        function calculateSimulator() {
+            const qty = parseInt(document.getElementById('sim-qty').value) || 1;
+            const scenarioSelect = document.getElementById('sim-scenario');
+            const unitPrice = parseFloat(scenarioSelect.value);
+            const shippingSelect = document.getElementById('sim-shipping');
+            const shippingCost = parseFloat(shippingSelect.value);
+
+            document.getElementById('slider-qty-val').innerText = qty + ' Adet';
+
+            // Constants:
+            // 8 BileÅŸen ToplamÄ± = 2.700 â‚º
+            // Montaj = 250 â‚º
+            const componentCost = 2700;
+            const assemblyCost = 250;
+            const unitCost = componentCost + assemblyCost + shippingCost;
+            const unitProfit = unitPrice - unitCost;
+
+            const totalCost = unitCost * qty;
+            const totalRevenue = unitPrice * qty;
+            const totalProfit = unitProfit * qty;
+
+            document.getElementById('sim-unit-cost').innerText = unitCost.toLocaleString('tr-TR') + ' â‚º';
+            document.getElementById('sim-unit-price').innerText = unitPrice.toLocaleString('tr-TR') + ' â‚º';
+            document.getElementById('sim-unit-profit').innerText = (unitProfit >= 0 ? '+' : '') + unitProfit.toLocaleString('tr-TR') + ' â‚º';
+
+            document.getElementById('sim-total-cost').innerText = totalCost.toLocaleString('tr-TR') + ' â‚º';
+            document.getElementById('sim-total-revenue').innerText = totalRevenue.toLocaleString('tr-TR') + ' â‚º';
+            document.getElementById('sim-total-profit').innerText = (totalProfit >= 0 ? '+' : '') + totalProfit.toLocaleString('tr-TR') + ' â‚º';
+        }
+
+        // Transfer Simulator choice to Order Modal
+        function transferSimToOrder() {
+            const qty = document.getElementById('sim-qty').value;
+            const scenarioValue = document.getElementById('sim-scenario').value;
+            const shippingValue = document.getElementById('sim-shipping').value;
+
+            openOrderModal('SmartBox AkÄ±llÄ± Ä°stasyon (TÃ¼m 8 BileÅŸen Dahil)', scenarioValue);
+            document.getElementById('modal-quantity').value = qty;
+            document.getElementById('modal-shipping-select').value = shippingValue;
+
+            if (scenarioValue == '3658') {
+                document.getElementById('modal-scenario-select').selectedIndex = 1;
+            } else if (scenarioValue == '4960') {
+                document.getElementById('modal-scenario-select').selectedIndex = 2;
+            } else {
+                document.getElementById('modal-scenario-select').selectedIndex = 0;
+            }
+            updateModalSummary();
+        }
+
+        function selectScenario(name, price, margin) {
+            openOrderModal('SmartBox AkÄ±llÄ± Ä°stasyon (TÃ¼m 8 BileÅŸen Dahil)', price);
+            if (price === 3658) document.getElementById('modal-scenario-select').selectedIndex = 1;
+            else if (price === 4960) document.getElementById('modal-scenario-select').selectedIndex = 2;
+            else document.getElementById('modal-scenario-select').selectedIndex = 0;
+            updateModalSummary();
+        }
+
+        // Modal Logic
+        const orderModal = document.getElementById('orderModal');
+
+        function openOrderModal(productName = '', price = null) {
+            orderModal.classList.remove('hidden');
+            document.body.classList.add('modal-active');
+            goToStep(1);
+
+            if(productName) {
+                const select = document.getElementById('modal-product-select');
+                for (let i = 0; i < select.options.length; i++) {
+                    if (select.options[i].text.includes(productName) || select.options[i].value.includes(productName)) {
+                        select.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+            updateModalSummary();
+        }
+
+        function closeOrderModal() {
+            orderModal.classList.add('hidden');
+            document.body.classList.remove('modal-active');
+        }
+
+        function goToStep(step) {
+            document.getElementById('order-step-1').classList.add('hidden');
+            document.getElementById('order-step-2').classList.add('hidden');
+            document.getElementById('order-step-3').classList.add('hidden');
+            document.getElementById('order-step-success').classList.add('hidden');
+
+            const s1 = document.getElementById('step-dot-1');
+            const s2 = document.getElementById('step-dot-2');
+            const s3 = document.getElementById('step-dot-3');
+
+            s1.className = "w-8 h-8 rounded-full font-bold text-xs flex items-center justify-center " + (step >= 1 ? "bg-primary text-white" : "bg-slate-200 text-slate-600");
+            s2.className = "w-8 h-8 rounded-full font-bold text-xs flex items-center justify-center " + (step >= 2 ? "bg-primary text-white" : "bg-slate-200 text-slate-600");
+            s3.className = "w-8 h-8 rounded-full font-bold text-xs flex items-center justify-center " + (step >= 3 ? "bg-primary text-white" : "bg-slate-200 text-slate-600");
+
+            if(step === 1) document.getElementById('order-step-1').classList.remove('hidden');
+            if(step === 2) document.getElementById('order-step-2').classList.remove('hidden');
+            if(step === 3) document.getElementById('order-step-3').classList.remove('hidden');
+
+            updateModalSummary();
+        }
+
+        function updateModalSummary() {
+            const productSelect = document.getElementById('modal-product-select');
+            const qty = parseInt(document.getElementById('modal-quantity').value) || 1;
+            const scenarioSelect = document.getElementById('modal-scenario-select');
+
+            let unitPrice = 0;
+            if (productSelect.value.includes('SmartBox')) {
+                const opt = scenarioSelect.options[scenarioSelect.selectedIndex];
+                unitPrice = parseFloat(opt.getAttribute('data-unit')) || 4185;
+            } else {
+                const opt = productSelect.options[productSelect.selectedIndex];
+                unitPrice = parseFloat(opt.getAttribute('data-price')) || 380;
+            }
+
+            const total = unitPrice * qty;
+
+            document.getElementById('modal-sum-unit').innerText = unitPrice.toLocaleString('tr-TR') + ' â‚º';
+            document.getElementById('modal-sum-qty').innerText = qty + ' Adet';
+            document.getElementById('modal-sum-total').innerText = total.toLocaleString('tr-TR') + ' â‚º';
+        }
+
+        function submitFinalOrder() {
+            const company = document.getElementById('cust-company').value.trim();
+            const name = document.getElementById('cust-name').value.trim();
+            const email = document.getElementById('cust-email').value.trim();
+
+            if(!company || !name || !email) {
+                alert('LÃ¼tfen ÅŸirket adÄ±, yetkili adÄ± ve e-posta alanlarÄ±nÄ± eksiksiz doldurunuz.');
+                return;
+            }
+
+            const product = document.getElementById('modal-product-select').value;
+            const qty = document.getElementById('modal-quantity').value;
+            const total = document.getElementById('modal-sum-total').innerText;
+
+            const randomCode = 'GP-2026-' + Math.floor(1000 + Math.random() * 9000);
+            document.getElementById('res-tracking-id').innerText = randomCode;
+            document.getElementById('res-product').innerText = product.split('(')[0];
+            document.getElementById('res-amount').innerText = qty + ' Adet (' + total + ')';
+
+            document.getElementById('order-step-3').classList.add('hidden');
+            document.getElementById('order-step-success').classList.remove('hidden');
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            alert('MesajÄ±nÄ±z GÃ¼vencePlus G08 kurumsal ekibine iletildi. En kÄ±sa sÃ¼rede dÃ¶nÃ¼ÅŸ saÄŸlanacaktÄ±r.');
+            e.target.reset();
+        }
+
+        // Initialize Simulator and handle deep linking
+        window.addEventListener('DOMContentLoaded', () => {
+            calculateSimulator();
+            
+            const params = new URLSearchParams(window.location.search);
+            const hash = window.location.hash;
+            
+            if (params.get('tab') || hash.includes('tab-')) {
+                const tab = params.get('tab') ? ('tab-' + params.get('tab')) : hash.replace('#', '');
+                switchTab(tab);
+            }
+            if (params.get('order') === 'true' || hash === '#order-modal') {
+                openOrderModal();
+            }
+        });
+    </script>
 </body>
 </html>
 
