@@ -1,0 +1,741 @@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | GüvencePlus Hizmetleri A.Ş. (G08)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3a8a',
+                        secondary: '#2563eb',
+                        accent: '#f59e0b',
+                        dark: '#090d16',
+                        card: '#131c2e'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-blue-600 selection:text-white">
+
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Brand / Logo -->
+                <div class="flex items-center gap-3">
+                    <a href="/" class="flex items-center gap-3 group focus:outline-none">
+                        <div class="w-10 h-10 bg-gradient-to-tr from-blue-700 to-blue-500 rounded-xl flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
+                            <i class="fas fa-shield-halved text-xl"></i>
+                        </div>
+                        <div>
+                            <span class="font-extrabold text-xl text-white tracking-tight">Güvence<span class="text-blue-500">Plus</span></span>
+                            <span class="text-[11px] ml-1.5 font-bold bg-blue-900/60 text-blue-300 px-2 py-0.5 rounded-full border border-blue-700/60">G08</span>
+                        </div>
+                    </a>
+                    <span class="text-slate-600 hidden sm:inline">|</span>
+                    <span class="text-xs font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-lg hidden sm:inline-flex items-center gap-1.5">
+                        <i class="fas fa-gauge-high"></i> Dashboard
+                    </span>
+                </div>
+
+                <!-- Status & Back to Main Site -->
+                <div class="flex items-center gap-3">
+                    <div class="hidden md:flex items-center gap-2 bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-700 text-xs">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span class="text-slate-300">Sistem Durumu: <strong class="text-white">Aktif</strong></span>
+                    </div>
+
+                    <button onclick="window.print()" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-xl text-xs font-semibold transition-all">
+                        <i class="fas fa-print"></i> Yazdır / PDF
+                    </button>
+
+                    <a href="/" class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white rounded-xl text-xs font-bold shadow-md hover:shadow-lg transition-all">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Ana Sayfaya Dön</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        <!-- Title & Executive Overview Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between pb-6 mb-8 border-b border-slate-800 gap-4">
+            <div>
+                <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight flex items-center gap-3">
+                    <span>Dashboard</span>
+                    <span class="text-xs font-bold text-emerald-400 bg-emerald-950/80 border border-emerald-800/60 px-2.5 py-1 rounded-lg uppercase tracking-wider">Canlı İzleme</span>
+                </h1>
+                <p class="text-slate-400 text-xs sm:text-sm mt-1.5 max-w-2xl leading-relaxed">
+                    Stok envanteri, kapasite kullanım oranları, makine parkuru durumu ve gelir projeksiyonu.
+                </p>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-xs">
+                <span class="bg-slate-900 text-slate-300 border border-slate-800 px-3 py-1.5 rounded-xl font-medium">
+                    <i class="fas fa-calendar-check text-blue-400 mr-1.5"></i> Son Güncelleme: <strong>Bugün (Gerçek Zamanlı)</strong>
+                </span>
+            </div>
+        </div>
+
+        <!-- ================= 6 KPI METRİK KARTI ================= -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 mb-8">
+            <!-- 1. Hazır Stok -->
+            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 hover:border-amber-400/50 transition-all shadow-lg flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between text-slate-400 text-xs mb-2">
+                        <span class="font-bold uppercase tracking-wider">Hazır Stok</span>
+                        <i class="fas fa-boxes-stacked text-amber-400 text-base"></i>
+                    </div>
+                    <div class="text-3xl font-black text-white">50 <span class="text-xs font-normal text-slate-400">Adet</span></div>
+                    <span class="inline-block mt-1 text-[11px] font-bold text-emerald-400 bg-emerald-950/70 border border-emerald-800/60 px-2 py-0.5 rounded">
+                        %100 A Kalite
+                    </span>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-400">
+                    50/50 Sevk Edilebilir
+                </div>
+            </div>
+
+            <!-- 2. İş Gücü -->
+            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 hover:border-blue-400/50 transition-all shadow-lg flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between text-slate-400 text-xs mb-2">
+                        <span class="font-bold uppercase tracking-wider">İş Gücü</span>
+                        <i class="fas fa-users-gear text-blue-400 text-base"></i>
+                    </div>
+                    <div class="text-3xl font-black text-white">4 <span class="text-xs font-normal text-slate-400">Personel</span></div>
+                    <span class="inline-block mt-1 text-[11px] font-bold text-blue-400 bg-blue-950/70 border border-blue-800/60 px-2 py-0.5 rounded">
+                        160 Adam/Saat
+                    </span>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-400">
+                    Hat Bakımı & Sevk Modu
+                </div>
+            </div>
+
+            <!-- 3. Makine Parkuru -->
+            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 hover:border-sky-400/50 transition-all shadow-lg flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between text-slate-400 text-xs mb-2">
+                        <span class="font-bold uppercase tracking-wider">Makine Parkuru</span>
+                        <i class="fas fa-gears text-sky-400 text-base"></i>
+                    </div>
+                    <div class="text-3xl font-black text-white">4 <span class="text-xs font-normal text-slate-400">Kurulu</span></div>
+                    <span class="inline-block mt-1 text-[11px] font-bold text-sky-400 bg-sky-950/70 border border-sky-800/60 px-2 py-0.5 rounded">
+                        4/4 Faal & Güvende
+                    </span>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-400">
+                    Koruyucu Rölanti Rejimi
+                </div>
+            </div>
+
+            <!-- 4. Perakende Fiyat -->
+            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 hover:border-emerald-400/50 transition-all shadow-lg flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between text-slate-400 text-xs mb-2">
+                        <span class="font-bold uppercase tracking-wider">Perakende Fiyat</span>
+                        <i class="fas fa-tags text-emerald-400 text-base"></i>
+                    </div>
+                    <div class="text-2xl sm:text-3xl font-black text-emerald-400">7.000 <span class="text-xs font-normal text-slate-400">₺</span></div>
+                    <span class="inline-block mt-1 text-[11px] font-bold text-amber-400 bg-amber-950/70 border border-amber-800/60 px-2 py-0.5 rounded">
+                        Rekabetçi Model
+                    </span>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-400">
+                    Hedef: <strong class="text-white">350.000 ₺ Ciro</strong>
+                </div>
+            </div>
+
+            <!-- 5. Lojistik Token -->
+            <div class="bg-slate-900/90 border border-rose-500/50 rounded-2xl p-5 hover:border-rose-400 transition-all shadow-lg flex flex-col justify-between relative overflow-hidden">
+                <div class="absolute -right-3 -top-3 w-10 h-10 bg-rose-500/20 rounded-full blur-md"></div>
+                <div>
+                    <div class="flex items-center justify-between text-slate-400 text-xs mb-2">
+                        <span class="font-bold uppercase tracking-wider">Lojistik Token</span>
+                        <i class="fas fa-triangle-exclamation text-rose-400 text-base animate-pulse"></i>
+                    </div>
+                    <div class="text-xl font-black text-rose-400">Darboğaz ⚠️</div>
+                    <span class="inline-block mt-1 text-[11px] font-bold text-rose-300 bg-rose-950/80 border border-rose-700/60 px-2 py-0.5 rounded">
+                        Montaj Kısıtlandı
+                    </span>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-400">
+                    Stoktan Sevk Modu
+                </div>
+            </div>
+
+            <!-- 6. Nakit Rezervi Kalkanı -->
+            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 hover:border-purple-400/50 transition-all shadow-lg flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between text-slate-400 text-xs mb-2">
+                        <span class="font-bold uppercase tracking-wider">Mali Rezerv</span>
+                        <i class="fas fa-vault text-purple-400 text-base"></i>
+                    </div>
+                    <div class="text-2xl font-black text-purple-300">0 ₺ Borç</div>
+                    <span class="inline-block mt-1 text-[11px] font-bold text-purple-300 bg-purple-950/70 border border-purple-800/60 px-2 py-0.5 rounded">
+                        Nakit Koruma
+                    </span>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-400">
+                    Kredi/Yatırım/Temettü: 0 ₺
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 4 INTERAKTİF GRAFİK (CHART.JS) ================= -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <!-- Grafik 1: Stok Dağılımı -->
+            <div class="bg-slate-900/90 rounded-3xl p-6 border border-slate-800 shadow-xl flex flex-col justify-between">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h3 class="text-base font-bold text-white flex items-center gap-2">
+                            <i class="fas fa-chart-pie text-amber-400"></i> Hazır Stok Kanal Dağılımı (50 Adet A Kalite)
+                        </h3>
+                        <p class="text-[11px] text-slate-400 mt-0.5">50 adet SmartBox'ın dağıtım kanallarına göre payı</p>
+                    </div>
+                    <span class="text-xs font-bold text-emerald-400 bg-emerald-950/80 border border-emerald-800/60 px-2.5 py-1 rounded-lg">350.000 ₺ Toplam</span>
+                </div>
+                <div class="relative h-64 w-full flex items-center justify-center">
+                    <canvas id="chartInventoryDistribution"></canvas>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-800/80 text-center text-xs text-slate-300 flex justify-around">
+                    <span><i class="fas fa-circle text-amber-400 text-[10px] mr-1"></i> Perakende (10)</span>
+                    <span><i class="fas fa-circle text-blue-400 text-[10px] mr-1"></i> Distribütör (10)</span>
+                    <span><i class="fas fa-circle text-emerald-400 text-[10px] mr-1"></i> Entegratör (10)</span>
+                    <span><i class="fas fa-circle text-purple-400 text-[10px] mr-1"></i> Garanti (10)</span>
+                    <span><i class="fas fa-circle text-sky-400 text-[10px] mr-1"></i> Ön Sipariş (10)</span>
+                </div>
+            </div>
+
+            <!-- Grafik 2: Kapasite ve İş Gücü Dağılımı -->
+            <div class="bg-slate-900/90 rounded-3xl p-6 border border-slate-800 shadow-xl flex flex-col justify-between">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h3 class="text-base font-bold text-white flex items-center gap-2">
+                            <i class="fas fa-chart-column text-blue-400"></i> 4 Personel & 4 Makine Kapasite Dağılımı
+                        </h3>
+                        <p class="text-[11px] text-slate-400 mt-0.5">160 adam/saat iş gücü ve korumaya alınan 4 kurulu makine durumu</p>
+                    </div>
+                    <span class="text-xs font-bold text-blue-400 bg-blue-950/80 border border-blue-800/60 px-2.5 py-1 rounded-lg">160 Adam/Saat</span>
+                </div>
+                <div class="relative h-64 w-full">
+                    <canvas id="chartCapacityDistribution"></canvas>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-800/80 text-center text-xs text-slate-300 flex justify-around">
+                    <span><i class="fas fa-square text-amber-400 text-[10px] mr-1"></i> Kalite & Sevk (%60)</span>
+                    <span><i class="fas fa-square text-blue-400 text-[10px] mr-1"></i> Hat Kalibrasyon (%25)</span>
+                    <span><i class="fas fa-square text-emerald-400 text-[10px] mr-1"></i> Envanter/Parça (%15)</span>
+                </div>
+            </div>
+
+            <!-- Grafik 3: Gelir & Nakit Akışı -->
+            <div class="bg-slate-900/90 rounded-3xl p-6 border border-slate-800 shadow-xl flex flex-col justify-between">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h3 class="text-base font-bold text-white flex items-center gap-2">
+                            <i class="fas fa-chart-line text-emerald-400"></i> Satış Geliri & Kümülatif Nakit Büyümesi
+                        </h3>
+                        <p class="text-[11px] text-slate-400 mt-0.5">50 Adet @@ 7.000 ₺ satış teslimatında oluşan net nakit rezervi</p>
+                    </div>
+                    <span class="text-xs font-bold text-emerald-400 bg-emerald-950/80 border border-emerald-800/60 px-2.5 py-1 rounded-lg">Net +350.000 ₺</span>
+                </div>
+                <div class="relative h-64 w-full">
+                    <canvas id="chartCashFlow"></canvas>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-800/80 text-center text-xs text-slate-300 flex justify-between px-2">
+                    <span>0 Adet (0 ₺)</span>
+                    <span>20 Adet (140.000 ₺)</span>
+                    <span>35 Adet (245.000 ₺)</span>
+                    <span class="text-emerald-400 font-bold">50 Adet (350.000 ₺)</span>
+                </div>
+            </div>
+
+            <!-- Grafik 4: Risk & Güvenlik İndeksi -->
+            <div class="bg-slate-900/90 rounded-3xl p-6 border border-slate-800 shadow-xl flex flex-col justify-between">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h3 class="text-base font-bold text-white flex items-center gap-2">
+                            <i class="fas fa-shield-halved text-purple-400"></i> Operasyonel Sağlık & Risk Değerlendirmesi
+                        </h3>
+                        <p class="text-[11px] text-slate-400 mt-0.5">Lojistik darboğazına karşı alınan kurumsal koruma skorları (%)</p>
+                    </div>
+                    <span class="text-xs font-bold text-rose-400 bg-rose-950/80 border border-rose-800/60 px-2.5 py-1 rounded-lg">Token: Darboğazda</span>
+                </div>
+                <div class="relative h-64 w-full">
+                    <canvas id="chartRiskHealth"></canvas>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-800/80 text-center text-xs text-slate-300 flex justify-around">
+                    <span><i class="fas fa-circle-check text-emerald-400 text-[10px] mr-1"></i> Kalite: %100</span>
+                    <span><i class="fas fa-circle-check text-blue-400 text-[10px] mr-1"></i> Makine: %100</span>
+                    <span><i class="fas fa-triangle-exclamation text-rose-400 text-[10px] mr-1"></i> Token: %15</span>
+                    <span><i class="fas fa-vault text-purple-400 text-[10px] mr-1"></i> Likidite: %100</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= İNTERAKTİF HESAPLAMA VE SİMÜLASYON KONSOLU ================= -->
+        <div class="bg-gradient-to-r from-slate-900 via-slate-850 to-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-xl mb-8">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between pb-6 border-b border-slate-800 gap-4 mb-6">
+                <div>
+                    <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fas fa-calculator text-amber-400"></i> Satış, Ciro ve Nakit Projeksiyon Konsolu
+                    </h3>
+                    <p class="text-slate-400 text-xs mt-1">Sipariş miktarını ve perakende satış fiyatını değiştirerek nakit rezervi etkisini canlı izleyin.</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="px-3 py-1.5 bg-emerald-950 text-emerald-300 border border-emerald-800 rounded-xl text-xs font-bold">Aktif Plan: 50 Adet @@ 7.000 ₺</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-6 space-y-5">
+                    <div>
+                        <div class="flex justify-between text-xs font-semibold text-slate-300 mb-1.5">
+                            <span>Satış Miktarı (Stoktan Sevk):</span>
+                            <span id="mis-sim-qty-display" class="font-bold text-amber-400 text-sm">50 Adet</span>
+                        </div>
+                        <input type="range" id="mis-sim-qty" min="10" max="50" value="50" step="5" oninput="calculateMisSimulator()" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-400">
+                        <div class="flex justify-between text-[11px] text-slate-400 mt-1">
+                            <span>10 Adet</span>
+                            <span>25 Adet</span>
+                            <span>40 Adet</span>
+                            <span class="text-amber-400 font-bold">50 Adet (Tam Stok)</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-xs font-semibold text-slate-300 mb-1.5">
+                            <span>Perakende Birim Satış Fiyatı:</span>
+                            <span id="mis-sim-price-display" class="font-bold text-emerald-400 text-sm">7.000 ₺</span>
+                        </div>
+                        <input type="range" id="mis-sim-price" min="5000" max="9000" value="7000" step="250" oninput="calculateMisSimulator()" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-400">
+                        <div class="flex justify-between text-[11px] text-slate-400 mt-1">
+                            <span>5.000 ₺</span>
+                            <span class="text-emerald-400 font-bold">7.000 ₺ (Rekabetçi Fiyat)</span>
+                            <span>9.000 ₺</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-6 bg-slate-950/80 rounded-2xl p-6 border border-slate-800">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-4">
+                        <div class="bg-slate-900 p-3.5 rounded-xl border border-slate-800">
+                            <span class="text-[11px] text-slate-400 block">Birim Fiyat</span>
+                            <span id="mis-res-unit-price" class="text-base sm:text-lg font-bold text-emerald-400">7.000 ₺</span>
+                        </div>
+                        <div class="bg-slate-900 p-3.5 rounded-xl border border-slate-800">
+                            <span class="text-[11px] text-slate-400 block">Teslimat Adedi</span>
+                            <span id="mis-res-qty" class="text-base sm:text-lg font-bold text-white">50 Adet</span>
+                        </div>
+                        <div class="bg-slate-900 p-3.5 rounded-xl border border-slate-800 col-span-2 sm:col-span-1">
+                            <span class="text-[11px] text-slate-400 block">Kalan Stok</span>
+                            <span class="text-base sm:text-lg font-bold text-slate-200">0 Adet</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2 border-t border-slate-800 pt-3 text-xs">
+                        <div class="flex justify-between items-center text-slate-300">
+                            <span>Toplam Brüt Satış Hasılatı:</span>
+                            <span id="mis-res-total-revenue" class="font-extrabold text-amber-400 text-base">350.000 ₺</span>
+                        </div>
+                        <div class="flex justify-between items-center text-slate-400 text-[11px]">
+                            <span>Finansman Gideri / Kredi Faizi:</span>
+                            <span class="text-emerald-400 font-bold">0 ₺ (0 Borçlanma)</span>
+                        </div>
+                        <div class="flex justify-between items-center text-slate-400 text-[11px]">
+                            <span>Yeni Tesis / Yatırım / Temettü:</span>
+                            <span class="text-purple-300 font-bold">0 ₺ (Nakit Tutuldu)</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-emerald-950/60 p-3 rounded-xl border border-emerald-800/60 text-emerald-300 font-bold text-sm mt-3">
+                            <span>Nakit Rezervine Net Katkı:</span>
+                            <span id="mis-res-cash-reserve" class="text-base sm:text-lg text-emerald-400 font-black">+350.000 ₺</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= OPERASYONEL TABLOLAR (MAKİNE & ENVANTER) ================= -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <!-- Makine Parkuru Durumu -->
+            <div class="bg-slate-900/90 rounded-3xl p-6 border border-slate-800 shadow-xl">
+                <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
+                    <h3 class="text-base font-bold text-white flex items-center gap-2">
+                        <i class="fas fa-gears text-sky-400"></i> Kurulu Makine Parkuru Durum İcmali
+                    </h3>
+                    <span class="text-xs font-bold text-sky-400 bg-sky-950 px-2.5 py-1 rounded-lg border border-sky-800/60">4/4 Kurulu</span>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950/60 border border-slate-800/80">
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-lg bg-blue-900/40 text-blue-400 font-bold text-xs flex items-center justify-center">M1</span>
+                            <div>
+                                <h4 class="text-xs font-bold text-white">Montaj İstasyonu #1</h4>
+                                <p class="text-[10px] text-slate-400">Hassas Montaj & Kalibrasyon</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/40">Kalibre Edildi</span>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950/60 border border-slate-800/80">
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-lg bg-blue-900/40 text-blue-400 font-bold text-xs flex items-center justify-center">M2</span>
+                            <div>
+                                <h4 class="text-xs font-bold text-white">Montaj İstasyonu #2</h4>
+                                <p class="text-[10px] text-slate-400">Elektronik Test & Entegrasyon</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/40">Kalibre Edildi</span>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950/60 border border-slate-800/80">
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-lg bg-slate-800 text-slate-300 font-bold text-xs flex items-center justify-center">M3</span>
+                            <div>
+                                <h4 class="text-xs font-bold text-white">Montaj İstasyonu #3</h4>
+                                <p class="text-[10px] text-slate-400">Kasa & Mekanik Montaj</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-blue-400 bg-blue-950/60 px-2 py-0.5 rounded border border-blue-800/40">Rölanti / Koruma</span>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950/60 border border-slate-800/80">
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-lg bg-slate-800 text-slate-300 font-bold text-xs flex items-center justify-center">M4</span>
+                            <div>
+                                <h4 class="text-xs font-bold text-white">Montaj İstasyonu #4</h4>
+                                <p class="text-[10px] text-slate-400">Son Muayene & Paketleme</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-blue-400 bg-blue-950/60 px-2 py-0.5 rounded border border-blue-800/40">Rölanti / Koruma</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Envanter Kalemleri İcmali -->
+            <div class="bg-slate-900/90 rounded-3xl p-6 border border-slate-800 shadow-xl">
+                <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
+                    <h3 class="text-base font-bold text-white flex items-center gap-2">
+                        <i class="fas fa-boxes-stacked text-amber-400"></i> Envanter ve Stok Varlık Durumu
+                    </h3>
+                    <span class="text-xs font-bold text-emerald-400 bg-emerald-950 px-2.5 py-1 rounded-lg border border-emerald-800/60">%100 A Kalite</span>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950/60 border border-slate-800/80">
+                        <div>
+                            <h4 class="text-xs font-bold text-white">SmartBox Akıllı İstasyon (Nihai Ürün)</h4>
+                            <p class="text-[10px] text-slate-400">8 Bileşen Entegre • Seri No: SB-2026-A1001-A1050</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs font-bold text-amber-400 block">50 Adet</span>
+                            <span class="text-[10px] text-emerald-400">350.000 ₺ Değer</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950/60 border border-slate-800/80">
+                        <div>
+                            <h4 class="text-xs font-bold text-white">Garanti ve Destek Hizmet Paketi (G08)</h4>
+                            <p class="text-[10px] text-slate-400">Uzmanlık Ürünü • 7/24 Kesintisiz Güvence</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs font-bold text-blue-400 block">Aktif Lisans</span>
+                            <span class="text-[10px] text-slate-400">380 ₺ / Adet</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950/60 border border-slate-800/80">
+                        <div>
+                            <h4 class="text-xs font-bold text-white">B2B Hammadde & Bileşen Stokları</h4>
+                            <p class="text-[10px] text-slate-400">G01-G05 & G07 Giriş Varlıkları</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs font-bold text-slate-200 block">Depoda Mevcut</span>
+                            <span class="text-[10px] text-blue-400">Montaj Sırasında</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950/60 border border-rose-900/40 bg-rose-950/20">
+                        <div>
+                            <h4 class="text-xs font-bold text-rose-300">Lojistik Token (G06 Tedariki)</h4>
+                            <p class="text-[10px] text-slate-400">Yeni Montaj İçin Gereken Lojistik Hak</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs font-bold text-rose-400 block">Darboğazda</span>
+                            <span class="text-[10px] text-rose-300">G06 Tedarik Müzakeresi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-6 text-center text-xs text-slate-400">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>© 2026 GüvencePlus Hizmetleri A.Ş. (G08) • Kurumsal Yönetim ve Operasyon Paneli</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Charts and Simulation Logic -->
+    <script>
+        let chartInventoryInstance = null;
+        let chartCapacityInstance = null;
+        let chartCashFlowInstance = null;
+        let chartRiskInstance = null;
+
+        function initCharts() {
+            // 1. Inventory Chart
+            const ctxInv = document.getElementById('chartInventoryDistribution');
+            if (ctxInv) {
+                if (chartInventoryInstance) chartInventoryInstance.destroy();
+                chartInventoryInstance = new Chart(ctxInv, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Perakende Ağı', 'Bölgesel Dağıtıcı', 'B2B Entegratör', 'Garanti Hizmet', 'Ön Sipariş'],
+                        datasets: [{
+                            data: [10, 10, 10, 10, 10],
+                            backgroundColor: ['#f59e0b', '#3b82f6', '#10b981', '#a855f7', '#06b6d4'],
+                            borderWidth: 3,
+                            borderColor: '#0f172a',
+                            hoverOffset: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.label + ': ' + context.raw + ' Adet (70.000 ₺)';
+                                    }
+                                }
+                            }
+                        },
+                        cutout: '72%'
+                    }
+                });
+            }
+
+            // 2. Capacity Chart
+            const ctxCap = document.getElementById('chartCapacityDistribution');
+            if (ctxCap) {
+                if (chartCapacityInstance) chartCapacityInstance.destroy();
+                chartCapacityInstance = new Chart(ctxCap, {
+                    type: 'bar',
+                    data: {
+                        labels: ['1. Sevk & Kalite Testi', '2. Makine Bakım/Kalibrasyon', '3. Envanter & Depo'],
+                        datasets: [
+                            {
+                                label: 'İş Gücü (Adam/Saat)',
+                                data: [96, 40, 24],
+                                backgroundColor: '#3b82f6',
+                                borderRadius: 8
+                            },
+                            {
+                                label: 'Kapasite Payı (%)',
+                                data: [60, 25, 15],
+                                backgroundColor: '#f59e0b',
+                                borderRadius: 8
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                labels: { color: '#cbd5e1', font: { size: 11, weight: 'bold' } }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { color: '#94a3b8', font: { size: 10 } },
+                                grid: { color: 'rgba(255,255,255,0.05)' }
+                            },
+                            y: {
+                                ticks: { color: '#94a3b8', font: { size: 10 } },
+                                grid: { color: 'rgba(255,255,255,0.05)' }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // 3. Cash Flow Chart
+            const ctxCash = document.getElementById('chartCashFlow');
+            if (ctxCash) {
+                if (chartCashFlowInstance) chartCashFlowInstance.destroy();
+                chartCashFlowInstance = new Chart(ctxCash, {
+                    type: 'line',
+                    data: {
+                        labels: ['0 Adet', '10 Adet', '20 Adet', '30 Adet', '40 Adet', '50 Adet'],
+                        datasets: [{
+                            label: 'Kümülatif Hasılat & Nakit Girişi (₺)',
+                            data: [0, 70000, 140000, 210000, 280000, 350000],
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.18)',
+                            fill: true,
+                            tension: 0.35,
+                            borderWidth: 3,
+                            pointBackgroundColor: '#10b981',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            pointRadius: 5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                labels: { color: '#cbd5e1', font: { size: 11, weight: 'bold' } }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.raw.toLocaleString('tr-TR') + ' ₺ Net Nakit Girişi';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { color: '#94a3b8', font: { size: 10 } },
+                                grid: { color: 'rgba(255,255,255,0.05)' }
+                            },
+                            y: {
+                                ticks: {
+                                    color: '#94a3b8',
+                                    font: { size: 10 },
+                                    callback: function(val) { return (val/1000) + 'k ₺'; }
+                                },
+                                grid: { color: 'rgba(255,255,255,0.05)' }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // 4. Risk / Health Chart
+            const ctxRisk = document.getElementById('chartRiskHealth');
+            if (ctxRisk) {
+                if (chartRiskInstance) chartRiskInstance.destroy();
+                chartRiskInstance = new Chart(ctxRisk, {
+                    type: 'bar',
+                    indexAxis: 'y',
+                    data: {
+                        labels: ['Ürün Kalite Skoru', 'Makine Emniyeti', 'Likidite Kalkanı', 'İş Gücü Verimi', 'Lojistik Token'],
+                        datasets: [{
+                            label: 'Operasyonel Güvenlik İndeksi (%)',
+                            data: [100, 100, 100, 95, 15],
+                            backgroundColor: [
+                                '#10b981',
+                                '#3b82f6',
+                                '#a855f7',
+                                '#06b6d4',
+                                '#ef4444'
+                            ],
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.raw + '% Güvenlik Skoru';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                min: 0,
+                                max: 100,
+                                ticks: { color: '#94a3b8', font: { size: 10 }, callback: function(v){ return v + '%'; } },
+                                grid: { color: 'rgba(255,255,255,0.05)' }
+                            },
+                            y: {
+                                ticks: { color: '#cbd5e1', font: { size: 10, weight: '500' } },
+                                grid: { color: 'rgba(255,255,255,0.05)' }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Live calculation for simulation console
+        function calculateMisSimulator() {
+            const qty = parseInt(document.getElementById('mis-sim-qty').value) || 50;
+            const price = parseFloat(document.getElementById('mis-sim-price').value) || 7000;
+            const totalRevenue = qty * price;
+
+            document.getElementById('mis-sim-qty-display').innerText = qty + ' Adet';
+            document.getElementById('mis-sim-price-display').innerText = price.toLocaleString('tr-TR') + ' ₺';
+            document.getElementById('mis-res-unit-price').innerText = price.toLocaleString('tr-TR') + ' ₺';
+            document.getElementById('mis-res-qty').innerText = qty + ' Adet';
+            document.getElementById('mis-res-total-revenue').innerText = totalRevenue.toLocaleString('tr-TR') + ' ₺';
+            document.getElementById('mis-res-cash-reserve').innerText = '+' + totalRevenue.toLocaleString('tr-TR') + ' ₺';
+
+            if (chartCashFlowInstance) {
+                const step = qty / 5;
+                chartCashFlowInstance.data.labels = [
+                    '0 Adet',
+                    Math.round(step * 1) + ' Adet',
+                    Math.round(step * 2) + ' Adet',
+                    Math.round(step * 3) + ' Adet',
+                    Math.round(step * 4) + ' Adet',
+                    qty + ' Adet'
+                ];
+                chartCashFlowInstance.data.datasets[0].data = [
+                    0,
+                    Math.round(step * 1 * price),
+                    Math.round(step * 2 * price),
+                    Math.round(step * 3 * price),
+                    Math.round(step * 4 * price),
+                    totalRevenue
+                ];
+                chartCashFlowInstance.update();
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initCharts();
+            calculateMisSimulator();
+        });
+    </script>
+</body>
+</html>
