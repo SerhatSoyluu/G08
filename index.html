@@ -77,9 +77,15 @@
                 </a>
 
                 <!-- Desktop Menu -->
-                <div class="hidden lg:flex items-center space-x-7">
+                <div class="hidden lg:flex items-center space-x-5">
                     <a href="#home" class="text-slate-600 hover:text-primary font-medium text-sm transition-colors">Ana Sayfa</a>
-                    <a href="#about" class="text-slate-600 hover:text-primary font-medium text-sm transition-colors">Hakkımızda</a>
+                    <a href="#mis-dashboard" class="text-amber-800 bg-amber-100/90 hover:bg-amber-200 px-3 py-1.5 rounded-lg font-bold text-sm transition-all flex items-center gap-1.5 border border-amber-300 shadow-sm">
+                        <i class="fas fa-gauge-high text-xs text-amber-600"></i> MIS Dashboard
+                        <span class="bg-red-500 text-white text-[10px] px-1.5 py-0.2 rounded-full font-extrabold uppercase animate-pulse">Tur Görevi</span>
+                    </a>
+                    <a href="#production-pricing" class="text-blue-700 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg font-semibold text-sm transition-all flex items-center gap-1.5">
+                        <i class="fas fa-microchip text-xs"></i> 8 Bileşen & Fiyatlandırma
+                    </a>
                     <a href="#production-pricing" class="text-blue-700 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg font-semibold text-sm transition-all flex items-center gap-1.5">
                         <i class="fas fa-microchip text-xs"></i> 8 Bileşen & Fiyatlandırma
                     </a>
@@ -106,6 +112,10 @@
         <!-- Mobile Slide-out Menu -->
         <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 bg-white/95 px-4 pt-3 pb-6 space-y-2 shadow-xl animate-fadeIn">
             <a href="#home" class="mobile-nav-link block px-4 py-2.5 rounded-lg text-slate-700 hover:text-primary hover:bg-slate-50 font-medium">Ana Sayfa</a>
+            <a href="#mis-dashboard" class="mobile-nav-link block px-4 py-2.5 rounded-lg text-amber-800 bg-amber-50 font-bold flex items-center justify-between border border-amber-200">
+                <span class="flex items-center gap-2"><i class="fas fa-gauge-high text-amber-600"></i> Web/MIS Dashboard & Kriz Planı</span>
+                <span class="bg-red-500 text-white text-[10px] px-2 py-0.5 rounded-full font-extrabold">Tur Görevi</span>
+            </a>
             <a href="#about" class="mobile-nav-link block px-4 py-2.5 rounded-lg text-slate-700 hover:text-primary hover:bg-slate-50 font-medium">Hakkımızda</a>
             <a href="#production-pricing" class="mobile-nav-link block px-4 py-2.5 rounded-lg text-blue-700 bg-blue-50 font-bold flex items-center gap-2">
                 <i class="fas fa-microchip"></i> 8 Bileşen, Montaj & Fiyatlandırma
@@ -137,8 +147,11 @@
                     8 şirketin ortak bileşenleriyle şekillenen SmartBox donanımını üretiyor; uzmanlık ürünümüz <strong>Garanti Hizmet Paketi (G08)</strong> ile tüm lige kesintisiz güvence sunuyoruz.
                 </p>
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="#production-pricing" class="bg-amber-400 hover:bg-amber-300 text-slate-900 px-8 py-3.5 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
-                        <i class="fas fa-calculator"></i> 8 Bileşen, Montaj & Fiyat Senaryoları
+                    <a href="#mis-dashboard" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold px-8 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                        <i class="fas fa-gauge-high"></i> Web/MIS: Stok & Kapasite Dashboard'u
+                    </a>
+                    <a href="#production-pricing" class="bg-white/10 hover:bg-white/20 border border-white/30 text-white px-8 py-3.5 rounded-xl font-bold transition-all backdrop-blur-sm flex items-center justify-center gap-2">
+                        <i class="fas fa-calculator"></i> 8 Bileşen & Fiyatlandırma
                     </a>
                     <a href="#catalog" class="bg-white/10 hover:bg-white/20 border border-white/30 text-white px-8 py-3.5 rounded-xl font-bold transition-all backdrop-blur-sm flex items-center justify-center gap-2">
                         <i class="fas fa-boxes-stacked"></i> Ürün Kataloğu
@@ -165,6 +178,736 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+
+    <!-- ************************************************************************* -->
+    <!-- WEB/MIS: STOK VE KAPASİTE DASHBOARD'U (KRİZ PLANI + TESLİM LİSTESİ)       -->
+    <!-- ************************************************************************* -->
+    <section id="mis-dashboard" class="py-20 bg-slate-900 text-slate-100 border-b border-slate-800 relative overflow-hidden">
+        <!-- Ambient Glow Elements -->
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Header -->
+            <div class="text-center max-w-4xl mx-auto mb-12">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+                    Web / MIS Yönetim Bilgi Sistemi & Karar Destek Paneli
+                </div>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
+                    Stok, Kapasite ve <span class="text-amber-400">Kriz Yönetimi</span> Dashboard'u
+                </h2>
+                <div class="w-24 h-1.5 bg-gradient-to-r from-amber-400 via-blue-500 to-emerald-400 mx-auto rounded-full mt-4 mb-4"></div>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-3xl mx-auto">
+                    GüvencePlus Hizmetleri A.Ş. (G08) operasyonel durumu, 50 adet hazır A kalite SmartBox stoku, 4 makine ve 4 personel kapasite dağılımı, lojistik token darboğazı acil eylem protokolü ve haftalık teslim listesi.
+                </p>
+
+                <!-- Tur Karar Özeti Şeridi -->
+                <div class="mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs">
+                    <span class="bg-slate-800/90 text-blue-300 border border-blue-500/30 px-3 py-1.5 rounded-xl font-semibold flex items-center gap-1.5">
+                        <i class="fas fa-boxes-stacked text-amber-400"></i> Hazır Stok: <strong>50 Adet (A Kalite)</strong>
+                    </span>
+                    <span class="bg-slate-800/90 text-emerald-300 border border-emerald-500/30 px-3 py-1.5 rounded-xl font-semibold flex items-center gap-1.5">
+                        <i class="fas fa-tag text-emerald-400"></i> Perakende Fiyat: <strong>7.000 ₺</strong>
+                    </span>
+                    <span class="bg-slate-800/90 text-amber-300 border border-amber-500/30 px-3 py-1.5 rounded-xl font-semibold flex items-center gap-1.5">
+                        <i class="fas fa-sack-dollar text-amber-400"></i> Hedef Satış & Hasılat: <strong>50 Adet / 350.000 ₺</strong>
+                    </span>
+                    <span class="bg-slate-800/90 text-rose-300 border border-rose-500/30 px-3 py-1.5 rounded-xl font-semibold flex items-center gap-1.5">
+                        <i class="fas fa-triangle-exclamation text-rose-400"></i> Lojistik Token: <strong>Kriz Protokolü Devrede</strong>
+                    </span>
+                    <span class="bg-slate-800/90 text-purple-300 border border-purple-500/30 px-3 py-1.5 rounded-xl font-semibold flex items-center gap-1.5">
+                        <i class="fas fa-shield-halved text-purple-400"></i> Nakit Koruma: <strong>0 ₺ Borç / Yatırım / Temettü</strong>
+                    </span>
+                </div>
+            </div>
+
+            <!-- ================= 6 KPI METRİK KARTI ================= -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 mb-10">
+                <!-- KPI 1: Hazır Stok -->
+                <div class="bg-slate-800/90 border border-slate-700/80 rounded-2xl p-5 hover:border-amber-400/50 transition-all shadow-lg flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between text-slate-400 text-xs mb-2">
+                            <span class="font-bold uppercase tracking-wider">Hazır Stok</span>
+                            <i class="fas fa-box-open text-amber-400 text-base"></i>
+                        </div>
+                        <div class="text-3xl font-black text-white">50 <span class="text-xs font-normal text-slate-400">Adet</span></div>
+                        <span class="inline-block mt-1 text-[11px] font-bold text-emerald-400 bg-emerald-950/70 border border-emerald-800/60 px-2 py-0.5 rounded">
+                            %100 A Kalite
+                        </span>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-700/60 text-[11px] text-slate-300">
+                        <span class="text-emerald-400 font-semibold">50/50 Rezerve</span> (Teslimata Hazır)
+                    </div>
+                </div>
+
+                <!-- KPI 2: Operasyon Gücü -->
+                <div class="bg-slate-800/90 border border-slate-700/80 rounded-2xl p-5 hover:border-blue-400/50 transition-all shadow-lg flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between text-slate-400 text-xs mb-2">
+                            <span class="font-bold uppercase tracking-wider">İş Gücü</span>
+                            <i class="fas fa-users-gear text-blue-400 text-base"></i>
+                        </div>
+                        <div class="text-3xl font-black text-white">4 <span class="text-xs font-normal text-slate-400">Personel</span></div>
+                        <span class="inline-block mt-1 text-[11px] font-bold text-blue-400 bg-blue-950/70 border border-blue-800/60 px-2 py-0.5 rounded">
+                            160 Adam/Saat
+                        </span>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-700/60 text-[11px] text-slate-300">
+                        Hat Bakımı & Sevk Modu
+                    </div>
+                </div>
+
+                <!-- KPI 3: Makine Parkuru -->
+                <div class="bg-slate-800/90 border border-slate-700/80 rounded-2xl p-5 hover:border-sky-400/50 transition-all shadow-lg flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between text-slate-400 text-xs mb-2">
+                            <span class="font-bold uppercase tracking-wider">Makine Parkuru</span>
+                            <i class="fas fa-gears text-sky-400 text-base"></i>
+                        </div>
+                        <div class="text-3xl font-black text-white">4 <span class="text-xs font-normal text-slate-400">Kurulu</span></div>
+                        <span class="inline-block mt-1 text-[11px] font-bold text-sky-400 bg-sky-950/70 border border-sky-800/60 px-2 py-0.5 rounded">
+                            4/4 Faal & Güvende
+                        </span>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-700/60 text-[11px] text-slate-300">
+                        Koruyucu Rölanti Rejimi
+                    </div>
+                </div>
+
+                <!-- KPI 4: Satış Fiyatı -->
+                <div class="bg-slate-800/90 border border-slate-700/80 rounded-2xl p-5 hover:border-emerald-400/50 transition-all shadow-lg flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between text-slate-400 text-xs mb-2">
+                            <span class="font-bold uppercase tracking-wider">Perakende Fiyat</span>
+                            <i class="fas fa-tags text-emerald-400 text-base"></i>
+                        </div>
+                        <div class="text-2xl sm:text-3xl font-black text-emerald-400">7.000 <span class="text-xs font-normal text-slate-400">₺</span></div>
+                        <span class="inline-block mt-1 text-[11px] font-bold text-amber-400 bg-amber-950/70 border border-amber-800/60 px-2 py-0.5 rounded">
+                            Rekabetçi Fiyat
+                        </span>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-700/60 text-[11px] text-slate-300">
+                        Hedef: <strong class="text-white">350.000 ₺ Ciro</strong>
+                    </div>
+                </div>
+
+                <!-- KPI 5: Lojistik Token -->
+                <div class="bg-slate-800/90 border border-rose-500/50 rounded-2xl p-5 hover:border-rose-400 transition-all shadow-lg flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute -right-3 -top-3 w-10 h-10 bg-rose-500/20 rounded-full blur-md"></div>
+                    <div>
+                        <div class="flex items-center justify-between text-slate-400 text-xs mb-2">
+                            <span class="font-bold uppercase tracking-wider">Lojistik Token</span>
+                            <i class="fas fa-triangle-exclamation text-rose-400 text-base animate-pulse"></i>
+                        </div>
+                        <div class="text-xl font-black text-rose-400">Darboğaz ⚠️</div>
+                        <span class="inline-block mt-1 text-[11px] font-bold text-rose-300 bg-rose-950/80 border border-rose-700/60 px-2 py-0.5 rounded">
+                            Montaj Kısıtlandı
+                        </span>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-700/60 text-[11px] text-slate-300">
+                        G06 Tedarik Müzakeresi
+                    </div>
+                </div>
+
+                <!-- KPI 6: Nakit Rezervi Kalkanı -->
+                <div class="bg-slate-800/90 border border-slate-700/80 rounded-2xl p-5 hover:border-purple-400/50 transition-all shadow-lg flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between text-slate-400 text-xs mb-2">
+                            <span class="font-bold uppercase tracking-wider">Mali Politika</span>
+                            <i class="fas fa-vault text-purple-400 text-base"></i>
+                        </div>
+                        <div class="text-2xl font-black text-purple-300">0 ₺ Borç</div>
+                        <span class="inline-block mt-1 text-[11px] font-bold text-purple-300 bg-purple-950/70 border border-purple-800/60 px-2 py-0.5 rounded">
+                            Nakit Koruma
+                        </span>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-700/60 text-[11px] text-slate-300">
+                        Kredi/Yatırım/Temettü: 0 ₺
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= MIS NAVİGASYON SEKMELERİ ================= -->
+            <div class="flex justify-center mb-10">
+                <div class="inline-flex p-1.5 bg-slate-800/90 rounded-2xl border border-slate-700/80 max-w-full overflow-x-auto shadow-inner">
+                    <button onclick="switchMisTab('mis-tab-overview')" id="btn-mis-tab-overview" class="mis-tab-btn px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all bg-amber-500 text-slate-950 shadow-md flex items-center gap-2 whitespace-nowrap">
+                        <i class="fas fa-chart-pie"></i> 1. Kapasite & Stok Paneli
+                    </button>
+                    <button onclick="switchMisTab('mis-tab-crisis')" id="btn-mis-tab-crisis" class="mis-tab-btn px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all text-slate-300 hover:text-white flex items-center gap-2 whitespace-nowrap">
+                        <i class="fas fa-file-shield text-rose-400"></i> 2. Kriz Planı (Gerekli Kanıt)
+                    </button>
+                    <button onclick="switchMisTab('mis-tab-delivery')" id="btn-mis-tab-delivery" class="mis-tab-btn px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all text-slate-300 hover:text-white flex items-center gap-2 whitespace-nowrap">
+                        <i class="fas fa-clipboard-check text-emerald-400"></i> 3. Teslim Listesi (Gerekli Kanıt)
+                    </button>
+                    <button onclick="switchMisTab('mis-tab-report')" id="btn-mis-tab-report" class="mis-tab-btn px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all text-slate-300 hover:text-white flex items-center gap-2 whitespace-nowrap">
+                        <i class="fas fa-scroll text-blue-400"></i> 4. Yönetim Raporu (Haftalık Teslim)
+                    </button>
+                </div>
+            </div>
+
+            <!-- ================= SEKME 1: KAPASİTE & STOK PANELİ ================= -->
+            <div id="mis-tab-overview" class="mis-tab-content block">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+                    <!-- Sol Taraf (7 cols): Kapasite & Operasyon Dağılımı -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <!-- Kart 1: İş Gücü ve Makine Dağılımı -->
+                        <div class="bg-slate-800/80 rounded-3xl p-6 sm:p-8 border border-slate-700/80 shadow-md">
+                            <div class="flex items-center justify-between mb-6">
+                                <div>
+                                    <span class="text-xs font-bold text-blue-400 uppercase tracking-wider">Operasyonel Kaynak Analizi</span>
+                                    <h3 class="text-xl font-bold text-white mt-1">İş Gücü (4 Personel) & Makine Parkuru (4 Ünite)</h3>
+                                </div>
+                                <span class="px-3 py-1 bg-blue-950 text-blue-300 border border-blue-800 rounded-lg text-xs font-bold">160 Saat / Hafta</span>
+                            </div>
+
+                            <p class="text-slate-300 text-xs sm:text-sm mb-6 leading-relaxed">
+                                Lojistik token kısıtı nedeniyle yeni montaj geçici olarak durdurulduğundan, 4 operasyonel çalışanımızın ve 4 kurulu makinemizin atıl kalarak maliyet yükü oluşturması önlenmiş; kaynaklar hat güvenliği, koruyucu bakım ve nihai test operasyonlarına kaydırılmıştır:
+                            </p>
+
+                            <!-- Progress Bars -->
+                            <div class="space-y-4">
+                                <div>
+                                    <div class="flex justify-between text-xs font-semibold mb-1">
+                                        <span class="text-slate-200"><i class="fas fa-dolly text-amber-400 mr-1.5"></i> 50 Adet SmartBox Kalite Testi, Paketleme & Sevkiyat Hazırlığı</span>
+                                        <span class="text-amber-400 font-bold">%60 (96 Adam/Saat)</span>
+                                    </div>
+                                    <div class="w-full h-3 bg-slate-700 rounded-full overflow-hidden">
+                                        <div class="h-full bg-amber-400 rounded-full" style="width: 60%"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between text-xs font-semibold mb-1">
+                                        <span class="text-slate-200"><i class="fas fa-wrench text-blue-400 mr-1.5"></i> 4 Kurulu Makine Kalibrasyonu, Sensör Testi & Önleyici Bakım</span>
+                                        <span class="text-blue-400 font-bold">%25 (40 Adam/Saat)</span>
+                                    </div>
+                                    <div class="w-full h-3 bg-slate-700 rounded-full overflow-hidden">
+                                        <div class="h-full bg-blue-400 rounded-full" style="width: 25%"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between text-xs font-semibold mb-1">
+                                        <span class="text-slate-200"><i class="fas fa-boxes-stacked text-emerald-400 mr-1.5"></i> B2B Komponent Depolama, Ön Montaj Gruplama & Envanter Sayımı</span>
+                                        <span class="text-emerald-400 font-bold">%15 (24 Adam/Saat)</span>
+                                    </div>
+                                    <div class="w-full h-3 bg-slate-700 rounded-full overflow-hidden">
+                                        <div class="h-full bg-emerald-400 rounded-full" style="width: 15%"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 4 Makine Durum Kutucukları -->
+                            <div class="mt-8 pt-6 border-t border-slate-700/80">
+                                <span class="text-xs font-bold text-slate-300 uppercase tracking-wider block mb-3">Kurulu Makine Parkuru Durum Matrisi:</span>
+                                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                                    <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-700 text-center">
+                                        <span class="text-[10px] text-slate-400 block font-bold">MAKİNE #1</span>
+                                        <span class="text-xs font-extrabold text-emerald-400 block mt-1"><i class="fas fa-circle-check"></i> Kalibre Edildi</span>
+                                        <span class="text-[10px] text-slate-400">Montaj Hazır</span>
+                                    </div>
+                                    <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-700 text-center">
+                                        <span class="text-[10px] text-slate-400 block font-bold">MAKİNE #2</span>
+                                        <span class="text-xs font-extrabold text-emerald-400 block mt-1"><i class="fas fa-circle-check"></i> Kalibre Edildi</span>
+                                        <span class="text-[10px] text-slate-400">Montaj Hazır</span>
+                                    </div>
+                                    <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-700 text-center">
+                                        <span class="text-[10px] text-slate-400 block font-bold">MAKİNE #3</span>
+                                        <span class="text-xs font-extrabold text-blue-400 block mt-1"><i class="fas fa-shield"></i> Koruma Modu</span>
+                                        <span class="text-[10px] text-slate-400">Rölantide</span>
+                                    </div>
+                                    <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-700 text-center">
+                                        <span class="text-[10px] text-slate-400 block font-bold">MAKİNE #4</span>
+                                        <span class="text-xs font-extrabold text-blue-400 block mt-1"><i class="fas fa-shield"></i> Koruma Modu</span>
+                                        <span class="text-[10px] text-slate-400">Rölantide</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Kart 2: Stok Eritme ve Likidite Modeli -->
+                        <div class="bg-slate-800/80 rounded-3xl p-6 sm:p-8 border border-slate-700/80 shadow-md">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                                    <i class="fas fa-cubes-stacked text-amber-400"></i> Hazır Stok Envanter Durumu & Satış Kararı
+                                </h3>
+                                <span class="px-2.5 py-1 bg-amber-950 text-amber-300 border border-amber-800 rounded-lg text-xs font-bold">Tam Rezerve</span>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center mt-4">
+                                <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700/60">
+                                    <span class="text-xs text-slate-400 block">Dönem Başı Hazır Stok</span>
+                                    <span class="text-2xl font-black text-white mt-1 block">50 Adet</span>
+                                    <span class="text-[11px] text-emerald-400 font-semibold">%100 A Kalite</span>
+                                </div>
+                                <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700/60">
+                                    <span class="text-xs text-slate-400 block">Bu Tur Satış Hedefi</span>
+                                    <span class="text-2xl font-black text-amber-400 mt-1 block">50 Adet</span>
+                                    <span class="text-[11px] text-slate-300 font-semibold">Tüm Stok Eritilecek</span>
+                                </div>
+                                <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700/60">
+                                    <span class="text-xs text-slate-400 block">Dönem Sonu Kalan Stok</span>
+                                    <span class="text-2xl font-black text-slate-200 mt-1 block">0 Adet</span>
+                                    <span class="text-[11px] text-blue-300 font-semibold">Sıfır Stok Maliyeti</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sağ Taraf (5 cols): MIS İnteraktif Finansal Hesaplayıcı -->
+                    <div class="lg:col-span-5 bg-gradient-to-b from-slate-800 to-slate-850 rounded-3xl p-6 sm:p-8 border border-slate-700/90 shadow-xl flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">MIS Canlı Finansal Motor</span>
+                                <span class="px-2.5 py-1 bg-emerald-950 text-emerald-300 border border-emerald-800 text-[11px] font-bold rounded-lg">Ciro & Nakit Projeksiyonu</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Tur Satış ve Nakit Simülasyonu</h3>
+                            <p class="text-slate-300 text-xs mb-6">
+                                50 adet hazır stok ve 7.000 TL rekabetçi birim satış fiyatı parametreleriyle hedeflenen brüt ciro ve nakit koruma projeksiyonu:
+                            </p>
+
+                            <!-- Giriş Parametreleri -->
+                            <div class="space-y-4 mb-6">
+                                <div>
+                                    <div class="flex justify-between text-xs font-semibold text-slate-300 mb-1.5">
+                                        <span>Satış Miktarı (Stoktan):</span>
+                                        <span id="mis-sim-qty-display" class="font-bold text-amber-400">50 Adet</span>
+                                    </div>
+                                    <input type="range" id="mis-sim-qty" min="10" max="50" value="50" step="5" oninput="calculateMisSimulator()" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-400">
+                                    <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                                        <span>10 Adet (Kısmi)</span>
+                                        <span>50 Adet (Tam Stok)</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between text-xs font-semibold text-slate-300 mb-1.5">
+                                        <span>Perakende Birim Satış Fiyatı:</span>
+                                        <span id="mis-sim-price-display" class="font-bold text-emerald-400">7.000 ₺</span>
+                                    </div>
+                                    <input type="range" id="mis-sim-price" min="5000" max="9000" value="7000" step="250" oninput="calculateMisSimulator()" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-400">
+                                    <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                                        <span>5.000 ₺ (Taban)</span>
+                                        <span>7.000 ₺ (Hedef)</span>
+                                        <span>9.000 ₺ (Tavan)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Canlı Finansal Özet Tablosu -->
+                            <div class="bg-slate-900/90 rounded-2xl p-5 border border-slate-700/80 space-y-3 text-xs">
+                                <div class="flex justify-between items-center text-slate-300">
+                                    <span>Birim Perakende Satış Fiyatı:</span>
+                                    <span id="mis-res-unit-price" class="font-bold text-emerald-400 text-sm">7.000 ₺</span>
+                                </div>
+                                <div class="flex justify-between items-center text-slate-300">
+                                    <span>Eritilen Hazır Stok Adedi:</span>
+                                    <span id="mis-res-qty" class="font-bold text-white text-sm">50 Adet</span>
+                                </div>
+                                <div class="flex justify-between items-center text-slate-300">
+                                    <span>Toplam Brüt Satış Hasılatı:</span>
+                                    <span id="mis-res-total-revenue" class="font-extrabold text-amber-400 text-base">350.000 ₺</span>
+                                </div>
+                                <div class="pt-2 border-t border-slate-800 space-y-2 text-[11px]">
+                                    <div class="flex justify-between text-slate-400">
+                                        <span>Ek Kredi / Borçlanma:</span>
+                                        <span class="text-emerald-400 font-bold">0 ₺ (0 Faiz Yükü)</span>
+                                    </div>
+                                    <div class="flex justify-between text-slate-400">
+                                        <span>Yeni Makine / Tesis Yatırımı:</span>
+                                        <span class="text-purple-300 font-bold">0 ₺ (Korumada)</span>
+                                    </div>
+                                    <div class="flex justify-between text-slate-400">
+                                        <span>Temettü & Gelişim Harcaması:</span>
+                                        <span class="text-purple-300 font-bold">0 ₺ (Nakit Tutuldu)</span>
+                                    </div>
+                                </div>
+                                <div class="pt-3 border-t border-slate-700 flex justify-between items-center bg-emerald-950/40 p-3 rounded-xl border border-emerald-800/40">
+                                    <span class="font-bold text-emerald-300">Nakit Rezervine Katkı:</span>
+                                    <span id="mis-res-cash-reserve" class="text-lg font-black text-emerald-400">+350.000 ₺</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-slate-700/80 text-[11px] text-slate-400 flex items-center justify-between">
+                            <span><i class="fas fa-shield text-emerald-400 mr-1"></i> Finansal Kalkan: Sıkı Nakit Disiplini</span>
+                            <span class="text-slate-300 font-bold">G08 MIS Karar Sistemi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= SEKME 2: GEREKLİ KANIT 1 - KRİZ PLANI ================= -->
+            <div id="mis-tab-crisis" class="mis-tab-content hidden">
+                <div class="bg-slate-850 rounded-3xl p-6 sm:p-10 border border-slate-700/90 shadow-xl mb-8">
+                    <!-- Kriz Planı Başlık -->
+                    <div class="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b border-slate-700 gap-4">
+                        <div>
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 text-xs font-bold uppercase tracking-wider mb-2">
+                                <i class="fas fa-triangle-exclamation"></i> Gerekli Kanıt #1
+                            </div>
+                            <h3 class="text-2xl sm:text-3xl font-black text-white">Lojistik Token Eksikliği & Tedarik Darboğazı Kriz Eylem Planı</h3>
+                            <p class="text-slate-300 text-xs sm:text-sm mt-1">Acil Durum Yönetimi, Tedarik ve Üretim Sürekliliği Protokolü (G08 - GüvencePlus)</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="copyCrisisPlan()" class="px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold transition-all flex items-center gap-2 shadow">
+                                <i class="fas fa-copy"></i> <span id="copy-crisis-btn-text">Kriz Planını Kopyala</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Kriz Tanımı ve Kök Neden -->
+                    <div class="mt-8 bg-rose-950/30 border border-rose-800/40 rounded-2xl p-6">
+                        <h4 class="text-base font-bold text-rose-300 flex items-center gap-2 mb-2">
+                            <i class="fas fa-circle-exclamation"></i> 1. Kriz Tanımı ve Kök Neden Analizi
+                        </h4>
+                        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                            Ekosistem genelinde <strong>G06 (HızlıRota)</strong> tarafından sağlanan <strong>Lojistik Token</strong> temininde yaşanan kısıt ve piyasa darboğazı, fabrikamızda yeni montaj işlemlerinin yürütülmesini geçici olarak sınırlandırmıştır. Yeni bileşenlerin fabrikaya transferi veya hat beslemesi lojistik token eksikliğine takıldığından, hammadde girişi ve montaj operasyonları kilitlenme riskiyle karşı karşıya kalmıştır.
+                        </p>
+                    </div>
+
+                    <!-- 4 Aşamalı Acil Eylem Protokolü -->
+                    <div class="mt-8">
+                        <h4 class="text-lg font-bold text-white flex items-center gap-2 mb-6">
+                            <i class="fas fa-list-check text-amber-400"></i> 2. Dört Aşamalı Kriz Müdahale ve Operasyonel Süreklilik Protokolü
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Aşama 1 -->
+                            <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 hover:border-amber-400/50 transition-all">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <div class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 font-black flex items-center justify-center text-sm">1</div>
+                                    <h5 class="text-base font-bold text-white">Hazır Stok Likiditasyonu (Acil Nakit Girişi)</h5>
+                                </div>
+                                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                                    Depomuzda mevcut bulunan <strong>50 adet A kalite SmartBox</strong> ürünümüz, yeni montaj beklemeden derhal satışa açılmıştır. Pazar penetrasyonu sağlamak ve stok maliyetini sıfırlamak için <strong>7.000 ₺ rekabetçi birim fiyat</strong> belirlenmiştir. Bu hamle ile kasaya <strong>350.000 ₺ net nakit tamponu</strong> kazandırılacaktır.
+                                </p>
+                            </div>
+
+                            <!-- Aşama 2 -->
+                            <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 hover:border-blue-400/50 transition-all">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <div class="w-9 h-9 rounded-xl bg-blue-500/20 text-blue-400 font-black flex items-center justify-center text-sm">2</div>
+                                    <h5 class="text-base font-bold text-white">İş Gücü & Makine Parkuru Koruma Protokolü</h5>
+                                </div>
+                                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                                    Montaj durduğu için <strong>4 çalışan ve 4 kurulu makinenin</strong> atıl kalıp verimsizlik oluşturması engellenmiştir. 4 personel, 50 adet SmartBox'ın son kalite kontrolleri, koruyucu ambalajlama ve 4 makinenin hassas kalibrasyon ve önleyici bakım operasyonlarına yönlendirilmiştir. Token sağlandığı an montaj sıfır hata ve sıfır gecikmeyle derhal başlayacaktır.
+                                </p>
+                            </div>
+
+                            <!-- Aşama 3 -->
+                            <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 hover:border-emerald-400/50 transition-all">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 font-black flex items-center justify-center text-sm">3</div>
+                                    <h5 class="text-base font-bold text-white">Lojistik Çözüm Masası & B2B İkili Müzakereler</h5>
+                                </div>
+                                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                                    Lojistik token sağlayıcımız <strong>G06 (HızlıRota)</strong> ile acil tedarik protokolü görüşmeleri başlatılmıştır. Ek olarak, ligdeki diğer üreticilerle (G01 - G07) ihtiyaç fazlası token takası (barter) ve ortak konsolide sevkiyat havuzu kurma müzakereleri yürütülerek alternatif lojistik rotaları güvence altına alınmaktadır.
+                                </p>
+                            </div>
+
+                            <!-- Aşama 4 -->
+                            <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 hover:border-purple-400/50 transition-all">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <div class="w-9 h-9 rounded-xl bg-purple-500/20 text-purple-400 font-black flex items-center justify-center text-sm">4</div>
+                                    <h5 class="text-base font-bold text-white">Mali Kalkan: Sıfır Harcama & Rezerv Koruma</h5>
+                                </div>
+                                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                                    Kriz döneminde şirketin nakit rezervlerini korumak için <strong>ek kredi (0 ₺), yeni makine yatırımı (0 ₺), temettü dağıtımı (0 ₺) ve gelişim harcaması (0 ₺)</strong> kararı alınmıştır. Bu sıkı finansal disiplin sayesinde şirketin nakit yakma oranı (burn rate) asgariye indirilmiş ve finansman gideri yüklenilmemiştir.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kriz Risk Matrisi Tablosu -->
+                    <div class="mt-10">
+                        <h4 class="text-lg font-bold text-white flex items-center gap-2 mb-4">
+                            <i class="fas fa-table-cells text-blue-400"></i> 3. Kriz Risk Matrisi & Erken Müdahale Tablosu
+                        </h4>
+                        <div class="overflow-x-auto rounded-2xl border border-slate-700">
+                            <table class="w-full text-left text-xs text-slate-300">
+                                <thead class="bg-slate-900 text-slate-200 uppercase font-bold text-[11px] border-b border-slate-700">
+                                    <tr>
+                                        <th class="py-3 px-4">Olası Risk Faktörü</th>
+                                        <th class="py-3 px-3">Olasılık / Etki</th>
+                                        <th class="py-3 px-4">Erken Uyarı Eşiği</th>
+                                        <th class="py-3 px-3">Sorumlu Birim</th>
+                                        <th class="py-3 px-4">Uygulanan Önleyici Aksiyon</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-800 bg-slate-850">
+                                    <tr class="hover:bg-slate-800/50">
+                                        <td class="py-3.5 px-4 font-semibold text-white">Lojistik Token Tedarik Kesintisi</td>
+                                        <td class="py-3.5 px-3"><span class="px-2 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-800 font-bold">Yüksek / Yüksek</span></td>
+                                        <td class="py-3.5 px-4">Montaj hattında token bakiyesinin sıfırlanması</td>
+                                        <td class="py-3.5 px-3 text-slate-300 font-medium">Tedarik & Lojistik</td>
+                                        <td class="py-3.5 px-4 text-slate-300">Yeni montaj donduruldu, mevcut 50 hazır A kalite stok doğrudan sevkiyata tahsis edildi.</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-800/50">
+                                        <td class="py-3.5 px-4 font-semibold text-white">4 Çalışanın Atıl Kalması / Maliyet Yükü</td>
+                                        <td class="py-3.5 px-3"><span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800 font-bold">Orta / Yüksek</span></td>
+                                        <td class="py-3.5 px-4">Montaj hattı duruş süresi > 4 saat</td>
+                                        <td class="py-3.5 px-3 text-slate-300 font-medium">Üretim & İK</td>
+                                        <td class="py-3.5 px-4 text-slate-300">Personel 4 makinenin koruyucu bakımına ve 50 ürünün sevkiyat kalite onayına yönlendirildi.</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-800/50">
+                                        <td class="py-3.5 px-4 font-semibold text-white">4 Kurulu Makinenin Verimsizliği</td>
+                                        <td class="py-3.5 px-3"><span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800 font-bold">Orta / Orta</span></td>
+                                        <td class="py-3.5 px-4">Makine aşınma veya kalibrasyon kayması</td>
+                                        <td class="py-3.5 px-3 text-slate-300 font-medium">Teknik Bakım</td>
+                                        <td class="py-3.5 px-4 text-slate-300">Makineler kontrollü rölantiye alındı, kalibrasyon yenilendi, token gelince anında hazır olacak.</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-800/50">
+                                        <td class="py-3.5 px-4 font-semibold text-white">Nakit Rezervinin Erimesi / Likidite Riski</td>
+                                        <td class="py-3.5 px-3"><span class="px-2 py-0.5 rounded bg-blue-950 text-blue-300 border border-blue-800 font-bold">Düşük / Kritik</span></td>
+                                        <td class="py-3.5 px-4">Operasyonel nakit tamponunun azalması</td>
+                                        <td class="py-3.5 px-3 text-slate-300 font-medium">Finans & Yönetim</td>
+                                        <td class="py-3.5 px-4 text-slate-300">Ek kredi, yatırım, temettü ve gelişim harcamaları sıfırlandı; 350.000 ₺ satış nakit tutulacak.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= SEKME 3: GEREKLİ KANIT 2 - TESLİM LİSTESİ ================= -->
+            <div id="mis-tab-delivery" class="mis-tab-content hidden">
+                <div class="bg-slate-850 rounded-3xl p-6 sm:p-10 border border-slate-700/90 shadow-xl mb-8">
+                    <!-- Teslim Listesi Başlık -->
+                    <div class="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b border-slate-700 gap-4">
+                        <div>
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold uppercase tracking-wider mb-2">
+                                <i class="fas fa-boxes-packing"></i> Gerekli Kanıt #2
+                            </div>
+                            <h3 class="text-2xl sm:text-3xl font-black text-white">Haftalık Teslim Listesi ve Sevkiyat Manifestosu</h3>
+                            <p class="text-slate-300 text-xs sm:text-sm mt-1">Hazır Stoktan 50 Adet A Kalite SmartBox Teslimat ve Dağıtım Tablosu (G08)</p>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="copyDeliveryList()" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all flex items-center gap-2 shadow">
+                                <i class="fas fa-copy"></i> <span id="copy-delivery-btn-text">Teslim Listesini Kopyala</span>
+                            </button>
+                            <button onclick="window.print()" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 rounded-xl text-xs font-bold transition-all flex items-center gap-2">
+                                <i class="fas fa-print"></i> Yazdır / PDF Al
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Teslimat Özeti İcmali -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 my-6">
+                        <div class="bg-slate-900/70 p-4 rounded-xl border border-slate-700/70">
+                            <span class="text-[11px] text-slate-400 block font-semibold">Toplam Teslimat</span>
+                            <span class="text-xl sm:text-2xl font-black text-white mt-0.5 block">50 Adet</span>
+                            <span class="text-[10px] text-emerald-400">%100 Hazır Stok</span>
+                        </div>
+                        <div class="bg-slate-900/70 p-4 rounded-xl border border-slate-700/70">
+                            <span class="text-[11px] text-slate-400 block font-semibold">Kalite Derecesi</span>
+                            <span class="text-xl sm:text-2xl font-black text-emerald-400 mt-0.5 block">A Kalite</span>
+                            <span class="text-[10px] text-slate-400">Sertifikalı & Test Edilmiş</span>
+                        </div>
+                        <div class="bg-slate-900/70 p-4 rounded-xl border border-slate-700/70">
+                            <span class="text-[11px] text-slate-400 block font-semibold">Birim Satış Fiyatı</span>
+                            <span class="text-xl sm:text-2xl font-black text-amber-400 mt-0.5 block">7.000 ₺</span>
+                            <span class="text-[10px] text-slate-400">Rekabetçi Fiyatlandırma</span>
+                        </div>
+                        <div class="bg-slate-900/70 p-4 rounded-xl border border-slate-700/70">
+                            <span class="text-[11px] text-slate-400 block font-semibold">Toplam Sevkiyat Tutarı</span>
+                            <span class="text-xl sm:text-2xl font-black text-emerald-300 mt-0.5 block">350.000 ₺</span>
+                            <span class="text-[10px] text-amber-300 font-semibold">Beklenen Brüt Ciro</span>
+                        </div>
+                    </div>
+
+                    <!-- Teslimat Tablosu -->
+                    <div class="overflow-x-auto rounded-2xl border border-slate-700 shadow-md">
+                        <table class="w-full text-left text-xs text-slate-300" id="delivery-table">
+                            <thead class="bg-slate-900 text-slate-200 uppercase font-bold text-[11px] border-b border-slate-700">
+                                <tr>
+                                    <th class="py-3 px-3">Parti Kodu</th>
+                                    <th class="py-3 px-4">Seri Numaraları</th>
+                                    <th class="py-3 px-4">Alıcı Müşteri / Dağıtım Kanalı</th>
+                                    <th class="py-3 px-3">Ürün & Kalite</th>
+                                    <th class="py-3 px-3 text-center">Adet</th>
+                                    <th class="py-3 px-3 text-right">Birim Fiyat</th>
+                                    <th class="py-3 px-4 text-right">Toplam Tutar</th>
+                                    <th class="py-3 px-3 text-center">Lojistik Durumu</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-800 bg-slate-850">
+                                <!-- Parti 1 -->
+                                <tr class="hover:bg-slate-800/60">
+                                    <td class="py-3.5 px-3 font-mono font-bold text-amber-400">PARTI-2026-A01</td>
+                                    <td class="py-3.5 px-4 font-mono text-[11px] text-slate-300">SB-2026-A1001 – A1010</td>
+                                    <td class="py-3.5 px-4 font-semibold text-white">Kurumsal Teknoloji Perakende Ağı</td>
+                                    <td class="py-3.5 px-3"><span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800 text-[10px] font-bold">SmartBox (A Kalite)</span></td>
+                                    <td class="py-3.5 px-3 text-center font-bold text-white">10</td>
+                                    <td class="py-3.5 px-3 text-right font-mono">7.000 ₺</td>
+                                    <td class="py-3.5 px-4 text-right font-mono font-bold text-emerald-400">70.000 ₺</td>
+                                    <td class="py-3.5 px-3 text-center"><span class="px-2 py-0.5 rounded bg-blue-950 text-blue-300 border border-blue-800 text-[10px] font-bold">Stoktan Sevk Hazır</span></td>
+                                </tr>
+                                <!-- Parti 2 -->
+                                <tr class="hover:bg-slate-800/60">
+                                    <td class="py-3.5 px-3 font-mono font-bold text-amber-400">PARTI-2026-A02</td>
+                                    <td class="py-3.5 px-4 font-mono text-[11px] text-slate-300">SB-2026-A1011 – A1020</td>
+                                    <td class="py-3.5 px-4 font-semibold text-white">Bölgesel Akıllı Donanım Distribütörü</td>
+                                    <td class="py-3.5 px-3"><span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800 text-[10px] font-bold">SmartBox (A Kalite)</span></td>
+                                    <td class="py-3.5 px-3 text-center font-bold text-white">10</td>
+                                    <td class="py-3.5 px-3 text-right font-mono">7.000 ₺</td>
+                                    <td class="py-3.5 px-4 text-right font-mono font-bold text-emerald-400">70.000 ₺</td>
+                                    <td class="py-3.5 px-3 text-center"><span class="px-2 py-0.5 rounded bg-blue-950 text-blue-300 border border-blue-800 text-[10px] font-bold">Stoktan Sevk Hazır</span></td>
+                                </tr>
+                                <!-- Parti 3 -->
+                                <tr class="hover:bg-slate-800/60">
+                                    <td class="py-3.5 px-3 font-mono font-bold text-amber-400">PARTI-2026-A03</td>
+                                    <td class="py-3.5 px-4 font-mono text-[11px] text-slate-300">SB-2026-A1021 – A1030</td>
+                                    <td class="py-3.5 px-4 font-semibold text-white">B2B Endüstriyel Entegratör Konsorsiyumu</td>
+                                    <td class="py-3.5 px-3"><span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800 text-[10px] font-bold">SmartBox (A Kalite)</span></td>
+                                    <td class="py-3.5 px-3 text-center font-bold text-white">10</td>
+                                    <td class="py-3.5 px-3 text-right font-mono">7.000 ₺</td>
+                                    <td class="py-3.5 px-4 text-right font-mono font-bold text-emerald-400">70.000 ₺</td>
+                                    <td class="py-3.5 px-3 text-center"><span class="px-2 py-0.5 rounded bg-blue-950 text-blue-300 border border-blue-800 text-[10px] font-bold">Stoktan Sevk Hazır</span></td>
+                                </tr>
+                                <!-- Parti 4 -->
+                                <tr class="hover:bg-slate-800/60">
+                                    <td class="py-3.5 px-3 font-mono font-bold text-amber-400">PARTI-2026-A04</td>
+                                    <td class="py-3.5 px-4 font-mono text-[11px] text-slate-300">SB-2026-A1031 – A1040</td>
+                                    <td class="py-3.5 px-4 font-semibold text-white">Kurumsal Garanti ve Hizmet Müşterileri</td>
+                                    <td class="py-3.5 px-3"><span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800 text-[10px] font-bold">SmartBox (A Kalite)</span></td>
+                                    <td class="py-3.5 px-3 text-center font-bold text-white">10</td>
+                                    <td class="py-3.5 px-3 text-right font-mono">7.000 ₺</td>
+                                    <td class="py-3.5 px-4 text-right font-mono font-bold text-emerald-400">70.000 ₺</td>
+                                    <td class="py-3.5 px-3 text-center"><span class="px-2 py-0.5 rounded bg-blue-950 text-blue-300 border border-blue-800 text-[10px] font-bold">Stoktan Sevk Hazır</span></td>
+                                </tr>
+                                <!-- Parti 5 -->
+                                <tr class="hover:bg-slate-800/60">
+                                    <td class="py-3.5 px-3 font-mono font-bold text-amber-400">PARTI-2026-A05</td>
+                                    <td class="py-3.5 px-4 font-mono text-[11px] text-slate-300">SB-2026-A1041 – A1050</td>
+                                    <td class="py-3.5 px-4 font-semibold text-white">Doğrudan Ön Sipariş ve Rezervasyon Havuzu</td>
+                                    <td class="py-3.5 px-3"><span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800 text-[10px] font-bold">SmartBox (A Kalite)</span></td>
+                                    <td class="py-3.5 px-3 text-center font-bold text-white">10</td>
+                                    <td class="py-3.5 px-3 text-right font-mono">7.000 ₺</td>
+                                    <td class="py-3.5 px-4 text-right font-mono font-bold text-emerald-400">70.000 ₺</td>
+                                    <td class="py-3.5 px-3 text-center"><span class="px-2 py-0.5 rounded bg-blue-950 text-blue-300 border border-blue-800 text-[10px] font-bold">Stoktan Sevk Hazır</span></td>
+                                </tr>
+                            </tbody>
+                            <tfoot class="bg-slate-900 border-t-2 border-slate-700 text-white font-bold text-xs">
+                                <tr>
+                                    <td colspan="4" class="py-3.5 px-4 text-right uppercase tracking-wider text-amber-400">TOPLAM HAFTALIK TESLİMAT:</td>
+                                    <td class="py-3.5 px-3 text-center text-sm font-black text-amber-400">50 Adet</td>
+                                    <td class="py-3.5 px-3 text-right text-slate-400">Ort. 7.000 ₺</td>
+                                    <td class="py-3.5 px-4 text-right text-base font-black text-emerald-400">350.000 ₺</td>
+                                    <td class="py-3.5 px-3 text-center text-emerald-400 font-semibold">%100 Tamamlandı</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <div class="mt-4 p-4 rounded-xl bg-slate-900/60 border border-slate-800 text-[11px] text-slate-400 flex items-center justify-between">
+                        <span><i class="fas fa-circle-info text-blue-400 mr-1.5"></i> Teslimat Notu: 50 adet SmartBox mevcut A kalite hazır mamul stoğundan doğrudan sevk edilmiş olup yeni lojistik token harcaması gerektirmemiştir.</span>
+                        <span class="text-slate-300 font-semibold">G08 Sevkiyat & Lojistik Masası</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= SEKME 4: YÖNETİM RAPORU (HAFTALIK TESLİM İÇİN) ================= -->
+            <div id="mis-tab-report" class="mis-tab-content hidden">
+                <div class="bg-slate-850 rounded-3xl p-6 sm:p-10 border border-slate-700/90 shadow-xl mb-8">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b border-slate-700 gap-4">
+                        <div>
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs font-bold uppercase tracking-wider mb-2">
+                                <i class="fas fa-file-lines"></i> Haftalık Teslim Yönetim Raporu
+                            </div>
+                            <h3 class="text-2xl sm:text-3xl font-black text-white">Kararlar ve Rapor → Haftalık Teslim Metni</h3>
+                            <p class="text-slate-300 text-xs sm:text-sm mt-1">Öğretim elemanı değerlendirmesi için sisteme kaydedilecek resmi yönetim raporu</p>
+                        </div>
+                        <div>
+                            <button onclick="copyManagementReport()" class="px-6 py-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black rounded-xl text-xs sm:text-sm transition-all shadow-lg hover:shadow-xl flex items-center gap-2">
+                                <i class="fas fa-copy text-base"></i> <span id="copy-report-btn-text">Tek Tıkla Raporu Panoya Kopyala</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Kopyalanabilir Rapor Kutusu (Önizleme) -->
+                    <div class="mt-6 bg-slate-900 rounded-2xl p-6 border border-slate-700 font-mono text-xs text-slate-200 leading-relaxed max-h-[500px] overflow-y-auto selection:bg-blue-600 selection:text-white" id="management-report-container">
+                        <pre class="whitespace-pre-wrap font-sans text-xs sm:text-sm text-slate-300" id="management-report-text">================================================================================
+DİJİTAL ŞİRKETLER LİGİ 2026 | HAFTALIK YÖNETİM RAPORU & KARAR TESLİMİ
+ŞİRKET: G08 - GÜVENCEPLUS HİZMETLERİ A.Ş.
+GÖREV: Web/MIS: Stok ve Kapasite Dashboard'u
+GEREKLİ KANIT: Kriz Planı + Teslim Listesi
+KANIT BAĞLANTISI: https://serhatsoyluu.github.io/G08/#mis-dashboard
+KOD REPOSU BAĞLANTISI: https://github.com/SerhatSoyluu/G08
+================================================================================
+
+1. YÖNETİCİ ÖZETİ VE STRATEJİK YAKLAŞIM
+Şirketimiz GüvencePlus Hizmetleri A.Ş. (G08), aktif karar turunda operasyonel sürekliliği, nakit rezervi güvenliğini ve pazar payı gücünü korumayı temel strateji olarak benimsemiştir. 
+Mevcut kaynaklarımız doğrultusunda 4 operasyon çalışanımız, 4 kurulu makinemiz ve 50 adet hazır A kalite SmartBox envanterimiz bulunmaktadır. Pazar koşullarında 7.000 TL perakende satış fiyatı belirlenerek rekabetçi fiyatlandırma stratejisi uygulanmış; satış hedefi mevcut hazır stok dikkate alınarak 50 adet olarak kararlaştırılmıştır. 
+Lojistik Token eksikliği yeni montaj işlemlerini sınırlandırdığından önceliğimiz tedarik ve üretim sürekliliğini sağlamak, nakit rezervlerini korumak amacıyla bu turda ek kredi, yatırım, temettü ve gelişim harcaması yapmamaktır.
+
+--------------------------------------------------------------------------------
+2. KAPASİTE VE İŞ GÜCÜ YÖNETİMİ
+• Operasyonel İş Gücü: 4 Personel (Haftalık toplam 160 Adam/Saat kapasite).
+• Makine Parkuru: 4 Kurulu ve faal üretim/montaj makinesi.
+• Kapasite Kullanım Stratejisi:
+  - Lojistik Token teminindeki darboğaz sebebiyle yeni montaj geçici olarak sınırlandırılmıştır.
+  - İş gücünün %60'ı (96 saat) mevcut 50 adet hazır A kalite SmartBox'ın son kalite onay testleri, ambalajlama ve sevkiyat lojistiğine ayrılmıştır.
+  - İş gücünün %25'i (40 saat) 4 kurulu makinenin hassas kalibrasyonu, sensör kontrolleri ve koruyucu bakımına tahsis edilmiş; makineler güvenli rölanti rejimine alınmıştır.
+  - İş gücünün %15'i (24 saat) komponent envanter sayımı ve B2B parça ön gruplamasına atanmıştır.
+  - Böylece 4 personel ve 4 makinenin atıl kalması önlenmiş, operasyonel verimlilik korunmuştur.
+
+--------------------------------------------------------------------------------
+3. FİYATLANDIRMA, SATIŞ HEDEFİ VE GELİR PROJEKSİYONU
+• Ürün: SmartBox Akıllı İstasyon (A Kalite)
+• Perakende Birim Satış Fiyatı: 7.000,00 ₺ (Rekabetçi Pazar Fiyatı)
+• Satış Hedefi: 50 Adet (Mevcut hazır stokun %100'ü)
+• Beklenen Brüt Satış Hasılatı (Ciro): 50 x 7.000 ₺ = 350.000,00 ₺
+• Pazar Stratejisi: Yüksek stok devir hızı ve hazır mamulün hızla nakde çevrilmesi.
+
+--------------------------------------------------------------------------------
+4. GEREKLİ KANIT #1: LOJİSTİK TOKEN KRİZ PLANI
+(Tedarik ve Üretim Sürekliliği Eylem Protokolü)
+• Problem Tespiti: G06 (HızlıRota) kaynaklı Lojistik Token eksikliği sebebiyle yeni montaj süreçleri kilitlenme riskiyle karşılaşmıştır.
+• Müdahale Protokolü (4 Adım):
+  1) Stok Likiditasyonu: 50 adet A kalite hazır SmartBox doğrudan 7.000 TL rekabetçi fiyatla pazara sunularak 350.000 TL acil nakit tamponu oluşturulmuştur.
+  2) Atıl Kapasiteyi Engelleme: 4 çalışan ve 4 kurulu makine hat koruma, kalibrasyon ve sevkiyat hazırlığına yönlendirilmiş, operasyonel kayıp sıfırlanmıştır.
+  3) Lojistik Müzakere Masası: G06 tedarikçisiyle acil token protokolü ve B2B ligindeki diğer şirketlerle (G01-G07) lojistik takas görüşmeleri başlatılmıştır.
+  4) Sıfır Maliyet Kalkanı: Finansman gideri oluşturacak tüm harcamalar durdurulmuştur.
+
+--------------------------------------------------------------------------------
+5. GEREKLİ KANIT #2: HAFTALIK TESLİM LİSTESİ
+(50 Adet A Kalite SmartBox Sevkiyat Manifestosu)
+• Parti 1: PARTI-2026-A01 | SB-2026-A1001 – A1010 | Kurumsal Teknoloji Perakende Ağı | 10 Adet | 7.000 ₺ | 70.000 ₺ | Sevk Hazır
+• Parti 2: PARTI-2026-A02 | SB-2026-A1011 – A1020 | Bölgesel Dağıtıcı Konsorsiyumu | 10 Adet | 7.000 ₺ | 70.000 ₺ | Sevk Hazır
+• Parti 3: PARTI-2026-A03 | SB-2026-A1021 – A1030 | B2B Endüstriyel Entegratörler | 10 Adet | 7.000 ₺ | 70.000 ₺ | Sevk Hazır
+• Parti 4: PARTI-2026-A04 | SB-2026-A1031 – A1040 | Garanti ve Hizmet İş Ortakları | 10 Adet | 7.000 ₺ | 70.000 ₺ | Sevk Hazır
+• Parti 5: PARTI-2026-A05 | SB-2026-A1041 – A1050 | Doğrudan Kurumsal Ön Siparişler | 10 Adet | 7.000 ₺ | 70.000 ₺ | Sevk Hazır
+• TOPLAM TESLİMAT: 50 Adet A Kalite SmartBox | TOPLAM TUTAR: 350.000,00 ₺
+• Sevkiyat Modeli: Hazır stoktan doğrudan teslimat (Token gereksinimi yoktur).
+
+--------------------------------------------------------------------------------
+6. FİNANSAL KARARLAR VE NAKİT REZERVİ KORUMA POLİTİKASI
+• Ek Kredi Kullanımı: 0,00 ₺ (Faiz ve borçlanma maliyeti sıfır tutulmuştur)
+• Yeni Makine / Tesis Yatırımı: 0,00 ₺ (Mevcut 4 makine parkuru yeterlidir)
+• Temettü (Kâr Payı) Dağıtımı: 0,00 ₺ (Nakit işletme bünyesinde tutulmuştur)
+• Gelişim Harcaması: 0,00 ₺ (Kriz ortamında nakit rezervini korumak için ertelenmiştir)
+• Net Nakit Etkisi: Satıştan elde edilecek 350.000 ₺ hasılat, lojistik token ve tedarik darboğazı aşılana kadar şirketin acil durum nakit rezervi olarak korunacaktır.
+
+--------------------------------------------------------------------------------
+7. KANIT VE DENETİM BAĞLANTILARI
+• Canlı Web/MIS Dashboard: https://serhatsoyluu.github.io/G08/#mis-dashboard
+• GitHub Kaynak Kod ve Dokümantasyon: https://github.com/SerhatSoyluu/G08
+Raporumuz öğretim elemanının incelemesine ve değerlendirmesine arz olunur.
+================================================================================</pre>
+                    </div>
+
+                    <!-- Bildirim Alanı -->
+                    <div id="copy-report-toast" class="hidden mt-4 p-4 rounded-xl bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 text-xs font-semibold flex items-center justify-between animate-fadeIn">
+                        <span class="flex items-center gap-2"><i class="fas fa-circle-check text-emerald-400 text-base"></i> Yönetim Raporu başarıyla panoya kopyalandı! Doğrudan "Kararlar ve rapor → Haftalık teslim" alanına yapıştırabilirsiniz.</span>
+                        <span class="text-[11px] bg-emerald-900/90 px-2.5 py-1 rounded-lg border border-emerald-700">Ctrl + V / Yapıştır</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -726,6 +1469,7 @@
                             <div>
                                 <label class="block text-xs font-semibold text-slate-300 mb-2">Fiyat Senaryosu Seçimi:</label>
                                 <select id="sim-scenario" onchange="calculateSimulator()" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                    <option value="7000" data-margin="125" selected>Güncel Tur Stratejisi: Rekabetçi Satış (7.000 ₺ - 50 Hazır Stok Hedefi)</option>
                                     <option value="3658" data-margin="18">Senaryo 1: Rekabetçi / Taban Fiyat (3.658 ₺ - %18 Kâr)</option>
                                     <option value="4185" data-margin="35" selected>Senaryo 2: Hedef / Piyasa Standardı (4.185 ₺ - %35 Kâr) [Önerilen]</option>
                                     <option value="4960" data-margin="60">Senaryo 3: Katma Değerli Premium (4.960 ₺ - %60 Kâr)</option>
